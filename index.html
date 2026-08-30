@@ -10,15 +10,9 @@
 
 <style>
 :root{
-  --creme:#FBF5EF;
-  --creme-2:#F1E4D9;
-  --bronze:#A9764E;
-  --bronze-esc:#8B5E3C;
-  --cacau:#3E2A20;
-  --rosa:#C4796F;
-  --linha:rgba(169,118,78,.28);
-  --ok:#4F7A52;
-  --erro:#A4443C;
+  --creme:#FBF5EF; --creme-2:#F1E4D9; --bronze:#A9764E; --bronze-esc:#8B5E3C;
+  --cacau:#3E2A20; --rosa:#C4796F; --linha:rgba(169,118,78,.28);
+  --ok:#4F7A52; --erro:#A4443C;
   --display:"Cormorant Garamond",Georgia,serif;
   --script:"Great Vibes","Segoe Script",cursive;
   --corpo:"Jost","Helvetica Neue",Arial,sans-serif;
@@ -40,33 +34,45 @@ header{position:relative;padding:26px 0 18px;text-align:center}
 .sino.on{display:grid}
 
 .passos{display:flex;align-items:center;gap:6px;justify-content:center;margin:22px 0 26px}
-.passo{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);opacity:.45}
+.passo{display:flex;align-items:center;gap:6px;color:var(--bronze);opacity:.45}
 .passo.on{opacity:1;color:var(--cacau)}
 .passo .bolha{width:22px;height:22px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;font-size:11px;font-family:var(--display);font-weight:600}
 .passo.on .bolha{background:var(--bronze);border-color:var(--bronze);color:#fff}
-.passo .traco{width:16px;height:1px;background:var(--linha)}
+.traco{width:16px;height:1px;background:var(--linha)}
 
 h1,h2{font-family:var(--display);font-weight:500;letter-spacing:.01em}
 h1{font-size:30px;margin:0 0 4px}
 h2{font-size:22px;margin:0 0 4px}
 .legenda{font-size:14px;color:rgba(62,42,32,.65);margin:0 0 20px}
 
-.lista{display:flex;flex-direction:column;gap:10px}
-.item{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border:1px solid var(--linha);border-radius:16px;padding:14px 16px;cursor:pointer;font:inherit;color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
-.item:hover{border-color:var(--bronze);transform:translateY(-1px);box-shadow:0 6px 18px rgba(139,94,60,.08)}
-.medalha{flex:0 0 42px;height:42px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;color:var(--bronze)}
-.item-nome{font-family:var(--display);font-size:19px;line-height:1.2}
-.item-meta{font-size:12.5px;color:rgba(62,42,32,.6);margin-top:2px}
-.item-preco{margin-left:auto;font-size:14px;color:var(--bronze-esc);white-space:nowrap}
+/* ---------- banner de promoção (topo) ---------- */
+.promo{display:none;width:100%;padding:0;margin:0 0 24px;border:1px solid var(--bronze);border-radius:18px;overflow:hidden;background:#fff;cursor:pointer;font:inherit;color:inherit;text-align:left;box-shadow:0 8px 22px rgba(139,94,60,.10);transition:transform .16s ease,box-shadow .16s ease}
+.promo:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(139,94,60,.16)}
+.promo.on{display:block}
+.promo-foto{width:100%;height:150px;object-fit:cover;display:block;background:var(--creme-2)}
+.promo-corpo{padding:14px 16px 15px;display:flex;align-items:center;gap:12px}
+.promo-txt{flex:1;min-width:0}
+.promo-tag{display:inline-block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--bronze);border-radius:999px;padding:2px 10px;margin-bottom:6px}
+.promo-tit{display:block;font-family:var(--display);font-size:21px;line-height:1.15}
+.promo-sub{display:block;font-size:13px;color:rgba(62,42,32,.65);margin-top:3px}
+.promo-seta{flex:0 0 34px;height:34px;border-radius:50%;background:var(--creme-2);color:var(--bronze-esc);display:grid;place-items:center;font-size:18px}
 
-/* ---------- vitrine de pacotes ---------- */
-.vitrine{margin-top:34px;padding-top:26px;border-top:1px solid var(--linha)}
-.vitrine-cab{text-align:center;margin-bottom:18px}
-.vitrine-cab h2{font-size:24px;margin-bottom:6px}
-.vitrine-cab p{font-size:13.5px;color:rgba(62,42,32,.65);margin:0}
-.pacote{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:18px 18px 16px;margin-bottom:12px;position:relative;overflow:hidden}
+/* ---------- procedimentos em duas colunas ---------- */
+.lista{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:#fff;border:1px solid var(--linha);border-radius:16px;padding:14px 14px 13px;cursor:pointer;font:inherit;color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;height:100%}
+.item:hover{border-color:var(--bronze);transform:translateY(-1px);box-shadow:0 6px 18px rgba(139,94,60,.08)}
+.medalha{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;color:var(--bronze);margin-bottom:8px}
+.item-nome{font-family:var(--display);font-size:17.5px;line-height:1.18}
+.item-meta{font-size:12px;color:rgba(62,42,32,.6)}
+.item-preco{font-size:13.5px;color:var(--bronze-esc);margin-top:auto;padding-top:8px}
+@media (max-width:340px){ .lista{grid-template-columns:1fr} }
+
+/* ---------- vitrine ---------- */
+.pacote{background:#fff;border:1px solid var(--linha);border-radius:18px;margin-bottom:14px;position:relative;overflow:hidden}
 .pacote.destaque{border-color:var(--bronze);box-shadow:0 8px 24px rgba(139,94,60,.10)}
-.fita{position:absolute;top:14px;right:-30px;transform:rotate(35deg);background:var(--bronze);color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 34px}
+.pacote-foto{width:100%;height:160px;object-fit:cover;display:block;background:var(--creme-2)}
+.pacote-corpo{padding:16px 18px 16px}
+.fita{position:absolute;top:14px;left:14px;background:var(--bronze);color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
 .pacote-nome{font-family:var(--display);font-size:21px;line-height:1.15}
 .pacote-ses{font-size:12.5px;color:rgba(62,42,32,.6);margin-top:2px}
 .pacote-precos{display:flex;align-items:baseline;gap:10px;margin-top:12px;flex-wrap:wrap}
@@ -78,6 +84,7 @@ h2{font-size:22px;margin:0 0 4px}
 
 label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:16px 0 6px}
 input,select,textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--linha);background:#fff;font:inherit;font-size:16px;color:var(--cacau)}
+input[type=file]{padding:10px;font-size:13px}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--bronze);outline-offset:1px;border-color:transparent}
 textarea{min-height:80px;resize:vertical}
 .dupla{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -121,7 +128,6 @@ textarea{min-height:80px;resize:vertical}
 .chamada-zap p{margin:0 0 12px;font-size:14px;color:#1a5c33}
 .chamada-zap strong{display:block;font-family:var(--display);font-size:18px;margin-bottom:4px;color:#12492a}
 .erro{color:var(--erro);font-size:13.5px;margin-top:10px;min-height:18px}
-.sucesso{color:var(--ok);font-size:13.5px;margin-top:10px}
 .vazio-msg{text-align:center;padding:26px 10px;color:rgba(62,42,32,.6);font-size:14.5px}
 
 footer{margin-top:38px;text-align:center;font-size:13px;color:rgba(62,42,32,.6)}
@@ -153,6 +159,9 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .pac-edit .dupla{gap:8px}
 .pac-edit input,.pac-edit select{padding:10px;font-size:14px}
 .pac-edit label{margin:10px 0 4px}
+.miniatura{width:100%;height:110px;object-fit:cover;border-radius:12px;background:var(--creme-2);display:none;margin-top:8px}
+.miniatura.on{display:block}
+.envio{font-size:12px;color:var(--bronze-esc);min-height:16px;margin-top:6px}
 .lixo{border:1px solid var(--linha);background:#fff;border-radius:10px;color:var(--erro);cursor:pointer;height:40px}
 .carregando{text-align:center;padding:60px 0;color:var(--bronze)}
 .quem-logado{font-size:12px;color:rgba(62,42,32,.55);margin-bottom:14px}
@@ -165,8 +174,8 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .exp-cab{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .chk{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;letter-spacing:0;text-transform:none;color:var(--cacau)}
 .chk input{width:auto}
-.exp-cab .tag{margin-left:auto}
 .exp-cab .btn.mini{margin-left:auto}
+.exp-cab .tag{margin-left:auto}
 .exp-cab .tag + .btn.mini{margin-left:0}
 .exp-h,.pausa{display:flex;align-items:center;gap:8px}
 .pausa{margin-top:8px}
@@ -206,17 +215,21 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     <div class="passos" id="passos"></div>
 
     <section class="tela" id="tela1">
+      <button class="promo" id="promoBanner">
+        <img class="promo-foto" id="promoFoto" alt="" style="display:none">
+        <span class="promo-corpo">
+          <span class="promo-txt">
+            <span class="promo-tag" id="promoTag">Promoção</span>
+            <span class="promo-tit" id="promoTit"></span>
+            <span class="promo-sub" id="promoSub"></span>
+          </span>
+          <span class="promo-seta">›</span>
+        </span>
+      </button>
+
       <h1>Escolha o procedimento</h1>
       <p class="legenda">Cuidados que transformam por fora e por dentro.</p>
       <div class="lista" id="listaProc"></div>
-
-      <div class="vitrine" id="vitrine" style="display:none">
-        <div class="vitrine-cab">
-          <h2 id="vitTitulo"></h2>
-          <p id="vitChamada"></p>
-        </div>
-        <div id="listaPacotes"></div>
-      </div>
     </section>
 
     <section class="tela" id="tela2">
@@ -264,12 +277,10 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
         <p class="legenda">Guarde seu código. Ele é necessário para remarcar ou cancelar.</p>
       </div>
       <div class="cartao" id="resumoFinal"></div>
-
       <div class="chamada-zap">
         <p><strong>Falta um passo</strong>Toque abaixo para avisar a Jamile. Ela confirma seu horário pelo WhatsApp.</p>
         <button class="btn zap grande" id="btnZap">Avisar a Jamile agora</button>
       </div>
-
       <div class="acoes" style="margin-top:14px">
         <button class="btn vazado" id="btnAgenda">Salvar no calendário</button>
         <button class="btn vazado" id="btnNovo">Novo agendamento</button>
@@ -291,7 +302,15 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     </footer>
   </main>
 
-  <!-- ================= CANCELAMENTO PELA CLIENTE ================= -->
+  <!-- ================= VITRINE ================= -->
+  <section class="tela" id="telaVitrine">
+    <h1 id="vitTitulo"></h1>
+    <p class="legenda" id="vitChamada"></p>
+    <div id="listaPacotes"></div>
+    <div class="acoes"><button class="btn vazado" id="vitVoltar">Voltar aos procedimentos</button></div>
+  </section>
+
+  <!-- ================= CANCELAMENTO ================= -->
   <section class="tela" id="telaCancelar">
     <h2>Cancelar agendamento</h2>
     <p class="legenda" id="legCancelar"></p>
@@ -353,7 +372,7 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       <button class="aba on" data-aba="agendamentos">Agenda</button>
       <button class="aba" data-aba="regras">Regras</button>
       <button class="aba" data-aba="procedimentos">Serviços</button>
-      <button class="aba" data-aba="pacotes">Pacotes</button>
+      <button class="aba" data-aba="pacotes">Promoções</button>
     </div>
 
     <div id="abaAgendamentos">
@@ -402,7 +421,7 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       </div>
       <div class="bloco">
         <h3>Horários de atendimento</h3>
-        <p class="dica">Vale para os sete dias. Use <b>24h</b> para atender sem parar e adicione quantos intervalos quiser.</p>
+        <p class="dica">Vale para os sete dias. Use <b>24h</b> para atender sem parar.</p>
         <div id="expediente"></div>
         <label for="gIntervalo">Grade de horários (minutos)</label>
         <input id="gIntervalo" type="number" min="10" max="120" step="5">
@@ -454,13 +473,20 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 
     <div id="abaPacotes" style="display:none">
       <div class="bloco">
-        <h3>Vitrine</h3>
-        <p class="dica">A seção de pacotes aparece abaixo dos procedimentos, na primeira tela.</p>
-        <label class="chk" style="margin:6px 0 12px"><input type="checkbox" id="vAtiva"><span>Mostrar a vitrine no site</span></label>
+        <h3>Chamada do topo</h3>
+        <p class="dica">É o primeiro bloco que a cliente vê. Ao tocar nele, ela vai para a lista de pacotes.</p>
+        <label class="chk" style="margin:6px 0 12px"><input type="checkbox" id="vAtiva"><span>Mostrar a promoção no topo</span></label>
+        <label for="vEtiqueta">Etiqueta</label>
+        <input id="vEtiqueta" placeholder="Promoção">
         <label for="vTitulo">Título</label>
         <input id="vTitulo" placeholder="Pacotes e promoções">
         <label for="vChamada">Chamada</label>
         <input id="vChamada" placeholder="Resultados melhores vêm com constância.">
+        <label for="vFoto">Foto do topo</label>
+        <input type="file" id="vFoto" accept="image/*">
+        <div class="envio" id="vEnvio"></div>
+        <img class="miniatura" id="vMini" alt="Prévia da foto do topo">
+        <button class="btn vazado mini" id="vRemFoto" style="margin-top:8px;display:none">Remover foto</button>
       </div>
       <div class="bloco">
         <h3>Pacotes oferecidos</h3>
@@ -479,25 +505,21 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ============================================================
-   CONEXÃO
-   A chave abaixo é a "anon" e pode ficar visível: o que protege
-   os dados são as políticas de RLS criadas no banco.
-   ============================================================ */
 const SUPABASE_URL  = 'https://ifemczgjdxwcfrxzlrlh.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW1jemdqZHh3Y2ZyeHpscmxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwOTI5NjYsImV4cCI6MjEwMzY2ODk2Nn0.dWBxSGIHodCzLp5m_luECGAV8lHmOieQML8rcbaxyn8';
+const BUCKET = 'pacotes';
 
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 const ICONES = {
-  rosto:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c4 0 6.5 2.6 6.5 6.4 0 4.6-3 11.6-6.5 11.6S5.5 14 5.5 9.4C5.5 5.6 8 3 12 3z"/><circle cx="9.6" cy="10" r=".7" fill="currentColor"/><circle cx="14.4" cy="10" r=".7" fill="currentColor"/></svg>',
-  lamina:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20 14.5 9.5"/><path d="M13 8.2 16.8 4.4a2 2 0 0 1 2.8 0l.4.4a2 2 0 0 1 0 2.8L16.2 11z"/></svg>',
-  gota:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3.5c3 4 5.5 6.6 5.5 9.8A5.5 5.5 0 0 1 6.5 13.3c0-3.2 2.5-5.8 5.5-9.8z"/></svg>',
-  seringa:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20l3.5-3.5"/><path d="M9 15l-2.5 2.5 1 1L10 16"/><path d="M8.5 14.5 15 8l1 1-6.5 6.5z"/><path d="M14 5.5 18.5 10"/><path d="M17 3l4 4"/></svg>',
-  folha:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20c0-8 5-13 16-14 0 10-5 15-13 15-1 0-2 0-3-1z"/><path d="M4 20c3-5 7-8 11-9.5"/></svg>',
-  olho:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg>',
-  maos:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 13V6.5a1.5 1.5 0 0 1 3 0V12"/><path d="M11 12V5.5a1.5 1.5 0 0 1 3 0V12"/><path d="M14 12V7.5a1.5 1.5 0 0 1 3 0V15c0 3.3-2.2 6-5.5 6S6 18.5 6 15v-2.5a1.5 1.5 0 0 1 2-1.4"/></svg>',
-  estrela:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3.5c.6 4.4 4.1 7.9 8.5 8.5-4.4.6-7.9 4.1-8.5 8.5-.6-4.4-4.1-7.9-8.5-8.5 4.4-.6 7.9-4.1 8.5-8.5z"/></svg>'
+  rosto:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c4 0 6.5 2.6 6.5 6.4 0 4.6-3 11.6-6.5 11.6S5.5 14 5.5 9.4C5.5 5.6 8 3 12 3z"/><circle cx="9.6" cy="10" r=".7" fill="currentColor"/><circle cx="14.4" cy="10" r=".7" fill="currentColor"/></svg>',
+  lamina:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20 14.5 9.5"/><path d="M13 8.2 16.8 4.4a2 2 0 0 1 2.8 0l.4.4a2 2 0 0 1 0 2.8L16.2 11z"/></svg>',
+  gota:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3.5c3 4 5.5 6.6 5.5 9.8A5.5 5.5 0 0 1 6.5 13.3c0-3.2 2.5-5.8 5.5-9.8z"/></svg>',
+  seringa:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20l3.5-3.5"/><path d="M9 15l-2.5 2.5 1 1L10 16"/><path d="M8.5 14.5 15 8l1 1-6.5 6.5z"/><path d="M14 5.5 18.5 10"/><path d="M17 3l4 4"/></svg>',
+  folha:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20c0-8 5-13 16-14 0 10-5 15-13 15-1 0-2 0-3-1z"/><path d="M4 20c3-5 7-8 11-9.5"/></svg>',
+  olho:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg>',
+  maos:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 13V6.5a1.5 1.5 0 0 1 3 0V12"/><path d="M11 12V5.5a1.5 1.5 0 0 1 3 0V12"/><path d="M14 12V7.5a1.5 1.5 0 0 1 3 0V15c0 3.3-2.2 6-5.5 6S6 18.5 6 15v-2.5a1.5 1.5 0 0 1 2-1.4"/></svg>',
+  estrela:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3.5c.6 4.4 4.1 7.9 8.5 8.5-4.4.6-7.9 4.1-8.5 8.5-.6-4.4-4.1-7.9-8.5-8.5 4.4-.6 7.9-4.1 8.5-8.5z"/></svg>'
 };
 
 const PADRAO = {
@@ -514,11 +536,8 @@ const PADRAO = {
     5:{aberto:true, inicio:'07:30',fim:'20:00',pausas:[{i:'12:00',f:'13:00'}]},
     6:{aberto:true, inicio:'07:30',fim:'20:00',pausas:[]}
   },
-  feriadosAbertos:[],
-  bloqueios:[],
-  procedimentos:[],
-  pacotes:[],
-  vitrine:{ ativa:true, titulo:'Pacotes e promoções', chamada:'Resultados melhores vêm com constância.' }
+  feriadosAbertos:[], bloqueios:[], procedimentos:[], pacotes:[],
+  vitrine:{ ativa:true, etiqueta:'Promoção', titulo:'Pacotes e promoções', chamada:'Resultados melhores vêm com constância.', imagem:'' }
 };
 
 const DIAS_CURTO = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
@@ -526,16 +545,11 @@ const DIAS_LONGO = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sáb
 const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
 let cfg = JSON.parse(JSON.stringify(PADRAO));
-let ocupacaoLista = [];
-let agendamentos = [];
+let ocupacaoLista = [], agendamentos = [];
 let sel = { proc:null, data:null, hora:null };
 let mesVisivel = new Date();
-let passo = 1;
-let mostrarPassados = false;
-let ultimo = null;
-let canceladoAgora = null;
+let passo = 1, mostrarPassados = false, ultimo = null, canceladoAgora = null;
 
-/* ============ datas ============ */
 const ymd = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const doYmd = s => { const [a,m,d]=s.split('-').map(Number); return new Date(a,m-1,d); };
 const hoje = () => { const d=new Date(); d.setHours(0,0,0,0); return d; };
@@ -545,8 +559,8 @@ const hm2min = s => { const [h,m]=String(s).split(':').map(Number); return h*60+
 const hhmm = s => String(s).slice(0,5);
 const extenso = s => { const d=doYmd(s); return DIAS_CURTO[d.getDay()]+', '+d.getDate()+' de '+MESES[d.getMonth()]; };
 const dinheiro = n => Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc = s => String(s||'').replace(/"/g,'&quot;');
 
-/* ============ feriados ============ */
 function pascoa(ano){
   const a=ano%19, b=Math.floor(ano/100), c=ano%100, d=Math.floor(b/4), e=b%4,
         f=Math.floor((b+8)/25), g=Math.floor((b-f+1)/3), h=(19*a+b-d-g+15)%30,
@@ -576,57 +590,64 @@ function feriadosDoAno(ano){
     {data:fix(12,25), nome:'Natal',                      tipo:'nacional'}
   ];
 }
-let _mapaFer = null, _mapaAno = null;
+let _mapaFer=null,_mapaAno=null;
 function mapaFeriados(){
   const base = new Date().getFullYear();
   if(_mapaFer && _mapaAno === base) return _mapaFer;
   const m = {};
-  for(let a=base; a<=base+2; a++) feriadosDoAno(a).forEach(f => { m[f.data] = f; });
-  _mapaFer = m; _mapaAno = base;
-  return m;
+  for(let a=base;a<=base+2;a++) feriadosDoAno(a).forEach(f=>{ m[f.data]=f; });
+  _mapaFer=m; _mapaAno=base; return m;
 }
 const feriadoDe = s => mapaFeriados()[s] || null;
 const feriadoTravado = s => !!feriadoDe(s) && !cfg.feriadosAbertos.includes(s);
 
 /* ============ banco ============ */
 function migrar(){
-  ['feriadosAbertos','bloqueios','procedimentos','pacotes'].forEach(k=>{
-    if(!Array.isArray(cfg[k])) cfg[k] = [];
-  });
-  if(!cfg.vitrine) cfg.vitrine = JSON.parse(JSON.stringify(PADRAO.vitrine));
+  ['feriadosAbertos','bloqueios','procedimentos','pacotes'].forEach(k=>{ if(!Array.isArray(cfg[k])) cfg[k]=[]; });
+  cfg.vitrine = Object.assign(JSON.parse(JSON.stringify(PADRAO.vitrine)), cfg.vitrine||{});
   if(!cfg.horasCancelamento) cfg.horasCancelamento = 24;
   Object.keys(cfg.expediente).forEach(d=>{
     const e = cfg.expediente[d];
-    if(!Array.isArray(e.pausas)) e.pausas = (e.almocoI && e.almocoF) ? [{i:e.almocoI, f:e.almocoF}] : [];
+    if(!Array.isArray(e.pausas)) e.pausas = (e.almocoI&&e.almocoF)?[{i:e.almocoI,f:e.almocoF}]:[];
     delete e.almocoI; delete e.almocoF;
   });
 }
-
 async function carregarConfig(){
   const { data, error } = await db.from('configuracao').select('dados').eq('id', true).single();
-  if(error) throw new Error('[' + (error.code || 'sem código') + '] ' + error.message);
+  if(error) throw new Error('[' + (error.code||'sem código') + '] ' + error.message);
   if(!data)  throw new Error('A tabela configuracao respondeu vazia.');
   cfg = Object.assign(JSON.parse(JSON.stringify(PADRAO)), data.dados);
   migrar();
 }
-
 async function carregarOcupacao(){
-  const de  = ymd(hoje());
-  const ate = ymd(somaDias(hoje(), Math.max(1, Number(cfg.janela.maxDias)||90) + 1));
+  const de = ymd(hoje());
+  const ate = ymd(somaDias(hoje(), Math.max(1, Number(cfg.janela.maxDias)||90)+1));
   const { data, error } = await db.rpc('ocupacao', { de, ate });
-  ocupacaoLista = error ? [] : (data || []);
+  ocupacaoLista = error ? [] : (data||[]);
 }
-
 async function carregarAgendamentos(){
   const { data, error } = await db.from('agendamentos').select('*').order('data').order('hora');
-  agendamentos = error ? [] : (data || []);
+  agendamentos = error ? [] : (data||[]);
 }
-
 async function salvarConfig(){
   const { error } = await db.from('configuracao')
-    .update({ dados: cfg, atualizado_em: new Date().toISOString() })
-    .eq('id', true);
+    .update({ dados: cfg, atualizado_em: new Date().toISOString() }).eq('id', true);
   return error ? error.message : null;
+}
+
+/* ============ upload de imagem ============ */
+async function enviarImagem(file, prefixo, aviso){
+  if(!file) return null;
+  if(!/^image\//.test(file.type)){ aviso.textContent = 'Escolha um arquivo de imagem.'; return null; }
+  if(file.size > 3*1024*1024){ aviso.textContent = 'Imagem muito grande. Use até 3 MB.'; return null; }
+  aviso.textContent = 'Enviando…';
+  const ext = (file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const caminho = prefixo + '-' + Date.now() + '.' + (ext||'jpg');
+  const { error } = await db.storage.from(BUCKET).upload(caminho, file, { contentType:file.type, upsert:true });
+  if(error){ aviso.textContent = 'Falha no envio: ' + error.message; return null; }
+  const { data } = db.storage.from(BUCKET).getPublicUrl(caminho);
+  aviso.textContent = 'Foto enviada. Não esqueça de salvar.';
+  return data.publicUrl;
 }
 
 /* ============ regras ============ */
@@ -641,114 +662,129 @@ function diaAberto(dataStr){
       && t <= somaDias(hoje(), Number(cfg.janela.maxDias)).getTime();
 }
 function ocupados(dataStr){
-  return ocupacaoLista.filter(o => o.data === dataStr)
-    .map(o => ({ i:hm2min(o.hora), f:hm2min(o.hora)+o.duracao }));
+  return ocupacaoLista.filter(o=>o.data===dataStr).map(o=>({i:hm2min(o.hora), f:hm2min(o.hora)+o.duracao}));
 }
-const ehJornada24 = e => e.inicio==='00:00' && (e.fim==='00:00' || e.fim==='23:59');
+const ehJornada24 = e => e.inicio==='00:00' && (e.fim==='00:00'||e.fim==='23:59');
 function janelaDoDia(e){
-  const ini = hm2min(e.inicio);
-  let fim = hm2min(e.fim);
-  if(ehJornada24(e) || fim <= ini) fim = 1440;
-  return [ini, fim];
+  const ini = hm2min(e.inicio); let fim = hm2min(e.fim);
+  if(ehJornada24(e) || fim<=ini) fim = 1440;
+  return [ini,fim];
 }
 function horariosLivres(dataStr, duracao){
   if(!diaAberto(dataStr)) return [];
   const exp = cfg.expediente[doYmd(dataStr).getDay()];
   const grade = Number(cfg.intervalo)||30;
-  const [ini, fim] = janelaDoDia(exp);
+  const [ini,fim] = janelaDoDia(exp);
   const pausas = (exp.pausas||[]).filter(p=>p.i&&p.f).map(p=>({i:hm2min(p.i), f:hm2min(p.f)===0?1440:hm2min(p.f)}));
   const oc = ocupados(dataStr);
   const agora = new Date();
   const ehHoje = dataStr === ymd(agora);
-  const minutoAgora = agora.getHours()*60 + agora.getMinutes();
-  const antecedencia = Number(cfg.janela.minDias) === 0 ? 60 : 0;
+  const minutoAgora = agora.getHours()*60+agora.getMinutes();
+  const antecedencia = Number(cfg.janela.minDias)===0 ? 60 : 0;
   const livres = [];
   for(let t=ini; t+duracao<=fim; t+=grade){
-    const f = t+duracao;
-    if(pausas.some(p => t < p.f && f > p.i)) continue;
-    if(oc.some(o => t < o.f && f > o.i)) continue;
-    if(ehHoje && t <= minutoAgora + antecedencia) continue;
+    const f=t+duracao;
+    if(pausas.some(p=>t<p.f&&f>p.i)) continue;
+    if(oc.some(o=>t<o.f&&f>o.i)) continue;
+    if(ehHoje && t<=minutoAgora+antecedencia) continue;
     livres.push(min2hm(t));
   }
   return livres;
 }
-function temVaga(dataStr, duracao){ return horariosLivres(dataStr, duracao).length > 0; }
+const temVaga = (d,dur) => horariosLivres(d,dur).length>0;
 
 /* ============ navegação ============ */
 const $ = id => document.getElementById(id);
-const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado'];
+const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado','telaVitrine'];
 function irPara(n){
   passo = n;
-  EXTRAS.forEach(t => $(t).classList.remove('ativa'));
+  EXTRAS.forEach(t=>$(t).classList.remove('ativa'));
   $('app').style.display = '';
   for(let i=1;i<=5;i++) $('tela'+i).classList.toggle('ativa', i===n);
   desenharPassos();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function irParaExtra(id){
-  $('app').style.display = 'none';
-  EXTRAS.forEach(t => $(t).classList.toggle('ativa', t===id));
+  $('app').style.display='none';
+  EXTRAS.forEach(t=>$(t).classList.toggle('ativa', t===id));
   window.scrollTo({top:0});
 }
 function desenharPassos(){
   $('passos').style.display = passo>=5 ? 'none' : 'flex';
   $('passos').innerHTML = [1,2,3,4].map((n,i)=>
-    `<div class="passo ${n===passo?'on':''}"><span class="bolha">${n}</span></div>`+
-    (i<3?'<span class="traco"></span>':'')
+    `<div class="passo ${n===passo?'on':''}"><span class="bolha">${n}</span></div>`+(i<3?'<span class="traco"></span>':'')
   ).join('');
 }
 
-/* ============ tela 1: procedimentos + vitrine ============ */
+/* ============ tela 1 ============ */
 function desenharProcedimentos(){
   if(!cfg.procedimentos.length){
-    $('listaProc').innerHTML = '<div class="vazio-msg">Nenhum procedimento cadastrado ainda.</div>';
+    $('listaProc').innerHTML = '<div class="vazio-msg" style="grid-column:1/-1">Nenhum procedimento cadastrado ainda.</div>';
   } else {
-    $('listaProc').innerHTML = cfg.procedimentos.map(p => `
+    $('listaProc').innerHTML = cfg.procedimentos.map(p=>`
       <button class="item" data-proc="${p.id}">
         <span class="medalha">${ICONES[p.icone]||ICONES.estrela}</span>
-        <span>
-          <span class="item-nome">${p.nome}</span>
-          <span class="item-meta">${p.duracao} min</span>
-        </span>
+        <span class="item-nome">${p.nome}</span>
+        <span class="item-meta">${p.duracao} min</span>
         <span class="item-preco">${p.preco ? 'R$ '+p.preco : 'sob consulta'}</span>
       </button>`).join('');
     $('listaProc').querySelectorAll('[data-proc]').forEach(b=>{
       b.onclick = () => {
         sel.proc = cfg.procedimentos.find(p=>p.id===b.dataset.proc);
-        sel.data = null; sel.hora = null;
+        sel.data=null; sel.hora=null;
         mesVisivel = somaDias(hoje(), Number(cfg.janela.minDias));
         desenharCalendario(); irPara(2);
       };
     });
   }
-  desenharVitrine();
+  desenharBanner();
 }
 
-function pacoteValido(p){
-  if(!p.validade) return true;
-  return p.validade >= ymd(hoje());
+const pacoteValido = p => !p.validade || p.validade >= ymd(hoje());
+const pacotesAtivos = () => (cfg.pacotes||[]).filter(p=>p.nome && pacoteValido(p));
+
+function desenharBanner(){
+  const ativos = pacotesAtivos();
+  const mostra = cfg.vitrine.ativa && ativos.length > 0;
+  $('promoBanner').classList.toggle('on', mostra);
+  if(!mostra) return;
+  $('promoTag').textContent = cfg.vitrine.etiqueta || 'Promoção';
+  $('promoTag').style.display = (cfg.vitrine.etiqueta===''?'none':'inline-block');
+  $('promoTit').textContent = cfg.vitrine.titulo || 'Pacotes e promoções';
+  $('promoSub').textContent = cfg.vitrine.chamada || (ativos.length + (ativos.length===1?' oferta disponível':' ofertas disponíveis'));
+  if(cfg.vitrine.imagem){
+    $('promoFoto').src = cfg.vitrine.imagem;
+    $('promoFoto').style.display = 'block';
+  } else {
+    $('promoFoto').style.display = 'none';
+  }
 }
+
 function desenharVitrine(){
-  const ativos = (cfg.pacotes||[]).filter(p => p.nome && pacoteValido(p));
-  if(!cfg.vitrine.ativa || !ativos.length){ $('vitrine').style.display = 'none'; return; }
-  $('vitrine').style.display = 'block';
+  const ativos = pacotesAtivos();
   $('vitTitulo').textContent = cfg.vitrine.titulo || 'Pacotes e promoções';
   $('vitChamada').textContent = cfg.vitrine.chamada || '';
+  if(!ativos.length){
+    $('listaPacotes').innerHTML = '<div class="vazio-msg">Nenhuma oferta ativa no momento.</div>';
+    return;
+  }
   $('listaPacotes').innerHTML = ativos.map(p=>{
-    const avulso = Number(p.precoAvulso)||0;
-    const pacote = Number(p.precoPacote)||0;
+    const avulso = Number(p.precoAvulso)||0, pacote = Number(p.precoPacote)||0;
     const economia = avulso > pacote ? avulso - pacote : 0;
     return `<div class="pacote ${p.destaque?'destaque':''}">
-      ${p.destaque?'<div class="fita">Oferta</div>':''}
-      <div class="pacote-nome">${p.nome}</div>
-      <div class="pacote-ses">${p.sessoes} ${Number(p.sessoes)===1?'sessão':'sessões'}${p.descricao?' · '+p.descricao:''}</div>
-      <div class="pacote-precos">
-        ${avulso && economia ? `<span class="de">R$ ${dinheiro(avulso)}</span>` : ''}
-        ${pacote ? `<span class="por">R$ ${dinheiro(pacote)}</span>` : '<span class="por">sob consulta</span>'}
-        ${economia ? `<span class="economia">economize R$ ${dinheiro(economia)}</span>` : ''}
+      ${p.imagem?`<img class="pacote-foto" src="${esc(p.imagem)}" alt="${esc(p.nome)}">`:''}
+      <div class="pacote-corpo">
+        ${p.destaque?'<div class="fita" style="position:static;display:inline-block;margin-bottom:8px">Oferta</div>':''}
+        <div class="pacote-nome">${p.nome}</div>
+        <div class="pacote-ses">${p.sessoes} ${Number(p.sessoes)===1?'sessão':'sessões'}${p.descricao?' · '+p.descricao:''}</div>
+        <div class="pacote-precos">
+          ${avulso && economia ? `<span class="de">R$ ${dinheiro(avulso)}</span>`:''}
+          ${pacote ? `<span class="por">R$ ${dinheiro(pacote)}</span>` : '<span class="por">sob consulta</span>'}
+          ${economia ? `<span class="economia">economize R$ ${dinheiro(economia)}</span>`:''}
+        </div>
+        ${p.validade?`<div class="pacote-val">Oferta válida até ${extenso(p.validade)}</div>`:''}
+        <button class="btn zap" data-pac="${p.id}">Quero este pacote</button>
       </div>
-      ${p.validade ? `<div class="pacote-val">Oferta válida até ${extenso(p.validade)}</div>` : ''}
-      <button class="btn zap" data-pac="${p.id}">Quero este pacote</button>
     </div>`;
   }).join('');
   $('listaPacotes').querySelectorAll('[data-pac]').forEach(b=>{
@@ -760,18 +796,16 @@ function desenharVitrine(){
   });
 }
 
-/* ============ tela 2 ============ */
+/* ============ telas 2 a 5 ============ */
 function desenharCalendario(){
-  $('legDia').textContent = sel.proc.nome + ' · ' + sel.proc.duracao + ' min · agenda aberta por ' + cfg.janela.maxDias + ' dias';
+  $('legDia').textContent = sel.proc.nome+' · '+sel.proc.duracao+' min · agenda aberta por '+cfg.janela.maxDias+' dias';
   $('calNomes').innerHTML = DIAS_CURTO.map(d=>`<div class="dia-nome">${d[0]}</div>`).join('');
   const ano = mesVisivel.getFullYear(), mes = mesVisivel.getMonth();
-  $('mesTitulo').textContent = MESES[mes] + ' ' + ano;
-  const primeiro = new Date(ano,mes,1);
-  const totalDias = new Date(ano,mes+1,0).getDate();
-  let html = '';
+  $('mesTitulo').textContent = MESES[mes]+' '+ano;
+  const primeiro = new Date(ano,mes,1), totalDias = new Date(ano,mes+1,0).getDate();
+  let html='', temFeriado=false;
   for(let i=0;i<primeiro.getDay();i++) html += '<button class="dia vazio" disabled></button>';
-  let temFeriado = false;
-  for(let d=1; d<=totalDias; d++){
+  for(let d=1;d<=totalDias;d++){
     const s = ymd(new Date(ano,mes,d));
     const ok = diaAberto(s) && temVaga(s, sel.proc.duracao);
     const fer = feriadoDe(s);
@@ -779,19 +813,16 @@ function desenharCalendario(){
     html += `<button class="dia ${ok?'livre':''} ${fer?'feriado':''} ${sel.data===s?'sel':''}" data-dia="${s}" ${ok?'':'disabled'} ${fer?`title="${fer.nome}"`:''}>${d}</button>`;
   }
   $('calDias').innerHTML = html;
-  $('legFeriado').style.display = temFeriado ? 'flex' : 'none';
+  $('legFeriado').style.display = temFeriado?'flex':'none';
   $('calDias').querySelectorAll('[data-dia]').forEach(b=>{
-    b.onclick = () => { sel.data = b.dataset.dia; sel.hora = null; desenharHorarios(); irPara(3); };
+    b.onclick = () => { sel.data=b.dataset.dia; sel.hora=null; desenharHorarios(); irPara(3); };
   });
-  const limiteMin = somaDias(hoje(), Number(cfg.janela.minDias));
-  const limiteMax = somaDias(hoje(), Number(cfg.janela.maxDias));
-  $('mesAnt').disabled = new Date(ano,mes,1) <= new Date(limiteMin.getFullYear(),limiteMin.getMonth(),1);
-  $('mesProx').disabled = new Date(ano,mes,1) >= new Date(limiteMax.getFullYear(),limiteMax.getMonth(),1);
+  const lMin = somaDias(hoje(), Number(cfg.janela.minDias)), lMax = somaDias(hoje(), Number(cfg.janela.maxDias));
+  $('mesAnt').disabled = new Date(ano,mes,1) <= new Date(lMin.getFullYear(),lMin.getMonth(),1);
+  $('mesProx').disabled = new Date(ano,mes,1) >= new Date(lMax.getFullYear(),lMax.getMonth(),1);
 }
-
-/* ============ tela 3 ============ */
 function desenharHorarios(){
-  $('legHora').textContent = extenso(sel.data) + ' · ' + sel.proc.nome;
+  $('legHora').textContent = extenso(sel.data)+' · '+sel.proc.nome;
   const livres = horariosLivres(sel.data, sel.proc.duracao);
   if(!livres.length){
     $('listaHoras').innerHTML = '<div class="vazio-msg">Este dia ficou sem vagas. Toque em Voltar e escolha outra data.</div>';
@@ -799,78 +830,55 @@ function desenharHorarios(){
   }
   $('listaHoras').innerHTML = livres.map(h=>`<button class="hora" data-h="${h}">${h}</button>`).join('');
   $('listaHoras').querySelectorAll('[data-h]').forEach(b=>{
-    b.onclick = () => { sel.hora = b.dataset.h; desenharResumoPre(); irPara(4); };
+    b.onclick = () => { sel.hora=b.dataset.h; desenharResumoPre(); irPara(4); };
   });
 }
-
-/* ============ tela 4 ============ */
-function linha(rot,val){ return `<div class="linha"><span class="rot">${rot}</span><span class="val">${val}</span></div>`; }
+const linha = (rot,val) => `<div class="linha"><span class="rot">${rot}</span><span class="val">${val}</span></div>`;
 function desenharResumoPre(){
   $('resumoPre').innerHTML =
-    linha('Procedimento', sel.proc.nome) +
-    linha('Dia', extenso(sel.data)) +
-    linha('Horário', sel.hora + ' — ' + min2hm(hm2min(sel.hora)+sel.proc.duracao)) +
-    (sel.proc.preco ? linha('Valor','R$ '+sel.proc.preco) : '');
+    linha('Procedimento', sel.proc.nome) + linha('Dia', extenso(sel.data)) +
+    linha('Horário', sel.hora+' — '+min2hm(hm2min(sel.hora)+sel.proc.duracao)) +
+    (sel.proc.preco?linha('Valor','R$ '+sel.proc.preco):'');
 }
-function codigo(){ return 'JB' + String(Date.now()).slice(-5) + Math.floor(Math.random()*9); }
+const codigo = () => 'JB'+String(Date.now()).slice(-5)+Math.floor(Math.random()*9);
 
 async function confirmar(){
-  const nome = $('fNome').value.trim();
-  const tel = $('fTel').value.replace(/\D/g,'');
-  const err = $('erroForm');
-  if(nome.length < 3){ err.textContent = 'Escreva seu nome completo para continuar.'; return; }
-  if(tel.length < 10){ err.textContent = 'Informe o WhatsApp com DDD, com 10 ou 11 dígitos.'; return; }
-  err.textContent = '';
-  $('btnConfirmar').disabled = true;
-
+  const nome = $('fNome').value.trim(), tel = $('fTel').value.replace(/\D/g,''), err = $('erroForm');
+  if(nome.length<3){ err.textContent='Escreva seu nome completo para continuar.'; return; }
+  if(tel.length<10){ err.textContent='Informe o WhatsApp com DDD, com 10 ou 11 dígitos.'; return; }
+  err.textContent=''; $('btnConfirmar').disabled=true;
   await carregarOcupacao();
   if(!horariosLivres(sel.data, sel.proc.duracao).includes(sel.hora)){
-    $('btnConfirmar').disabled = false;
-    err.textContent = 'Alguém acabou de reservar este horário. Escolha outro, por favor.';
+    $('btnConfirmar').disabled=false;
+    err.textContent='Alguém acabou de reservar este horário. Escolha outro, por favor.';
     desenharHorarios(); irPara(3); return;
   }
-
-  const reg = {
-    codigo: codigo(), procedimento: sel.proc.nome, duracao: sel.proc.duracao,
-    preco: sel.proc.preco || null, data: sel.data, hora: sel.hora,
-    nome, telefone: tel, observacao: $('fObs').value.trim() || null, status: 'confirmado'
-  };
-
+  const reg = { codigo:codigo(), procedimento:sel.proc.nome, duracao:sel.proc.duracao,
+    preco:sel.proc.preco||null, data:sel.data, hora:sel.hora, nome, telefone:tel,
+    observacao:$('fObs').value.trim()||null, status:'confirmado' };
   const { error } = await db.from('agendamentos').insert(reg);
-  $('btnConfirmar').disabled = false;
-
+  $('btnConfirmar').disabled=false;
   if(error){
-    if(error.code === '23P01'){
-      err.textContent = 'Alguém acabou de reservar este horário. Escolha outro, por favor.';
+    if(error.code==='23P01'){
+      err.textContent='Alguém acabou de reservar este horário. Escolha outro, por favor.';
       await carregarOcupacao(); desenharHorarios(); irPara(3); return;
     }
-    if(error.code === '23505'){ err.textContent = 'Houve um conflito no código. Toque em confirmar novamente.'; return; }
-    err.textContent = 'Não conseguimos gravar agora. Verifique sua conexão e tente de novo.';
-    return;
+    if(error.code==='23505'){ err.textContent='Houve um conflito no código. Toque em confirmar novamente.'; return; }
+    err.textContent='Não conseguimos gravar agora. Verifique sua conexão e tente de novo.'; return;
   }
-
-  ultimo = { id:reg.codigo, proc:reg.procedimento, duracao:reg.duracao,
-             data:reg.data, hora:reg.hora, nome:reg.nome, obs:reg.observacao || '' };
-  await carregarOcupacao();
-  desenharFinal(ultimo);
-  irPara(5);
+  ultimo = { id:reg.codigo, proc:reg.procedimento, duracao:reg.duracao, data:reg.data,
+             hora:reg.hora, nome:reg.nome, obs:reg.observacao||'' };
+  await carregarOcupacao(); desenharFinal(ultimo); irPara(5);
 }
-
-/* ============ tela 5 ============ */
 function desenharFinal(r){
   $('resumoFinal').innerHTML =
-    linha('Código', '<span class="codigo">'+r.id+'</span>') +
-    linha('Procedimento', r.proc) +
-    linha('Dia', extenso(r.data)) +
-    linha('Horário', r.hora) +
-    linha('Nome', r.nome) +
-    (cfg.negocio.endereco ? linha('Local', cfg.negocio.endereco) : '');
-  $('avisoCancel').textContent = 'Guarde o código ' + r.id + '. Com ele e seu WhatsApp você pode cancelar pelo site até '
+    linha('Código','<span class="codigo">'+r.id+'</span>') + linha('Procedimento', r.proc) +
+    linha('Dia', extenso(r.data)) + linha('Horário', r.hora) + linha('Nome', r.nome) +
+    (cfg.negocio.endereco?linha('Local', cfg.negocio.endereco):'');
+  $('avisoCancel').textContent = 'Guarde o código '+r.id+'. Com ele e seu WhatsApp você pode cancelar pelo site até '
     + cfg.horasCancelamento + ' horas antes. Chegue com 10 minutos de antecedência.';
 }
-function textoZap(r){
-  return `Olá, Jamile! Acabei de agendar pelo site.%0A%0A✨ ${encodeURIComponent(r.proc)}%0A📅 ${encodeURIComponent(extenso(r.data))} às ${r.hora}%0A👤 ${encodeURIComponent(r.nome)}%0A🔖 Código ${r.id}${r.obs?'%0A📝 '+encodeURIComponent(r.obs):''}`;
-}
+const textoZap = r => `Olá, Jamile! Acabei de agendar pelo site.%0A%0A✨ ${encodeURIComponent(r.proc)}%0A📅 ${encodeURIComponent(extenso(r.data))} às ${r.hora}%0A👤 ${encodeURIComponent(r.nome)}%0A🔖 Código ${r.id}${r.obs?'%0A📝 '+encodeURIComponent(r.obs):''}`;
 function baixarICS(r){
   const [a,m,d] = r.data.split('-');
   const ini = a+m+d+'T'+r.hora.replace(':','')+'00';
@@ -882,126 +890,87 @@ function baixarICS(r){
     'BEGIN:VALARM','TRIGGER:-PT120M','ACTION:DISPLAY','DESCRIPTION:Seu horário na Jamile Beauty','END:VALARM',
     'END:VEVENT','END:VCALENDAR'].join('\r\n');
   const url = URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
-  const a2 = document.createElement('a'); a2.href = url; a2.download = 'jamile-beauty-'+r.id+'.ics'; a2.click();
+  const a2 = document.createElement('a'); a2.href=url; a2.download='jamile-beauty-'+r.id+'.ics'; a2.click();
   URL.revokeObjectURL(url);
 }
 
-/* ============================================================
-   CANCELAMENTO PELA CLIENTE
-   ============================================================ */
+/* ============ cancelamento ============ */
 function abrirCancelar(){
   $('legCancelar').textContent = 'Informe o código que você recebeu e o WhatsApp usado no agendamento.';
-  $('dicaCancelar').textContent = 'O cancelamento pelo site é possível até ' + cfg.horasCancelamento
-    + ' horas antes do horário marcado. Depois disso, fale com a Jamile pelo WhatsApp.';
-  $('cCodigo').value = ''; $('cTel').value = ''; $('erroCancelar').textContent = '';
+  $('dicaCancelar').textContent = 'O cancelamento pelo site é possível até '+cfg.horasCancelamento
+    +' horas antes do horário marcado. Depois disso, fale com a Jamile pelo WhatsApp.';
+  $('cCodigo').value=''; $('cTel').value=''; $('erroCancelar').textContent='';
   irParaExtra('telaCancelar');
 }
-
 async function cancelarPelaCliente(){
-  const cod = $('cCodigo').value.trim();
-  const tel = $('cTel').value.replace(/\D/g,'');
-  const err = $('erroCancelar');
-  if(!cod){ err.textContent = 'Informe o código do agendamento.'; return; }
-  if(tel.length < 10){ err.textContent = 'Informe o WhatsApp com DDD.'; return; }
-  err.textContent = 'Verificando…';
-  $('btnCancelarAg').disabled = true;
-
-  const { data, error } = await db.rpc('cancelar_agendamento', { p_codigo: cod, p_telefone: tel });
-  $('btnCancelarAg').disabled = false;
-
-  if(error){ err.textContent = 'Não foi possível concluir: ' + error.message; return; }
+  const cod = $('cCodigo').value.trim(), tel = $('cTel').value.replace(/\D/g,''), err = $('erroCancelar');
+  if(!cod){ err.textContent='Informe o código do agendamento.'; return; }
+  if(tel.length<10){ err.textContent='Informe o WhatsApp com DDD.'; return; }
+  err.textContent='Verificando…'; $('btnCancelarAg').disabled=true;
+  const { data, error } = await db.rpc('cancelar_agendamento', { p_codigo:cod, p_telefone:tel });
+  $('btnCancelarAg').disabled=false;
+  if(error){ err.textContent='Não foi possível concluir: '+error.message; return; }
   if(!data || !data.ok){
-    err.textContent = (data && data.mensagem) ? data.mensagem : 'Não foi possível cancelar.';
+    err.textContent = (data&&data.mensagem) ? data.mensagem : 'Não foi possível cancelar.';
     if(data && data.tarde){
-      $('dicaCancelar').innerHTML = 'Fale com a Jamile pelo WhatsApp: <a href="https://wa.me/'
-        + cfg.negocio.whatsapp + '" target="_blank" rel="noopener">' + cfg.negocio.whatsapp.replace(/^55(\d{2})(\d{5})(\d{4})$/,'($1) $2-$3') + '</a>';
+      $('dicaCancelar').innerHTML = 'Fale com a Jamile pelo WhatsApp: <a href="https://wa.me/'+cfg.negocio.whatsapp
+        +'" target="_blank" rel="noopener">'+cfg.negocio.whatsapp.replace(/^55(\d{2})(\d{5})(\d{4})$/,'($1) $2-$3')+'</a>';
     }
     return;
   }
-
-  err.textContent = '';
-  canceladoAgora = { codigo: cod.toUpperCase(), proc: data.procedimento, data: data.data, hora: hhmm(data.hora), nome: data.nome };
+  err.textContent='';
+  canceladoAgora = { codigo:cod.toUpperCase(), proc:data.procedimento, data:data.data, hora:hhmm(data.hora), nome:data.nome };
   $('resumoCancelado').innerHTML =
-    linha('Código', '<span class="codigo">'+canceladoAgora.codigo+'</span>') +
-    linha('Procedimento', canceladoAgora.proc) +
-    linha('Dia', extenso(canceladoAgora.data)) +
+    linha('Código','<span class="codigo">'+canceladoAgora.codigo+'</span>') +
+    linha('Procedimento', canceladoAgora.proc) + linha('Dia', extenso(canceladoAgora.data)) +
     linha('Horário', canceladoAgora.hora);
   await carregarOcupacao();
   irParaExtra('telaCancelado');
 }
+const textoZapCancel = c => `Olá, Jamile! Precisei cancelar meu horário pelo site.%0A%0A✨ ${encodeURIComponent(c.proc)}%0A📅 ${encodeURIComponent(extenso(c.data))} às ${c.hora}%0A👤 ${encodeURIComponent(c.nome)}%0A🔖 Código ${c.codigo}%0A%0ADesculpe pelo transtorno!`;
 
-function textoZapCancel(c){
-  return `Olá, Jamile! Precisei cancelar meu horário pelo site.%0A%0A✨ ${encodeURIComponent(c.proc)}%0A📅 ${encodeURIComponent(extenso(c.data))} às ${c.hora}%0A👤 ${encodeURIComponent(c.nome)}%0A🔖 Código ${c.codigo}%0A%0ADesculpe pelo transtorno!`;
-}
-
-/* ============================================================
-   LOGIN E GESTÃO
-   ============================================================ */
-function abrirLogin(){
-  $('fSenha').value=''; $('erroLogin').textContent='';
-  irParaExtra('telaLogin');
-}
+/* ============ login e gestão ============ */
+function abrirLogin(){ $('fSenha').value=''; $('erroLogin').textContent=''; irParaExtra('telaLogin'); }
 async function entrar(){
-  const email = $('fEmail').value.trim();
-  const senha = $('fSenha').value;
-  const err = $('erroLogin');
-  if(!email || !senha){ err.textContent = 'Preencha e-mail e senha.'; return; }
-  err.textContent = 'Entrando…';
-  $('loginEntrar').disabled = true;
-  const { error } = await db.auth.signInWithPassword({ email, password: senha });
-  $('loginEntrar').disabled = false;
-  if(error){
-    err.textContent = error.message.includes('Invalid') ? 'E-mail ou senha incorretos.' : 'Não foi possível entrar: ' + error.message;
-    return;
-  }
-  err.textContent = '';
-  await abrirGestao();
+  const email = $('fEmail').value.trim(), senha = $('fSenha').value, err = $('erroLogin');
+  if(!email||!senha){ err.textContent='Preencha e-mail e senha.'; return; }
+  err.textContent='Entrando…'; $('loginEntrar').disabled=true;
+  const { error } = await db.auth.signInWithPassword({ email, password:senha });
+  $('loginEntrar').disabled=false;
+  if(error){ err.textContent = error.message.includes('Invalid')?'E-mail ou senha incorretos.':'Não foi possível entrar: '+error.message; return; }
+  err.textContent=''; await abrirGestao();
 }
 async function abrirGestao(){
   irParaExtra('telaGestao');
   const { data:{ user } } = await db.auth.getUser();
-  $('quemLogado').textContent = user ? 'Conectada como ' + user.email : '';
+  $('quemLogado').textContent = user ? 'Conectada como '+user.email : '';
   await carregarAgendamentos();
   preencherRegras(); desenharExpediente(); desenharFeriados(); desenharBloqueios();
-  desenharAgenda(); desenharProcEdit(); preencherPacotes(); desenharPacEdit();
+  desenharAgenda(); desenharProcEdit(); preencherVitrineEdit(); desenharPacEdit();
   atualizarAlertaCancel();
 }
-async function sair(){
-  await db.auth.signOut();
-  agendamentos = [];
-  atualizarSino();
-  irPara(1);
-}
+async function sair(){ await db.auth.signOut(); agendamentos=[]; atualizarSino(); irPara(1); }
 
-function novosCancelamentos(){
-  return agendamentos.filter(a => a.status==='cancelado' && a.visto_pela_gestora === false);
-}
+const novosCancelamentos = () => agendamentos.filter(a=>a.status==='cancelado' && a.visto_pela_gestora===false);
 function atualizarAlertaCancel(){
   const n = novosCancelamentos().length;
   $('alertaCancel').classList.toggle('on', n>0);
-  if(n) $('txtAlertaCancel').textContent = n === 1
-    ? '1 cliente cancelou desde a sua última visita.'
-    : n + ' clientes cancelaram desde a sua última visita.';
+  if(n) $('txtAlertaCancel').textContent = n===1 ? '1 cliente cancelou desde a sua última visita.' : n+' clientes cancelaram desde a sua última visita.';
   atualizarSino();
 }
 function atualizarSino(){
   const n = novosCancelamentos().length;
   $('sino').classList.toggle('on', n>0);
-  $('sino').textContent = n > 9 ? '9+' : n;
+  $('sino').textContent = n>9?'9+':n;
 }
-
 function preencherRegras(){
-  $('gMax').value = cfg.janela.maxDias;
-  $('gMin').value = cfg.janela.minDias;
-  $('gIntervalo').value = cfg.intervalo;
-  $('gZap').value = cfg.negocio.whatsapp;
-  $('gInsta').value = cfg.negocio.instagram;
-  $('gEndereco').value = cfg.negocio.endereco || '';
+  $('gMax').value=cfg.janela.maxDias; $('gMin').value=cfg.janela.minDias;
+  $('gIntervalo').value=cfg.intervalo; $('gZap').value=cfg.negocio.whatsapp;
+  $('gInsta').value=cfg.negocio.instagram; $('gEndereco').value=cfg.negocio.endereco||'';
 }
 function desenharExpediente(){
   $('expediente').innerHTML = [1,2,3,4,5,6,0].map(d=>{
-    const e = cfg.expediente[d];
-    const h24 = ehJornada24(e);
+    const e = cfg.expediente[d], h24 = ehJornada24(e);
     return `<div class="exp-dia ${e.aberto?'':'fechado'}" data-dia="${d}">
       <div class="exp-cab">
         <label class="chk"><input type="checkbox" class="exp-on" ${e.aberto?'checked':''}><span>${DIAS_LONGO[d]}</span></label>
@@ -1009,78 +978,56 @@ function desenharExpediente(){
         <button class="btn vazado mini" data-h24="${d}">24h</button>
       </div>
       <div class="exp-h">
-        <input type="time" class="exp-i" value="${e.inicio}" aria-label="Abre">
-        <span class="ate">às</span>
-        <input type="time" class="exp-f" value="${e.fim}" aria-label="Fecha">
+        <input type="time" class="exp-i" value="${e.inicio}"><span class="ate">às</span><input type="time" class="exp-f" value="${e.fim}">
       </div>
       <div class="pausas">
-        ${(e.pausas||[]).map((p,i)=>`
-          <div class="pausa">
-            <span class="ate">intervalo</span>
-            <input type="time" class="pa-i" value="${p.i}">
-            <input type="time" class="pa-f" value="${p.f}">
-            <button class="lixo" data-rempausa="${d}:${i}" style="height:36px;width:36px">✕</button>
-          </div>`).join('')}
+        ${(e.pausas||[]).map((p,i)=>`<div class="pausa"><span class="ate">intervalo</span>
+          <input type="time" class="pa-i" value="${p.i}"><input type="time" class="pa-f" value="${p.f}">
+          <button class="lixo" data-rempausa="${d}:${i}" style="height:36px;width:36px">✕</button></div>`).join('')}
       </div>
       <button class="btn vazado mini" data-addpausa="${d}" style="margin-top:6px">+ intervalo</button>
     </div>`;
   }).join('');
   $('expediente').querySelectorAll('[data-h24]').forEach(b=>{
-    b.onclick = () => {
-      lerExpediente();
+    b.onclick = () => { lerExpediente();
       const e = cfg.expediente[b.dataset.h24];
-      if(ehJornada24(e)){ e.inicio='07:30'; e.fim='20:00'; }
-      else { e.inicio='00:00'; e.fim='00:00'; e.aberto=true; }
-      desenharExpediente();
-    };
+      if(ehJornada24(e)){ e.inicio='07:30'; e.fim='20:00'; } else { e.inicio='00:00'; e.fim='00:00'; e.aberto=true; }
+      desenharExpediente(); };
   });
   $('expediente').querySelectorAll('[data-addpausa]').forEach(b=>{
     b.onclick = () => { lerExpediente(); cfg.expediente[b.dataset.addpausa].pausas.push({i:'12:00',f:'13:00'}); desenharExpediente(); };
   });
   $('expediente').querySelectorAll('[data-rempausa]').forEach(b=>{
-    b.onclick = () => {
-      lerExpediente();
-      const [d,i] = b.dataset.rempausa.split(':');
-      cfg.expediente[d].pausas.splice(Number(i),1);
-      desenharExpediente();
-    };
+    b.onclick = () => { lerExpediente(); const [d,i]=b.dataset.rempausa.split(':');
+      cfg.expediente[d].pausas.splice(Number(i),1); desenharExpediente(); };
   });
-  $('expediente').querySelectorAll('.exp-on').forEach(c=>{
-    c.onchange = () => { lerExpediente(); desenharExpediente(); };
-  });
+  $('expediente').querySelectorAll('.exp-on').forEach(c=>{ c.onchange = () => { lerExpediente(); desenharExpediente(); }; });
 }
 function lerExpediente(){
   [...$('expediente').querySelectorAll('.exp-dia')].forEach(l=>{
-    const d = l.dataset.dia;
-    cfg.expediente[d] = {
+    cfg.expediente[l.dataset.dia] = {
       aberto: l.querySelector('.exp-on').checked,
-      inicio: l.querySelector('.exp-i').value || '00:00',
-      fim: l.querySelector('.exp-f').value || '00:00',
-      pausas: [...l.querySelectorAll('.pausa')].map(p=>({
-        i: p.querySelector('.pa-i').value, f: p.querySelector('.pa-f').value
-      })).filter(p=>p.i&&p.f)
+      inicio: l.querySelector('.exp-i').value||'00:00',
+      fim: l.querySelector('.exp-f').value||'00:00',
+      pausas: [...l.querySelectorAll('.pausa')].map(p=>({i:p.querySelector('.pa-i').value, f:p.querySelector('.pa-f').value})).filter(p=>p.i&&p.f)
     };
   });
 }
 function desenharFeriados(){
-  const dentro = f => f.data >= ymd(hoje()) && f.data <= ymd(somaDias(hoje(), Math.max(365, Number(cfg.janela.maxDias)||90)));
+  const dentro = f => f.data>=ymd(hoje()) && f.data<=ymd(somaDias(hoje(), Math.max(365, Number(cfg.janela.maxDias)||90)));
   const l = Object.values(mapaFeriados()).filter(dentro).sort((a,b)=>a.data.localeCompare(b.data));
-  if(!l.length){ $('listaFeriados').innerHTML = '<p class="dica">Nenhum feriado na janela atual.</p>'; return; }
+  if(!l.length){ $('listaFeriados').innerHTML='<p class="dica">Nenhum feriado na janela atual.</p>'; return; }
   $('listaFeriados').innerHTML = l.map(f=>{
     const aberto = cfg.feriadosAbertos.includes(f.data);
     return `<div class="fer-linha ${aberto?'':'travado'}">
       <div><div class="fer-nome">${f.nome}</div>
       <div class="fer-data">${extenso(f.data)}${f.tipo==='facultativo'?' · ponto facultativo':f.tipo==='df'?' · feriado do DF':''}</div></div>
-      <button class="btn ${aberto?'':'vazado'} mini" data-fer="${f.data}">${aberto?'Atende':'Travado'}</button>
-    </div>`;
+      <button class="btn ${aberto?'':'vazado'} mini" data-fer="${f.data}">${aberto?'Atende':'Travado'}</button></div>`;
   }).join('');
   $('listaFeriados').querySelectorAll('[data-fer]').forEach(b=>{
-    b.onclick = () => {
-      const d = b.dataset.fer;
-      cfg.feriadosAbertos = cfg.feriadosAbertos.includes(d)
-        ? cfg.feriadosAbertos.filter(x=>x!==d) : [...cfg.feriadosAbertos, d];
-      desenharFeriados();
-    };
+    b.onclick = () => { const d=b.dataset.fer;
+      cfg.feriadosAbertos = cfg.feriadosAbertos.includes(d) ? cfg.feriadosAbertos.filter(x=>x!==d) : [...cfg.feriadosAbertos,d];
+      desenharFeriados(); };
   });
 }
 function desenharBloqueios(){
@@ -1094,26 +1041,22 @@ function desenharBloqueios(){
 }
 function desenharAgenda(){
   const limite = ymd(hoje());
-  const l = agendamentos
-    .filter(a => mostrarPassados ? true : (a.data >= limite && a.status!=='cancelado'))
-    .sort((a,b) => (a.data+a.hora).localeCompare(b.data+b.hora));
-  $('btnPassados').textContent = mostrarPassados ? 'Ver só os próximos' : 'Ver anteriores';
-  if(!l.length){ $('listaAgenda').innerHTML = '<div class="vazio-msg">Nenhum agendamento por aqui ainda. Compartilhe o link e ele começa a encher.</div>'; return; }
+  const l = agendamentos.filter(a=>mostrarPassados?true:(a.data>=limite && a.status!=='cancelado'))
+    .sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora));
+  $('btnPassados').textContent = mostrarPassados?'Ver só os próximos':'Ver anteriores';
+  if(!l.length){ $('listaAgenda').innerHTML='<div class="vazio-msg">Nenhum agendamento por aqui ainda. Compartilhe o link e ele começa a encher.</div>'; return; }
   $('listaAgenda').innerHTML = l.map(a=>{
-    const novoCancel = a.status==='cancelado' && a.visto_pela_gestora===false;
-    return `<div class="agenda-item ${novoCancel?'novo-cancel':''}">
-      <div class="top">
-        <span class="quando">${extenso(a.data)} · ${hhmm(a.hora)}</span>
-        <span class="tag ${novoCancel?'alerta':''}">${a.status==='cancelado'?(a.cancelado_por==='cliente'?'cancelou':'cancelado'):a.codigo}</span>
-      </div>
+    const nc = a.status==='cancelado' && a.visto_pela_gestora===false;
+    return `<div class="agenda-item ${nc?'novo-cancel':''}">
+      <div class="top"><span class="quando">${extenso(a.data)} · ${hhmm(a.hora)}</span>
+      <span class="tag ${nc?'alerta':''}">${a.status==='cancelado'?(a.cancelado_por==='cliente'?'cancelou':'cancelado'):a.codigo}</span></div>
       <div class="quem">${a.procedimento} · ${a.duracao} min</div>
       <div class="quem">${a.nome} — ${a.telefone}</div>
       ${a.observacao?`<div class="quem">📝 ${a.observacao}</div>`:''}
       <div class="mini-acoes">
         <a class="btn vazado mini" href="https://wa.me/55${a.telefone.replace(/^55/,'')}?text=${encodeURIComponent('Oi, '+a.nome.split(' ')[0]+'! '+(a.status==='cancelado'?'Vi que você cancelou o horário de '+extenso(a.data)+'. Quer remarcar?':'Confirmando seu horário na Jamile Beauty: '+a.procedimento+' em '+extenso(a.data)+' às '+hhmm(a.hora)+'. Até lá!'))}" target="_blank" rel="noopener" style="text-decoration:none;text-align:center">Chamar</a>
         ${a.status!=='cancelado'?`<button class="btn vazado mini" data-cancelar="${a.id}">Cancelar</button>`:''}
-      </div>
-    </div>`;
+      </div></div>`;
   }).join('');
   $('listaAgenda').querySelectorAll('[data-cancelar]').forEach(b=>{
     b.onclick = async () => {
@@ -1121,7 +1064,7 @@ function desenharAgenda(){
       const { error } = await db.from('agendamentos')
         .update({ status:'cancelado', cancelado_em:new Date().toISOString(), cancelado_por:'gestora', visto_pela_gestora:true })
         .eq('id', b.dataset.cancelar);
-      if(error){ alert('Não foi possível cancelar: ' + error.message); return; }
+      if(error){ alert('Não foi possível cancelar: '+error.message); return; }
       await carregarAgendamentos(); await carregarOcupacao();
       desenharAgenda(); atualizarAlertaCancel();
     };
@@ -1131,94 +1074,81 @@ async function marcarVistos(){
   const ids = novosCancelamentos().map(a=>a.id);
   if(!ids.length) return;
   const { error } = await db.from('agendamentos').update({ visto_pela_gestora:true }).in('id', ids);
-  if(error){ alert('Não foi possível marcar: ' + error.message); return; }
-  await carregarAgendamentos();
-  desenharAgenda(); atualizarAlertaCancel();
+  if(error){ alert('Não foi possível marcar: '+error.message); return; }
+  await carregarAgendamentos(); desenharAgenda(); atualizarAlertaCancel();
 }
-
-/* ---- novo agendamento pela gestora ---- */
 function abrirNovo(){
   $('nProc').innerHTML = cfg.procedimentos.map(p=>`<option value="${p.id}">${p.nome} (${p.duracao} min)</option>`).join('');
-  $('nData').value = ymd(hoje());
-  $('nHora').value = '';
-  $('nNome').value = ''; $('nTel').value = ''; $('nObs').value = '';
-  $('erroNovo').textContent = '';
-  $('blocoNovo').style.display = 'block';
-  $('btnAbrirNovo').style.display = 'none';
+  $('nData').value = ymd(hoje()); $('nHora').value='';
+  $('nNome').value=''; $('nTel').value=''; $('nObs').value=''; $('erroNovo').textContent='';
+  $('blocoNovo').style.display='block'; $('btnAbrirNovo').style.display='none';
 }
-function fecharNovo(){
-  $('blocoNovo').style.display = 'none';
-  $('btnAbrirNovo').style.display = '';
-}
+function fecharNovo(){ $('blocoNovo').style.display='none'; $('btnAbrirNovo').style.display=''; }
 async function salvarNovo(){
-  const p = cfg.procedimentos.find(x=>x.id === $('nProc').value);
-  const err = $('erroNovo');
-  const nome = $('nNome').value.trim();
-  const tel = $('nTel').value.replace(/\D/g,'');
-  if(!p){ err.textContent = 'Escolha um procedimento.'; return; }
-  if(!$('nData').value){ err.textContent = 'Informe a data.'; return; }
-  if(!$('nHora').value){ err.textContent = 'Informe a hora.'; return; }
-  if(nome.length < 3){ err.textContent = 'Informe o nome da cliente.'; return; }
-  if(tel.length < 10){ err.textContent = 'Informe o WhatsApp com DDD.'; return; }
-  err.textContent = '';
-  $('novoSalvar').disabled = true;
+  const p = cfg.procedimentos.find(x=>x.id===$('nProc').value), err = $('erroNovo');
+  const nome = $('nNome').value.trim(), tel = $('nTel').value.replace(/\D/g,'');
+  if(!p){ err.textContent='Escolha um procedimento.'; return; }
+  if(!$('nData').value){ err.textContent='Informe a data.'; return; }
+  if(!$('nHora').value){ err.textContent='Informe a hora.'; return; }
+  if(nome.length<3){ err.textContent='Informe o nome da cliente.'; return; }
+  if(tel.length<10){ err.textContent='Informe o WhatsApp com DDD.'; return; }
+  err.textContent=''; $('novoSalvar').disabled=true;
   const { error } = await db.from('agendamentos').insert({
-    codigo: codigo(), procedimento: p.nome, duracao: p.duracao, preco: p.preco || null,
-    data: $('nData').value, hora: $('nHora').value, nome, telefone: tel,
-    observacao: $('nObs').value.trim() || null, status: 'confirmado'
-  });
-  $('novoSalvar').disabled = false;
+    codigo:codigo(), procedimento:p.nome, duracao:p.duracao, preco:p.preco||null,
+    data:$('nData').value, hora:$('nHora').value, nome, telefone:tel,
+    observacao:$('nObs').value.trim()||null, status:'confirmado' });
+  $('novoSalvar').disabled=false;
   if(error){
-    err.textContent = error.code === '23P01'
-      ? 'Já existe um atendimento nesse intervalo. Escolha outro horário.'
-      : 'Não foi possível marcar: ' + error.message;
+    err.textContent = error.code==='23P01' ? 'Já existe um atendimento nesse intervalo. Escolha outro horário.' : 'Não foi possível marcar: '+error.message;
     return;
   }
-  await carregarAgendamentos(); await carregarOcupacao();
-  desenharAgenda(); fecharNovo();
+  await carregarAgendamentos(); await carregarOcupacao(); desenharAgenda(); fecharNovo();
 }
-
-/* ---- procedimentos ---- */
 function desenharProcEdit(){
   $('listaProcEdit').innerHTML = cfg.procedimentos.map((p,i)=>`
     <div class="proc-edit" data-i="${i}">
-      <input class="pe-nome" value="${String(p.nome).replace(/"/g,'&quot;')}" placeholder="Nome">
+      <input class="pe-nome" value="${esc(p.nome)}" placeholder="Nome">
       <input class="pe-dur" type="number" min="10" step="5" value="${p.duracao}" placeholder="min">
-      <input class="pe-preco" value="${p.preco||''}" placeholder="R$">
-      <button class="lixo" data-rem="${i}">✕</button>
-    </div>`).join('');
+      <input class="pe-preco" value="${esc(p.preco)}" placeholder="R$">
+      <button class="lixo" data-rem="${i}">✕</button></div>`).join('');
   $('listaProcEdit').querySelectorAll('[data-rem]').forEach(b=>{
     b.onclick = () => { lerProcEdit(); cfg.procedimentos.splice(Number(b.dataset.rem),1); desenharProcEdit(); };
   });
 }
 function lerProcEdit(){
-  const linhas = [...$('listaProcEdit').querySelectorAll('.proc-edit')];
-  cfg.procedimentos = linhas.map((l,i)=>({
-    id: cfg.procedimentos[i] ? cfg.procedimentos[i].id : 'p'+Date.now()+i,
-    nome: l.querySelector('.pe-nome').value.trim() || 'Procedimento',
-    duracao: Number(l.querySelector('.pe-dur').value) || 60,
+  cfg.procedimentos = [...$('listaProcEdit').querySelectorAll('.proc-edit')].map((l,i)=>({
+    id: cfg.procedimentos[i]?cfg.procedimentos[i].id:'p'+Date.now()+i,
+    nome: l.querySelector('.pe-nome').value.trim()||'Procedimento',
+    duracao: Number(l.querySelector('.pe-dur').value)||60,
     preco: l.querySelector('.pe-preco').value.trim(),
-    icone: cfg.procedimentos[i] ? cfg.procedimentos[i].icone : 'estrela'
+    icone: cfg.procedimentos[i]?cfg.procedimentos[i].icone:'estrela'
   }));
 }
 
-/* ---- pacotes ---- */
-function preencherPacotes(){
+/* ---- promoções ---- */
+function preencherVitrineEdit(){
   $('vAtiva').checked = !!cfg.vitrine.ativa;
-  $('vTitulo').value = cfg.vitrine.titulo || '';
-  $('vChamada').value = cfg.vitrine.chamada || '';
+  $('vEtiqueta').value = cfg.vitrine.etiqueta||'';
+  $('vTitulo').value = cfg.vitrine.titulo||'';
+  $('vChamada').value = cfg.vitrine.chamada||'';
+  $('vEnvio').textContent = '';
+  if(cfg.vitrine.imagem){
+    $('vMini').src = cfg.vitrine.imagem; $('vMini').classList.add('on'); $('vRemFoto').style.display='';
+  } else {
+    $('vMini').classList.remove('on'); $('vRemFoto').style.display='none';
+  }
 }
 function desenharPacEdit(){
   if(!cfg.pacotes.length){
-    $('listaPacEdit').innerHTML = '<p class="dica">Nenhum pacote cadastrado. A vitrine fica escondida até você criar um.</p>';
+    $('listaPacEdit').innerHTML = '<p class="dica">Nenhum pacote cadastrado. A promoção do topo fica escondida até você criar um.</p>';
     return;
   }
   $('listaPacEdit').innerHTML = cfg.pacotes.map((p,i)=>`
     <div class="pac-edit" data-i="${i}">
       <label>Nome do pacote</label>
-      <input class="px-nome" value="${String(p.nome||'').replace(/"/g,'&quot;')}" placeholder="Ex.: Limpeza de pele — 5 sessões">
+      <input class="px-nome" value="${esc(p.nome)}" placeholder="Ex.: Limpeza de pele — 5 sessões">
       <label>Descrição curta (opcional)</label>
-      <input class="px-desc" value="${String(p.descricao||'').replace(/"/g,'&quot;')}" placeholder="Ex.: uma por semana">
+      <input class="px-desc" value="${esc(p.descricao)}" placeholder="Ex.: uma por semana">
       <div class="dupla">
         <div><label>Sessões</label><input class="px-ses" type="number" min="1" value="${p.sessoes||1}"></div>
         <div><label>Validade</label><input class="px-val" type="date" value="${p.validade||''}"></div>
@@ -1227,35 +1157,55 @@ function desenharPacEdit(){
         <div><label>Preço avulso total</label><input class="px-avulso" type="number" step="0.01" min="0" value="${p.precoAvulso||''}" placeholder="900"></div>
         <div><label>Preço no pacote</label><input class="px-pacote" type="number" step="0.01" min="0" value="${p.precoPacote||''}" placeholder="720"></div>
       </div>
+      <label>Foto deste pacote (opcional)</label>
+      <input type="file" class="px-file" accept="image/*" data-i="${i}">
+      <div class="envio" data-envio="${i}"></div>
+      <img class="miniatura ${p.imagem?'on':''}" data-mini="${i}" src="${esc(p.imagem)}" alt="">
+      <input type="hidden" class="px-img" value="${esc(p.imagem)}">
       <label class="chk" style="margin-top:12px"><input type="checkbox" class="px-dest" ${p.destaque?'checked':''}><span>Destacar como oferta</span></label>
       <div class="acoes" style="margin-top:12px"><button class="btn vazado mini" data-rempac="${i}" style="flex:1">Remover pacote</button></div>
     </div>`).join('');
+
   $('listaPacEdit').querySelectorAll('[data-rempac]').forEach(b=>{
     b.onclick = () => { lerPacEdit(); cfg.pacotes.splice(Number(b.dataset.rempac),1); desenharPacEdit(); };
+  });
+  $('listaPacEdit').querySelectorAll('.px-file').forEach(inp=>{
+    inp.onchange = async () => {
+      const i = inp.dataset.i;
+      const aviso = $('listaPacEdit').querySelector('[data-envio="'+i+'"]');
+      const url = await enviarImagem(inp.files[0], 'pacote-'+i, aviso);
+      if(!url) return;
+      const caixa = inp.closest('.pac-edit');
+      caixa.querySelector('.px-img').value = url;
+      const mini = caixa.querySelector('[data-mini]');
+      mini.src = url; mini.classList.add('on');
+    };
   });
 }
 function lerPacEdit(){
   const linhas = [...$('listaPacEdit').querySelectorAll('.pac-edit')];
   if(!linhas.length) return;
   cfg.pacotes = linhas.map((l,i)=>({
-    id: cfg.pacotes[i] ? cfg.pacotes[i].id : 'pac'+Date.now()+i,
+    id: cfg.pacotes[i]?cfg.pacotes[i].id:'pac'+Date.now()+i,
     nome: l.querySelector('.px-nome').value.trim(),
     descricao: l.querySelector('.px-desc').value.trim(),
-    sessoes: Number(l.querySelector('.px-ses').value) || 1,
-    validade: l.querySelector('.px-val').value || '',
+    sessoes: Number(l.querySelector('.px-ses').value)||1,
+    validade: l.querySelector('.px-val').value||'',
     precoAvulso: l.querySelector('.px-avulso').value ? Number(l.querySelector('.px-avulso').value) : '',
     precoPacote: l.querySelector('.px-pacote').value ? Number(l.querySelector('.px-pacote').value) : '',
+    imagem: l.querySelector('.px-img').value||'',
     destaque: l.querySelector('.px-dest').checked
   }));
 }
-function lerVitrine(){
+function lerVitrineEdit(){
   cfg.vitrine = {
     ativa: $('vAtiva').checked,
-    titulo: $('vTitulo').value.trim() || 'Pacotes e promoções',
-    chamada: $('vChamada').value.trim()
+    etiqueta: $('vEtiqueta').value.trim(),
+    titulo: $('vTitulo').value.trim()||'Pacotes e promoções',
+    chamada: $('vChamada').value.trim(),
+    imagem: cfg.vitrine.imagem||''
   };
 }
-
 function lerRegras(){
   cfg.janela.maxDias = Math.max(1, Number($('gMax').value)||90);
   cfg.janela.minDias = Math.max(0, Number($('gMin').value)||0);
@@ -1268,7 +1218,7 @@ function lerRegras(){
 function baixarCSV(){
   const cab = ['Codigo','Data','Hora','Procedimento','Duracao','Preco','Nome','WhatsApp','Observacao','Status','CanceladoPor'];
   const linhas = agendamentos.map(a=>[a.codigo,a.data,hhmm(a.hora),a.procedimento,a.duracao,a.preco||'',a.nome,a.telefone,(a.observacao||'').replace(/;/g,','),a.status,a.cancelado_por||'']);
-  const csv = '\uFEFF' + [cab,...linhas].map(l=>l.join(';')).join('\n');
+  const csv = '\uFEFF'+[cab,...linhas].map(l=>l.join(';')).join('\n');
   const url = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   const a = document.createElement('a'); a.href=url; a.download='agenda-jamile-beauty.csv'; a.click();
   URL.revokeObjectURL(url);
@@ -1279,8 +1229,6 @@ function desenharRodape(){
   $('linkInsta').href = 'https://instagram.com/'+cfg.negocio.instagram;
   $('txtInsta').textContent = '@'+cfg.negocio.instagram;
 }
-
-/* ============ máscara de telefone ============ */
 function mascaraTel(el){
   el.addEventListener('input', e => {
     const v = e.target.value.replace(/\D/g,'').slice(0,11);
@@ -1290,6 +1238,9 @@ function mascaraTel(el){
 }
 
 /* ============ eventos ============ */
+$('promoBanner').onclick = () => { desenharVitrine(); irParaExtra('telaVitrine'); };
+$('vitVoltar').onclick = () => irPara(1);
+
 $('btnGestao').onclick = async () => {
   const { data:{ session } } = await db.auth.getSession();
   if(session) await abrirGestao(); else abrirLogin();
@@ -1325,32 +1276,43 @@ $('btnBloq').onclick = () => {
 $('btnAddProc').onclick = () => { lerProcEdit(); cfg.procedimentos.push({id:'p'+Date.now(),nome:'',duracao:60,preco:'',icone:'estrela'}); desenharProcEdit(); };
 $('btnAddPac').onclick = () => {
   lerPacEdit();
-  cfg.pacotes.push({id:'pac'+Date.now(),nome:'',descricao:'',sessoes:5,validade:'',precoAvulso:'',precoPacote:'',destaque:false});
+  cfg.pacotes.push({id:'pac'+Date.now(),nome:'',descricao:'',sessoes:5,validade:'',precoAvulso:'',precoPacote:'',imagem:'',destaque:false});
   desenharPacEdit();
 };
+$('vFoto').onchange = async () => {
+  const url = await enviarImagem($('vFoto').files[0], 'topo', $('vEnvio'));
+  if(!url) return;
+  cfg.vitrine.imagem = url;
+  $('vMini').src = url; $('vMini').classList.add('on'); $('vRemFoto').style.display='';
+};
+$('vRemFoto').onclick = () => {
+  cfg.vitrine.imagem = '';
+  $('vMini').classList.remove('on'); $('vRemFoto').style.display='none';
+  $('vEnvio').textContent = 'Foto removida. Não esqueça de salvar.';
+};
 $('btnSalvarRegras').onclick = async e => {
-  lerRegras(); e.target.disabled = true;
-  const erro = await salvarConfig(); e.target.disabled = false;
-  $('erroRegras').textContent = erro ? 'Não salvou: ' + erro : '';
-  e.target.textContent = erro ? 'Não salvou' : 'Salvo ✓';
+  lerRegras(); e.target.disabled=true;
+  const erro = await salvarConfig(); e.target.disabled=false;
+  $('erroRegras').textContent = erro?'Não salvou: '+erro:'';
+  e.target.textContent = erro?'Não salvou':'Salvo ✓';
   if(!erro){ await carregarOcupacao(); desenharRodape(); desenharProcedimentos(); }
-  setTimeout(()=>{ e.target.textContent='Salvar alterações'; }, 1800);
+  setTimeout(()=>{ e.target.textContent='Salvar alterações'; },1800);
 };
 $('btnSalvarProc').onclick = async e => {
-  lerProcEdit(); e.target.disabled = true;
-  const erro = await salvarConfig(); e.target.disabled = false;
-  $('erroProc').textContent = erro ? 'Não salvou: ' + erro : '';
-  e.target.textContent = erro ? 'Não salvou' : 'Salvo ✓';
+  lerProcEdit(); e.target.disabled=true;
+  const erro = await salvarConfig(); e.target.disabled=false;
+  $('erroProc').textContent = erro?'Não salvou: '+erro:'';
+  e.target.textContent = erro?'Não salvou':'Salvo ✓';
   if(!erro) desenharProcedimentos();
-  setTimeout(()=>{ e.target.textContent='Salvar alterações'; }, 1800);
+  setTimeout(()=>{ e.target.textContent='Salvar alterações'; },1800);
 };
 $('btnSalvarPac').onclick = async e => {
-  lerPacEdit(); lerVitrine(); e.target.disabled = true;
-  const erro = await salvarConfig(); e.target.disabled = false;
-  $('erroPac').textContent = erro ? 'Não salvou: ' + erro : '';
-  e.target.textContent = erro ? 'Não salvou' : 'Salvo ✓';
-  if(!erro) desenharVitrine();
-  setTimeout(()=>{ e.target.textContent='Salvar alterações'; }, 1800);
+  lerPacEdit(); lerVitrineEdit(); e.target.disabled=true;
+  const erro = await salvarConfig(); e.target.disabled=false;
+  $('erroPac').textContent = erro?'Não salvou: '+erro:'';
+  e.target.textContent = erro?'Não salvou':'Salvo ✓';
+  if(!erro){ $('vEnvio').textContent=''; desenharBanner(); }
+  setTimeout(()=>{ e.target.textContent='Salvar alterações'; },1800);
 };
 $('regrasVoltar').onclick = () => irPara(1);
 $('procVoltar').onclick = () => irPara(1);
@@ -1358,30 +1320,26 @@ $('pacVoltar').onclick = () => irPara(1);
 document.querySelectorAll('.aba').forEach(a => a.onclick = () => {
   document.querySelectorAll('.aba').forEach(x=>x.classList.remove('on'));
   a.classList.add('on');
-  $('abaAgendamentos').style.display  = a.dataset.aba==='agendamentos' ? '' : 'none';
-  $('abaRegras').style.display        = a.dataset.aba==='regras' ? '' : 'none';
-  $('abaProcedimentos').style.display = a.dataset.aba==='procedimentos' ? '' : 'none';
-  $('abaPacotes').style.display       = a.dataset.aba==='pacotes' ? '' : 'none';
+  $('abaAgendamentos').style.display  = a.dataset.aba==='agendamentos'?'':'none';
+  $('abaRegras').style.display        = a.dataset.aba==='regras'?'':'none';
+  $('abaProcedimentos').style.display = a.dataset.aba==='procedimentos'?'':'none';
+  $('abaPacotes').style.display       = a.dataset.aba==='pacotes'?'':'none';
 });
 mascaraTel($('fTel')); mascaraTel($('cTel')); mascaraTel($('nTel'));
 
 /* ============ início ============ */
 (async function(){
-  try{
-    await carregarConfig();
-    await carregarOcupacao();
-  }catch(e){
-    $('carregando').style.display = 'none';
-    $('falhaConexao').style.display = 'block';
-    $('falhaConexao').textContent = 'Falha ao carregar: ' + e.message;
+  try{ await carregarConfig(); await carregarOcupacao(); }
+  catch(e){
+    $('carregando').style.display='none';
+    $('falhaConexao').style.display='block';
+    $('falhaConexao').textContent = 'Falha ao carregar: '+e.message;
     console.error('Falha ao carregar a agenda:', e);
     return;
   }
-  $('carregando').style.display = 'none';
-  $('app').style.display = '';
+  $('carregando').style.display='none';
+  $('app').style.display='';
   desenharProcedimentos(); desenharRodape(); irPara(1);
-
-  // se a Jamile já estiver logada, mostra o sino com cancelamentos novos
   const { data:{ session } } = await db.auth.getSession();
   if(session){ await carregarAgendamentos(); atualizarSino(); }
 })();
