@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico — Jamile Agenda</title>
+<style>
+body{font-family:ui-monospace,Menlo,Consolas,monospace;background:#111;color:#eee;padding:20px;line-height:1.6;font-size:14px}
+h1{font-size:18px;color:#7ee787}
+.t{border:1px solid #333;border-radius:8px;padding:12px 14px;margin-bottom:12px;background:#1a1a1a}
+.t h2{font-size:14px;margin:0 0 6px;color:#79c0ff}
+.ok{color:#7ee787}.ruim{color:#ff7b72}.aviso{color:#e3b341}
+pre{white-space:pre-wrap;word-break:break-all;margin:6px 0 0;color:#bbb}
+</style>
+</head>
+<body>
+<h1>Diagnóstico da conexão</h1>
+<div id="saida">Executando…</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL  = 'https://ifemczgjdxwcfrxzlrlh.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW1jemdqZHh3Y2ZyeHpscmxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwOTI5NjYsImV4cCI6MjEwMzY2ODk2Nn0.dWBxSGIHodCzLp5m_luECGAV8lHmOieQML8rcbaxyn8';
+
+const saida = document.getElementById('saida');
+saida.innerHTML = '';
+
+function bloco(titulo, estado, texto){
+  const cls = estado === true ? 'ok' : estado === false ? 'ruim' : 'aviso';
+  const marca = estado === true ? 'OK' : estado === false ? 'FALHOU' : 'ATENÇÃO';
+  const d = document.createElement('div');
+  d.className = 't';
+  d.innerHTML = '<h2>'+titulo+' — <span class="'+cls+'">'+marca+'</span></h2><pre>'+texto+'</pre>';
+  saida.appendChild(d);
+}
+
+(async function(){
+
+  // 1. biblioteca carregou?
+  if(!window.supabase || !window.supabase.createClient){
+    bloco('1. Biblioteca supabase-js', false,
+      'O script do CDN não carregou. Alguma extensão, bloqueador de anúncios ou rede corporativa pode estar barrando cdn.jsdelivr.net.');
+    return;
+  }
+  bloco('1. Biblioteca supabase-js', true, 'Carregada.');
+
+  // 2. formato das credenciais
+  const partes = SUPABASE_ANON.split('.');
+  let corpo = null, obsChave = 'URL: ' + SUPABASE_URL + '\nTamanho da chave: ' + SUPABASE_ANON.length + ' caracteres';
+  if(partes.length !== 3){
+    bloco('2. Formato da chave', false, obsChave + '\nA chave não tem as três partes de um JWT. Provavelmente foi cortada ou colada com espaço.');
+    return;
+  }
+  try{
+    corpo = JSON.parse(atob(partes[1]));
+    obsChave += '\npapel (role): ' + corpo.role + '\nprojeto (ref): ' + corpo.ref;
+    const refUrl = SUPABASE_URL.replace('https://','').split('.')[0];
+    if(corpo.ref !== refUrl){
+      bloco('2. Formato da chave', false, obsChave + '\n\nA chave pertence ao projeto "'+corpo.ref+'" mas a URL aponta para "'+refUrl+'".');
+      return;
+    }
+    if(corpo.role !== 'anon'){
+      bloco('2. Formato da chave', false, obsChave + '\n\nEsta NÃO é a chave anônima. Não use chave secreta em página pública.');
+      return;
+    }
+    bloco('2. Formato da chave', true, obsChave);
+  }catch(e){
+    bloco('2. Formato da chave', false, obsChave + '\nNão foi possível decodificar: ' + e.message);
+    return;
+  }
+
+  // 3. a API responde?
+  let resposta;
+  try{
+    resposta = await fetch(SUPABASE_URL + '/rest/v1/', { headers:{ apikey: SUPABASE_ANON } });
+    bloco('3. A API responde', resposta.status < 500,
+      'HTTP ' + resposta.status + ' ' + resposta.statusText);
+  }catch(e){
+    bloco('3. A API responde', false,
+      'Não houve resposta: ' + e.message +
+      '\n\nCausas comuns: URL errada, projeto pausado por inatividade, ou bloqueio de rede.');
+    return;
+  }
+
+  // 4. leitura da tabela configuracao
+  try{
+    const r = await fetch(SUPABASE_URL + '/rest/v1/configuracao?select=dados', {
+      headers:{ apikey: SUPABASE_ANON, Authorization: 'Bearer ' + SUPABASE_ANON }
+    });
+    const txt = await r.text();
+    bloco('4. Leitura de public.configuracao', r.ok,
+      'HTTP ' + r.status + '\n' + txt.slice(0, 600));
+    if(r.status === 401) bloco('→ Interpretação', false,
+      'Chave rejeitada. Se o projeto desativou as chaves legadas, gere e use a "publishable key".');
+    if(r.ok && txt.trim() === '[]') bloco('→ Interpretação', false,
+      'A tabela existe e o acesso passou, mas voltou vazia: ou a linha de configuração não foi inserida, ou a política de leitura não alcança o papel anon.');
+  }catch(e){
+    bloco('4. Leitura de public.configuracao', false, e.message);
+  }
+
+  // 5. o mesmo pela biblioteca
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  const { data, error } = await db.from('configuracao').select('dados').eq('id', true).single();
+  bloco('5. Leitura via supabase-js', !error,
+    error ? ('código: ' + (error.code||'—') + '\nmensagem: ' + error.message +
+             (error.details ? '\ndetalhes: ' + error.details : '') +
+             (error.hint ? '\ndica: ' + error.hint : ''))
+          : ('Configuração lida. Procedimentos encontrados: ' +
+             ((data && data.dados && data.dados.procedimentos) ? data.dados.procedimentos.length : 0)));
+
+  // 6. função ocupacao
+  const rpc = await db.rpc('ocupacao', { de:'2026-01-01', ate:'2026-12-31' });
+  bloco('6. Função ocupacao()', !rpc.error,
+    rpc.error ? ('código: ' + (rpc.error.code||'—') + '\nmensagem: ' + rpc.error.message)
+              : ('Respondeu. Horários ocupados no período: ' + (rpc.data ? rpc.data.length : 0)));
+
+})();
+</script>
+</body>
+</html>
