@@ -25,17 +25,9 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{
-  background:var(--creme);
-  color:var(--cacau);
-  font-family:var(--corpo);
-  font-size:16px;
-  line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
+body{background:var(--creme);color:var(--cacau);font-family:var(--corpo);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:560px;margin:0 auto;padding:0 20px 48px}
 
-/* ---------- cabeçalho ---------- */
 header{position:relative;padding:26px 0 18px;text-align:center}
 .marca{font-family:var(--script);font-size:44px;line-height:1;color:var(--cacau)}
 .marca-sub{font-family:var(--corpo);font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--bronze);margin-top:8px}
@@ -44,8 +36,9 @@ header{position:relative;padding:26px 0 18px;text-align:center}
 .ornamento b{width:5px;height:5px;transform:rotate(45deg);background:var(--bronze);display:block}
 .engrenagem{position:absolute;right:0;top:26px;border:1px solid var(--linha);background:transparent;border-radius:50%;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;color:var(--bronze)}
 .engrenagem:hover{background:var(--creme-2)}
+.sino{position:absolute;top:-4px;right:-4px;background:var(--rosa);color:#fff;border-radius:999px;font-size:10px;min-width:17px;height:17px;display:none;place-items:center;padding:0 4px;font-family:var(--corpo)}
+.sino.on{display:grid}
 
-/* ---------- passos ---------- */
 .passos{display:flex;align-items:center;gap:6px;justify-content:center;margin:22px 0 26px}
 .passo{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);opacity:.45}
 .passo.on{opacity:1;color:var(--cacau)}
@@ -58,22 +51,37 @@ h1{font-size:30px;margin:0 0 4px}
 h2{font-size:22px;margin:0 0 4px}
 .legenda{font-size:14px;color:rgba(62,42,32,.65);margin:0 0 20px}
 
-/* ---------- lista de procedimentos ---------- */
 .lista{display:flex;flex-direction:column;gap:10px}
-.item{
-  display:flex;align-items:center;gap:14px;width:100%;text-align:left;
-  background:#fff;border:1px solid var(--linha);border-radius:16px;
-  padding:14px 16px;cursor:pointer;font:inherit;color:inherit;
-  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
-}
+.item{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border:1px solid var(--linha);border-radius:16px;padding:14px 16px;cursor:pointer;font:inherit;color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
 .item:hover{border-color:var(--bronze);transform:translateY(-1px);box-shadow:0 6px 18px rgba(139,94,60,.08)}
-.item[aria-pressed="true"]{border-color:var(--bronze);background:var(--creme-2)}
 .medalha{flex:0 0 42px;height:42px;border-radius:50%;border:1px solid var(--linha);display:grid;place-items:center;color:var(--bronze)}
 .item-nome{font-family:var(--display);font-size:19px;line-height:1.2}
 .item-meta{font-size:12.5px;color:rgba(62,42,32,.6);margin-top:2px}
 .item-preco{margin-left:auto;font-size:14px;color:var(--bronze-esc);white-space:nowrap}
 
-/* ---------- calendário ---------- */
+/* ---------- vitrine de pacotes ---------- */
+.vitrine{margin-top:34px;padding-top:26px;border-top:1px solid var(--linha)}
+.vitrine-cab{text-align:center;margin-bottom:18px}
+.vitrine-cab h2{font-size:24px;margin-bottom:6px}
+.vitrine-cab p{font-size:13.5px;color:rgba(62,42,32,.65);margin:0}
+.pacote{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:18px 18px 16px;margin-bottom:12px;position:relative;overflow:hidden}
+.pacote.destaque{border-color:var(--bronze);box-shadow:0 8px 24px rgba(139,94,60,.10)}
+.fita{position:absolute;top:14px;right:-30px;transform:rotate(35deg);background:var(--bronze);color:#fff;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 34px}
+.pacote-nome{font-family:var(--display);font-size:21px;line-height:1.15}
+.pacote-ses{font-size:12.5px;color:rgba(62,42,32,.6);margin-top:2px}
+.pacote-precos{display:flex;align-items:baseline;gap:10px;margin-top:12px;flex-wrap:wrap}
+.de{font-size:14px;color:rgba(62,42,32,.5);text-decoration:line-through}
+.por{font-family:var(--display);font-size:26px;color:var(--bronze-esc)}
+.economia{font-size:12px;background:var(--creme-2);color:var(--bronze-esc);border-radius:999px;padding:3px 10px}
+.pacote-val{font-size:12px;color:var(--rosa);margin-top:8px}
+.pacote .btn{margin-top:14px;width:100%}
+
+label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:16px 0 6px}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--linha);background:#fff;font:inherit;font-size:16px;color:var(--cacau)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--bronze);outline-offset:1px;border-color:transparent}
+textarea{min-height:80px;resize:vertical}
+.dupla{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
 .cal-topo{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .cal-mes{font-family:var(--display);font-size:20px;text-transform:capitalize}
 .seta{width:34px;height:34px;border-radius:50%;border:1px solid var(--linha);background:#fff;color:var(--bronze);cursor:pointer;display:grid;place-items:center;font-size:16px}
@@ -87,36 +95,19 @@ h2{font-size:22px;margin:0 0 4px}
 .dia.sel{background:var(--bronze);border-color:var(--bronze);color:#fff}
 .dia.vazio{visibility:hidden}
 
-/* ---------- horários ---------- */
 .horarios{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
 .hora{padding:12px 4px;border-radius:12px;border:1px solid var(--linha);background:#fff;font:inherit;font-size:15px;color:var(--cacau);cursor:pointer}
 .hora:hover{border-color:var(--bronze)}
-.hora.sel{background:var(--bronze);border-color:var(--bronze);color:#fff}
 
-/* ---------- formulário ---------- */
-label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:16px 0 6px}
-input,select,textarea{
-  width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--linha);
-  background:#fff;font:inherit;font-size:16px;color:var(--cacau)
-}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--bronze);outline-offset:1px;border-color:transparent}
-textarea{min-height:80px;resize:vertical}
-.dupla{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-/* ---------- botões ---------- */
 .acoes{display:flex;gap:10px;margin-top:26px}
-.btn{
-  flex:1;padding:15px 18px;border-radius:999px;border:1px solid var(--bronze);
-  background:var(--bronze);color:#fff;font:inherit;font-size:15px;letter-spacing:.04em;cursor:pointer;
-  transition:filter .16s ease
-}
+.btn{flex:1;padding:15px 18px;border-radius:999px;border:1px solid var(--bronze);background:var(--bronze);color:#fff;font:inherit;font-size:15px;letter-spacing:.04em;cursor:pointer;transition:filter .16s ease}
 .btn:hover{filter:brightness(1.06)}
 .btn:disabled{opacity:.4;cursor:default;filter:none}
 .btn.vazado{background:transparent;color:var(--bronze-esc)}
 .btn.zap{background:#1FA855;border-color:#1FA855}
 .btn.mini{padding:10px 14px;font-size:13.5px;flex:0 0 auto}
+.btn.grande{padding:18px;font-size:16.5px}
 
-/* ---------- resumo / confirmação ---------- */
 .cartao{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:20px;margin-top:6px}
 .cartao .linha{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid rgba(169,118,78,.14);font-size:14.5px}
 .cartao .linha:last-child{border-bottom:0}
@@ -126,15 +117,18 @@ textarea{min-height:80px;resize:vertical}
 .centro{text-align:center}
 .codigo{font-family:var(--display);font-size:22px;letter-spacing:.16em;color:var(--bronze-esc)}
 .aviso{background:var(--creme-2);border-radius:14px;padding:13px 15px;font-size:13.5px;color:rgba(62,42,32,.78);margin-top:16px}
+.chamada-zap{background:#EAF7EE;border:1px solid rgba(31,168,85,.3);border-radius:16px;padding:16px;margin-top:20px;text-align:center}
+.chamada-zap p{margin:0 0 12px;font-size:14px;color:#1a5c33}
+.chamada-zap strong{display:block;font-family:var(--display);font-size:18px;margin-bottom:4px;color:#12492a}
 .erro{color:var(--erro);font-size:13.5px;margin-top:10px;min-height:18px}
+.sucesso{color:var(--ok);font-size:13.5px;margin-top:10px}
 .vazio-msg{text-align:center;padding:26px 10px;color:rgba(62,42,32,.6);font-size:14.5px}
 
-/* ---------- rodapé ---------- */
 footer{margin-top:38px;text-align:center;font-size:13px;color:rgba(62,42,32,.6)}
 footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-items:center;gap:7px;margin:0 9px}
 .frase{font-family:var(--display);font-size:17px;color:var(--cacau);margin-bottom:14px}
+.link-cancelar{display:block;margin-top:18px;font-size:12.5px;color:rgba(62,42,32,.55);background:none;border:0;cursor:pointer;font-family:inherit;width:100%;text-decoration:underline}
 
-/* ---------- painel de gestão ---------- */
 .tela{display:none}
 .tela.ativa{display:block}
 .bloco{background:#fff;border:1px solid var(--linha);border-radius:16px;padding:16px 18px;margin-bottom:14px}
@@ -142,25 +136,30 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .bloco p.dica{font-size:12.5px;color:rgba(62,42,32,.6);margin:0 0 6px}
 .exp-linha{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(169,118,78,.14)}
 .exp-linha:last-child{border-bottom:0}
-.exp-linha .dia-lbl{flex:0 0 44px;font-size:13px}
-.exp-linha input[type=time]{padding:8px 10px;font-size:14px}
-.exp-linha input[type=checkbox]{width:auto;flex:0 0 auto}
 .agenda-item{border:1px solid var(--linha);border-radius:14px;padding:12px 14px;margin-bottom:8px;background:#fff}
+.agenda-item.novo-cancel{border-color:var(--rosa);background:#FFF6F4}
 .agenda-item .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .agenda-item .quando{font-family:var(--display);font-size:17px}
 .agenda-item .quem{font-size:13.5px;color:rgba(62,42,32,.75);margin-top:2px}
 .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);border:1px solid var(--linha);border-radius:999px;padding:2px 9px}
+.tag.alerta{color:var(--rosa);border-color:var(--rosa)}
 .mini-acoes{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.abas{display:flex;gap:6px;margin:18px 0 16px;border-bottom:1px solid var(--linha)}
-.aba{flex:1;padding:11px 4px;background:none;border:0;border-bottom:2px solid transparent;font:inherit;font-size:13.5px;color:rgba(62,42,32,.55);cursor:pointer}
+.abas{display:flex;gap:4px;margin:18px 0 16px;border-bottom:1px solid var(--linha);flex-wrap:wrap}
+.aba{flex:1;min-width:80px;padding:11px 4px;background:none;border:0;border-bottom:2px solid transparent;font:inherit;font-size:13px;color:rgba(62,42,32,.55);cursor:pointer}
 .aba.on{color:var(--cacau);border-bottom-color:var(--bronze)}
 .proc-edit{display:grid;grid-template-columns:1fr 74px 88px 36px;gap:8px;align-items:center;margin-bottom:8px}
 .proc-edit input{padding:10px;font-size:14px}
+.pac-edit{border:1px solid var(--linha);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.pac-edit .dupla{gap:8px}
+.pac-edit input,.pac-edit select{padding:10px;font-size:14px}
+.pac-edit label{margin:10px 0 4px}
 .lixo{border:1px solid var(--linha);background:#fff;border-radius:10px;color:var(--erro);cursor:pointer;height:40px}
 .carregando{text-align:center;padding:60px 0;color:var(--bronze)}
 .quem-logado{font-size:12px;color:rgba(62,42,32,.55);margin-bottom:14px}
+.painel-alerta{background:#FFF6F4;border:1px solid var(--rosa);border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:13.5px;color:var(--erro);display:none;align-items:center;gap:10px;flex-wrap:wrap}
+.painel-alerta.on{display:flex}
+.painel-alerta span{flex:1}
 
-/* expediente */
 .exp-dia{border:1px solid var(--linha);border-radius:14px;padding:12px 14px;margin-bottom:10px}
 .exp-dia.fechado{opacity:.5}
 .exp-cab{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -174,7 +173,6 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .exp-h input[type=time],.pausa input[type=time]{padding:9px 10px;font-size:14px;flex:1}
 .ate{font-size:12px;color:rgba(62,42,32,.6);white-space:nowrap}
 
-/* feriados */
 .fer-linha{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(169,118,78,.14)}
 .fer-linha:last-child{border-bottom:0}
 .fer-nome{font-size:14.5px}
@@ -196,6 +194,7 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     <div class="marca-sub">Saúde e Estética</div>
     <button class="engrenagem" id="btnGestao" title="Área da Jamile" aria-label="Área da Jamile">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+      <span class="sino" id="sino"></span>
     </button>
     <div class="ornamento"><i></i><b></b><i></i></div>
   </header>
@@ -203,19 +202,23 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
   <div id="carregando" class="carregando">Preparando a agenda…</div>
   <div id="falhaConexao" style="display:none" class="vazio-msg"></div>
 
-  <!-- ================= CLIENTE ================= -->
   <main id="app" style="display:none">
-
     <div class="passos" id="passos"></div>
 
-    <!-- 1. procedimento -->
     <section class="tela" id="tela1">
       <h1>Escolha o procedimento</h1>
       <p class="legenda">Cuidados que transformam por fora e por dentro.</p>
       <div class="lista" id="listaProc"></div>
+
+      <div class="vitrine" id="vitrine" style="display:none">
+        <div class="vitrine-cab">
+          <h2 id="vitTitulo"></h2>
+          <p id="vitChamada"></p>
+        </div>
+        <div id="listaPacotes"></div>
+      </div>
     </section>
 
-    <!-- 2. data -->
     <section class="tela" id="tela2">
       <h1>Escolha o dia</h1>
       <p class="legenda" id="legDia"></p>
@@ -230,7 +233,6 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       <div class="acoes"><button class="btn vazado" data-voltar="1">Voltar</button></div>
     </section>
 
-    <!-- 3. horário -->
     <section class="tela" id="tela3">
       <h1>Escolha o horário</h1>
       <p class="legenda" id="legHora"></p>
@@ -238,7 +240,6 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       <div class="acoes"><button class="btn vazado" data-voltar="2">Voltar</button></div>
     </section>
 
-    <!-- 4. dados -->
     <section class="tela" id="tela4">
       <h1>Seus dados</h1>
       <p class="legenda">Só o essencial para confirmar seu horário.</p>
@@ -256,16 +257,20 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       </div>
     </section>
 
-    <!-- 5. pronto -->
     <section class="tela" id="tela5">
       <div class="centro">
         <div class="selo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h1>Horário reservado</h1>
-        <p class="legenda">Enviamos os detalhes abaixo. Toque no botão para avisar a Jamile pelo WhatsApp e garantir a confirmação.</p>
+        <p class="legenda">Guarde seu código. Ele é necessário para remarcar ou cancelar.</p>
       </div>
       <div class="cartao" id="resumoFinal"></div>
-      <div class="acoes"><button class="btn zap" id="btnZap">Avisar no WhatsApp</button></div>
-      <div class="acoes" style="margin-top:10px">
+
+      <div class="chamada-zap">
+        <p><strong>Falta um passo</strong>Toque abaixo para avisar a Jamile. Ela confirma seu horário pelo WhatsApp.</p>
+        <button class="btn zap grande" id="btnZap">Avisar a Jamile agora</button>
+      </div>
+
+      <div class="acoes" style="margin-top:14px">
         <button class="btn vazado" id="btnAgenda">Salvar no calendário</button>
         <button class="btn vazado" id="btnNovo">Novo agendamento</button>
       </div>
@@ -282,8 +287,41 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
         <span id="txtInsta"></span>
       </a>
+      <button class="link-cancelar" id="btnAbrirCancelar">Cancelar um agendamento</button>
     </footer>
   </main>
+
+  <!-- ================= CANCELAMENTO PELA CLIENTE ================= -->
+  <section class="tela" id="telaCancelar">
+    <h2>Cancelar agendamento</h2>
+    <p class="legenda" id="legCancelar"></p>
+    <label for="cCodigo">Código do agendamento</label>
+    <input id="cCodigo" placeholder="JB123456" autocomplete="off">
+    <label for="cTel">WhatsApp usado no agendamento</label>
+    <input id="cTel" inputmode="tel" placeholder="(61) 90000-0000">
+    <div class="erro" id="erroCancelar"></div>
+    <div class="acoes">
+      <button class="btn vazado" id="cancelVoltar">Voltar</button>
+      <button class="btn" id="btnCancelarAg">Cancelar horário</button>
+    </div>
+    <div class="aviso" id="dicaCancelar"></div>
+  </section>
+
+  <section class="tela" id="telaCancelado">
+    <div class="centro">
+      <div class="selo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M18 6 6 18M6 6l12 12"/></svg></div>
+      <h1>Horário cancelado</h1>
+      <p class="legenda">O horário voltou a ficar disponível para outras clientes.</p>
+    </div>
+    <div class="cartao" id="resumoCancelado"></div>
+    <div class="chamada-zap">
+      <p><strong>Avise a Jamile</strong>Assim ela não te espera e pode reorganizar a agenda.</p>
+      <button class="btn zap grande" id="btnZapCancel">Avisar do cancelamento</button>
+    </div>
+    <div class="acoes" style="margin-top:14px">
+      <button class="btn vazado" id="btnVoltarInicio">Voltar ao início</button>
+    </div>
+  </section>
 
   <!-- ================= LOGIN ================= -->
   <section class="tela" id="telaLogin">
@@ -305,13 +343,46 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     <h2>Gestão da agenda</h2>
     <p class="legenda">Tudo o que você mudar aqui vale para quem abrir o link.</p>
     <div class="quem-logado" id="quemLogado"></div>
+
+    <div class="painel-alerta" id="alertaCancel">
+      <span id="txtAlertaCancel"></span>
+      <button class="btn mini" id="btnVistos">Marcar como vistos</button>
+    </div>
+
     <div class="abas">
-      <button class="aba on" data-aba="agendamentos">Agendamentos</button>
+      <button class="aba on" data-aba="agendamentos">Agenda</button>
       <button class="aba" data-aba="regras">Regras</button>
-      <button class="aba" data-aba="procedimentos">Procedimentos</button>
+      <button class="aba" data-aba="procedimentos">Serviços</button>
+      <button class="aba" data-aba="pacotes">Pacotes</button>
     </div>
 
     <div id="abaAgendamentos">
+      <div class="bloco" id="blocoNovo" style="display:none">
+        <h3>Novo agendamento</h3>
+        <p class="dica">Para marcar por telefone ou encaixar uma sessão de pacote.</p>
+        <label for="nProc">Procedimento</label>
+        <select id="nProc"></select>
+        <div class="dupla">
+          <div><label for="nData">Data</label><input id="nData" type="date"></div>
+          <div><label for="nHora">Hora</label><input id="nHora" type="time"></div>
+        </div>
+        <label for="nNome">Nome da cliente</label>
+        <input id="nNome" placeholder="Nome completo">
+        <label for="nTel">WhatsApp com DDD</label>
+        <input id="nTel" inputmode="tel" placeholder="(61) 90000-0000">
+        <label for="nObs">Observação</label>
+        <input id="nObs" placeholder="Ex.: sessão 2 do pacote, já pago">
+        <div class="erro" id="erroNovo"></div>
+        <div class="acoes">
+          <button class="btn vazado" id="novoCancelar">Fechar</button>
+          <button class="btn" id="novoSalvar">Marcar</button>
+        </div>
+      </div>
+
+      <div class="acoes" style="margin-top:0;margin-bottom:14px">
+        <button class="btn mini" id="btnAbrirNovo" style="flex:1">+ Novo agendamento</button>
+      </div>
+
       <div id="listaAgenda"></div>
       <div class="acoes">
         <button class="btn vazado mini" id="btnCSV">Baixar planilha</button>
@@ -323,33 +394,27 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     <div id="abaRegras" style="display:none">
       <div class="bloco">
         <h3>Janela de agendamento</h3>
-        <p class="dica">Até quantos dias à frente o cliente pode marcar, e a antecedência mínima.</p>
+        <p class="dica">Até quantos dias à frente a cliente pode marcar, e a antecedência mínima.</p>
         <div class="dupla">
-          <div>
-            <label for="gMax">Máximo (dias)</label>
-            <input id="gMax" type="number" min="1" max="730">
-          </div>
-          <div>
-            <label for="gMin">Antecedência (dias)</label>
-            <input id="gMin" type="number" min="0" max="60">
-          </div>
+          <div><label for="gMax">Máximo (dias)</label><input id="gMax" type="number" min="1" max="730"></div>
+          <div><label for="gMin">Antecedência (dias)</label><input id="gMin" type="number" min="0" max="60"></div>
         </div>
       </div>
       <div class="bloco">
         <h3>Horários de atendimento</h3>
-        <p class="dica">Vale para os sete dias, inclusive sábado e domingo. Use <b>24h</b> para atender sem parar e adicione quantos intervalos quiser.</p>
+        <p class="dica">Vale para os sete dias. Use <b>24h</b> para atender sem parar e adicione quantos intervalos quiser.</p>
         <div id="expediente"></div>
         <label for="gIntervalo">Grade de horários (minutos)</label>
         <input id="gIntervalo" type="number" min="10" max="120" step="5">
       </div>
       <div class="bloco">
         <h3>Feriados</h3>
-        <p class="dica">Nacionais e do DF, já calculados. Travado = ninguém marca. Destrave para atender no feriado.</p>
+        <p class="dica">Nacionais e do DF, já calculados. Travado = ninguém marca.</p>
         <div id="listaFeriados"></div>
       </div>
       <div class="bloco">
         <h3>Dias bloqueados</h3>
-        <p class="dica">Férias, feriados, congressos. Ninguém consegue marcar nesses dias.</p>
+        <p class="dica">Férias, congressos. Ninguém consegue marcar nesses dias.</p>
         <div class="dupla" style="align-items:end">
           <div><label for="gBloq">Data</label><input id="gBloq" type="date"></div>
           <button class="btn mini" id="btnBloq" style="height:48px">Bloquear</button>
@@ -362,7 +427,7 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
           <div><label for="gZap">WhatsApp (só números)</label><input id="gZap" inputmode="numeric"></div>
           <div><label for="gInsta">Instagram</label><input id="gInsta"></div>
         </div>
-        <label for="gEndereco">Endereço mostrado ao cliente</label>
+        <label for="gEndereco">Endereço mostrado à cliente</label>
         <input id="gEndereco" placeholder="Ex.: Águas Claras — DF">
         <p class="dica" style="margin-top:12px">A senha desta área é trocada no painel do Supabase, em Authentication.</p>
       </div>
@@ -386,22 +451,44 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
         <button class="btn" id="btnSalvarProc">Salvar alterações</button>
       </div>
     </div>
+
+    <div id="abaPacotes" style="display:none">
+      <div class="bloco">
+        <h3>Vitrine</h3>
+        <p class="dica">A seção de pacotes aparece abaixo dos procedimentos, na primeira tela.</p>
+        <label class="chk" style="margin:6px 0 12px"><input type="checkbox" id="vAtiva"><span>Mostrar a vitrine no site</span></label>
+        <label for="vTitulo">Título</label>
+        <input id="vTitulo" placeholder="Pacotes e promoções">
+        <label for="vChamada">Chamada</label>
+        <input id="vChamada" placeholder="Resultados melhores vêm com constância.">
+      </div>
+      <div class="bloco">
+        <h3>Pacotes oferecidos</h3>
+        <p class="dica">A cliente toca no pacote e fala com você pelo WhatsApp. O fechamento é feito por lá.</p>
+        <div id="listaPacEdit"></div>
+        <button class="btn vazado mini" id="btnAddPac" style="margin-top:8px">Adicionar pacote</button>
+      </div>
+      <div class="erro" id="erroPac"></div>
+      <div class="acoes">
+        <button class="btn vazado" id="pacVoltar">Sair</button>
+        <button class="btn" id="btnSalvarPac">Salvar alterações</button>
+      </div>
+    </div>
   </section>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* ============================================================
-   CONEXÃO COM O SUPABASE
+   CONEXÃO
    A chave abaixo é a "anon" e pode ficar visível: o que protege
    os dados são as políticas de RLS criadas no banco.
    ============================================================ */
 const SUPABASE_URL  = 'https://ifemczgjdxwcfrxzlrlh.supabase.co';
-const SUPABASE_ANON  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW1jemdqZHh3Y2ZyeHpscmxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwOTI5NjYsImV4cCI6MjEwMzY2ODk2Nn0.dWBxSGIHodCzLp5m_luECGAV8lHmOieQML8rcbaxyn8';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW1jemdqZHh3Y2ZyeHpscmxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwOTI5NjYsImV4cCI6MjEwMzY2ODk2Nn0.dWBxSGIHodCzLp5m_luECGAV8lHmOieQML8rcbaxyn8';
 
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-/* ============ ícones dos procedimentos ============ */
 const ICONES = {
   rosto:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c4 0 6.5 2.6 6.5 6.4 0 4.6-3 11.6-6.5 11.6S5.5 14 5.5 9.4C5.5 5.6 8 3 12 3z"/><circle cx="9.6" cy="10" r=".7" fill="currentColor"/><circle cx="14.4" cy="10" r=".7" fill="currentColor"/></svg>',
   lamina:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20 14.5 9.5"/><path d="M13 8.2 16.8 4.4a2 2 0 0 1 2.8 0l.4.4a2 2 0 0 1 0 2.8L16.2 11z"/></svg>',
@@ -429,7 +516,9 @@ const PADRAO = {
   },
   feriadosAbertos:[],
   bloqueios:[],
-  procedimentos:[]
+  procedimentos:[],
+  pacotes:[],
+  vitrine:{ ativa:true, titulo:'Pacotes e promoções', chamada:'Resultados melhores vêm com constância.' }
 };
 
 const DIAS_CURTO = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
@@ -437,13 +526,14 @@ const DIAS_LONGO = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sáb
 const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 
 let cfg = JSON.parse(JSON.stringify(PADRAO));
-let ocupacaoLista = [];   // {data, hora, duracao} — visível para todos
-let agendamentos = [];    // registros completos — só para a gestora logada
+let ocupacaoLista = [];
+let agendamentos = [];
 let sel = { proc:null, data:null, hora:null };
 let mesVisivel = new Date();
 let passo = 1;
 let mostrarPassados = false;
 let ultimo = null;
+let canceladoAgora = null;
 
 /* ============ datas ============ */
 const ymd = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -454,6 +544,7 @@ const min2hm = m => String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).pa
 const hm2min = s => { const [h,m]=String(s).split(':').map(Number); return h*60+m; };
 const hhmm = s => String(s).slice(0,5);
 const extenso = s => { const d=doYmd(s); return DIAS_CURTO[d.getDay()]+', '+d.getDate()+' de '+MESES[d.getMonth()]; };
+const dinheiro = n => Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 
 /* ============ feriados ============ */
 function pascoa(ano){
@@ -497,18 +588,16 @@ function mapaFeriados(){
 const feriadoDe = s => mapaFeriados()[s] || null;
 const feriadoTravado = s => !!feriadoDe(s) && !cfg.feriadosAbertos.includes(s);
 
-/* ============================================================
-   BANCO DE DADOS
-   ============================================================ */
+/* ============ banco ============ */
 function migrar(){
-  if(!Array.isArray(cfg.feriadosAbertos)) cfg.feriadosAbertos = [];
-  if(!Array.isArray(cfg.bloqueios)) cfg.bloqueios = [];
-  if(!Array.isArray(cfg.procedimentos)) cfg.procedimentos = [];
+  ['feriadosAbertos','bloqueios','procedimentos','pacotes'].forEach(k=>{
+    if(!Array.isArray(cfg[k])) cfg[k] = [];
+  });
+  if(!cfg.vitrine) cfg.vitrine = JSON.parse(JSON.stringify(PADRAO.vitrine));
+  if(!cfg.horasCancelamento) cfg.horasCancelamento = 24;
   Object.keys(cfg.expediente).forEach(d=>{
     const e = cfg.expediente[d];
-    if(!Array.isArray(e.pausas)){
-      e.pausas = (e.almocoI && e.almocoF) ? [{i:e.almocoI, f:e.almocoF}] : [];
-    }
+    if(!Array.isArray(e.pausas)) e.pausas = (e.almocoI && e.almocoF) ? [{i:e.almocoI, f:e.almocoF}] : [];
     delete e.almocoI; delete e.almocoF;
   });
 }
@@ -540,7 +629,7 @@ async function salvarConfig(){
   return error ? error.message : null;
 }
 
-/* ============ regras de agenda ============ */
+/* ============ regras ============ */
 function diaAberto(dataStr){
   const d = doYmd(dataStr);
   const exp = cfg.expediente[d.getDay()];
@@ -551,13 +640,10 @@ function diaAberto(dataStr){
   return t >= somaDias(hoje(), Number(cfg.janela.minDias)).getTime()
       && t <= somaDias(hoje(), Number(cfg.janela.maxDias)).getTime();
 }
-
 function ocupados(dataStr){
-  return ocupacaoLista
-    .filter(o => o.data === dataStr)
+  return ocupacaoLista.filter(o => o.data === dataStr)
     .map(o => ({ i:hm2min(o.hora), f:hm2min(o.hora)+o.duracao }));
 }
-
 const ehJornada24 = e => e.inicio==='00:00' && (e.fim==='00:00' || e.fim==='23:59');
 function janelaDoDia(e){
   const ini = hm2min(e.inicio);
@@ -586,49 +672,90 @@ function horariosLivres(dataStr, duracao){
   }
   return livres;
 }
-
 function temVaga(dataStr, duracao){ return horariosLivres(dataStr, duracao).length > 0; }
 
 /* ============ navegação ============ */
 const $ = id => document.getElementById(id);
+const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado'];
 function irPara(n){
   passo = n;
-  ['telaLogin','telaGestao'].forEach(t => $(t).classList.remove('ativa'));
+  EXTRAS.forEach(t => $(t).classList.remove('ativa'));
   $('app').style.display = '';
   for(let i=1;i<=5;i++) $('tela'+i).classList.toggle('ativa', i===n);
   desenharPassos();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function irParaExtra(id){
+  $('app').style.display = 'none';
+  EXTRAS.forEach(t => $(t).classList.toggle('ativa', t===id));
+  window.scrollTo({top:0});
+}
 function desenharPassos(){
-  const nomes = ['Procedimento','Dia','Horário','Dados'];
   $('passos').style.display = passo>=5 ? 'none' : 'flex';
-  $('passos').innerHTML = nomes.map((n,i)=>
-    `<div class="passo ${i+1===passo?'on':''}"><span class="bolha">${i+1}</span></div>`+
+  $('passos').innerHTML = [1,2,3,4].map((n,i)=>
+    `<div class="passo ${n===passo?'on':''}"><span class="bolha">${n}</span></div>`+
     (i<3?'<span class="traco"></span>':'')
   ).join('');
 }
 
-/* ============ tela 1 ============ */
+/* ============ tela 1: procedimentos + vitrine ============ */
 function desenharProcedimentos(){
   if(!cfg.procedimentos.length){
     $('listaProc').innerHTML = '<div class="vazio-msg">Nenhum procedimento cadastrado ainda.</div>';
-    return;
+  } else {
+    $('listaProc').innerHTML = cfg.procedimentos.map(p => `
+      <button class="item" data-proc="${p.id}">
+        <span class="medalha">${ICONES[p.icone]||ICONES.estrela}</span>
+        <span>
+          <span class="item-nome">${p.nome}</span>
+          <span class="item-meta">${p.duracao} min</span>
+        </span>
+        <span class="item-preco">${p.preco ? 'R$ '+p.preco : 'sob consulta'}</span>
+      </button>`).join('');
+    $('listaProc').querySelectorAll('[data-proc]').forEach(b=>{
+      b.onclick = () => {
+        sel.proc = cfg.procedimentos.find(p=>p.id===b.dataset.proc);
+        sel.data = null; sel.hora = null;
+        mesVisivel = somaDias(hoje(), Number(cfg.janela.minDias));
+        desenharCalendario(); irPara(2);
+      };
+    });
   }
-  $('listaProc').innerHTML = cfg.procedimentos.map(p => `
-    <button class="item" data-proc="${p.id}">
-      <span class="medalha">${ICONES[p.icone]||ICONES.estrela}</span>
-      <span>
-        <span class="item-nome">${p.nome}</span>
-        <span class="item-meta">${p.duracao} min</span>
-      </span>
-      <span class="item-preco">${p.preco ? 'R$ '+p.preco : 'sob consulta'}</span>
-    </button>`).join('');
-  $('listaProc').querySelectorAll('[data-proc]').forEach(b=>{
+  desenharVitrine();
+}
+
+function pacoteValido(p){
+  if(!p.validade) return true;
+  return p.validade >= ymd(hoje());
+}
+function desenharVitrine(){
+  const ativos = (cfg.pacotes||[]).filter(p => p.nome && pacoteValido(p));
+  if(!cfg.vitrine.ativa || !ativos.length){ $('vitrine').style.display = 'none'; return; }
+  $('vitrine').style.display = 'block';
+  $('vitTitulo').textContent = cfg.vitrine.titulo || 'Pacotes e promoções';
+  $('vitChamada').textContent = cfg.vitrine.chamada || '';
+  $('listaPacotes').innerHTML = ativos.map(p=>{
+    const avulso = Number(p.precoAvulso)||0;
+    const pacote = Number(p.precoPacote)||0;
+    const economia = avulso > pacote ? avulso - pacote : 0;
+    return `<div class="pacote ${p.destaque?'destaque':''}">
+      ${p.destaque?'<div class="fita">Oferta</div>':''}
+      <div class="pacote-nome">${p.nome}</div>
+      <div class="pacote-ses">${p.sessoes} ${Number(p.sessoes)===1?'sessão':'sessões'}${p.descricao?' · '+p.descricao:''}</div>
+      <div class="pacote-precos">
+        ${avulso && economia ? `<span class="de">R$ ${dinheiro(avulso)}</span>` : ''}
+        ${pacote ? `<span class="por">R$ ${dinheiro(pacote)}</span>` : '<span class="por">sob consulta</span>'}
+        ${economia ? `<span class="economia">economize R$ ${dinheiro(economia)}</span>` : ''}
+      </div>
+      ${p.validade ? `<div class="pacote-val">Oferta válida até ${extenso(p.validade)}</div>` : ''}
+      <button class="btn zap" data-pac="${p.id}">Quero este pacote</button>
+    </div>`;
+  }).join('');
+  $('listaPacotes').querySelectorAll('[data-pac]').forEach(b=>{
     b.onclick = () => {
-      sel.proc = cfg.procedimentos.find(p=>p.id===b.dataset.proc);
-      sel.data = null; sel.hora = null;
-      mesVisivel = somaDias(hoje(), Number(cfg.janela.minDias));
-      desenharCalendario(); irPara(2);
+      const p = ativos.find(x=>x.id===b.dataset.pac);
+      const txt = `Olá, Jamile! Tenho interesse no pacote:%0A%0A✨ ${encodeURIComponent(p.nome)}%0A🔁 ${p.sessoes} ${Number(p.sessoes)===1?'sessão':'sessões'}${p.precoPacote?'%0A💰 R$ '+encodeURIComponent(dinheiro(p.precoPacote)):''}%0A%0APode me explicar como funciona?`;
+      window.open('https://wa.me/'+cfg.negocio.whatsapp+'?text='+txt,'_blank');
     };
   });
 }
@@ -685,7 +812,6 @@ function desenharResumoPre(){
     linha('Horário', sel.hora + ' — ' + min2hm(hm2min(sel.hora)+sel.proc.duracao)) +
     (sel.proc.preco ? linha('Valor','R$ '+sel.proc.preco) : '');
 }
-
 function codigo(){ return 'JB' + String(Date.now()).slice(-5) + Math.floor(Math.random()*9); }
 
 async function confirmar(){
@@ -697,7 +823,6 @@ async function confirmar(){
   err.textContent = '';
   $('btnConfirmar').disabled = true;
 
-  // relê a ocupação para não marcar em cima de outra cliente
   await carregarOcupacao();
   if(!horariosLivres(sel.data, sel.proc.duracao).includes(sel.hora)){
     $('btnConfirmar').disabled = false;
@@ -706,16 +831,9 @@ async function confirmar(){
   }
 
   const reg = {
-    codigo: codigo(),
-    procedimento: sel.proc.nome,
-    duracao: sel.proc.duracao,
-    preco: sel.proc.preco || null,
-    data: sel.data,
-    hora: sel.hora,
-    nome: nome,
-    telefone: tel,
-    observacao: $('fObs').value.trim() || null,
-    status: 'confirmado'
+    codigo: codigo(), procedimento: sel.proc.nome, duracao: sel.proc.duracao,
+    preco: sel.proc.preco || null, data: sel.data, hora: sel.hora,
+    nome, telefone: tel, observacao: $('fObs').value.trim() || null, status: 'confirmado'
   };
 
   const { error } = await db.from('agendamentos').insert(reg);
@@ -726,16 +844,13 @@ async function confirmar(){
       err.textContent = 'Alguém acabou de reservar este horário. Escolha outro, por favor.';
       await carregarOcupacao(); desenharHorarios(); irPara(3); return;
     }
-    if(error.code === '23505'){
-      err.textContent = 'Houve um conflito ao gerar seu código. Toque em confirmar novamente.';
-      return;
-    }
+    if(error.code === '23505'){ err.textContent = 'Houve um conflito no código. Toque em confirmar novamente.'; return; }
     err.textContent = 'Não conseguimos gravar agora. Verifique sua conexão e tente de novo.';
     return;
   }
 
-  ultimo = { id: reg.codigo, proc: reg.procedimento, duracao: reg.duracao,
-             data: reg.data, hora: reg.hora, nome: reg.nome, obs: reg.observacao || '' };
+  ultimo = { id:reg.codigo, proc:reg.procedimento, duracao:reg.duracao,
+             data:reg.data, hora:reg.hora, nome:reg.nome, obs:reg.observacao || '' };
   await carregarOcupacao();
   desenharFinal(ultimo);
   irPara(5);
@@ -750,7 +865,8 @@ function desenharFinal(r){
     linha('Horário', r.hora) +
     linha('Nome', r.nome) +
     (cfg.negocio.endereco ? linha('Local', cfg.negocio.endereco) : '');
-  $('avisoCancel').textContent = 'Precisa remarcar ou cancelar? Chame no WhatsApp informando o código ' + r.id + '. Chegue com 10 minutos de antecedência.';
+  $('avisoCancel').textContent = 'Guarde o código ' + r.id + '. Com ele e seu WhatsApp você pode cancelar pelo site até '
+    + cfg.horasCancelamento + ' horas antes. Chegue com 10 minutos de antecedência.';
 }
 function textoZap(r){
   return `Olá, Jamile! Acabei de agendar pelo site.%0A%0A✨ ${encodeURIComponent(r.proc)}%0A📅 ${encodeURIComponent(extenso(r.data))} às ${r.hora}%0A👤 ${encodeURIComponent(r.nome)}%0A🔖 Código ${r.id}${r.obs?'%0A📝 '+encodeURIComponent(r.obs):''}`;
@@ -761,8 +877,7 @@ function baixarICS(r){
   const fim = a+m+d+'T'+min2hm(hm2min(r.hora)+r.duracao).replace(':','')+'00';
   const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jamile Beauty//PT-BR','BEGIN:VEVENT',
     'UID:'+r.id+'@jamilebeauty','DTSTART:'+ini,'DTEND:'+fim,
-    'SUMMARY:'+r.proc+' — Jamile Beauty',
-    'DESCRIPTION:Código '+r.id,
+    'SUMMARY:'+r.proc+' — Jamile Beauty','DESCRIPTION:Código '+r.id,
     'LOCATION:'+(cfg.negocio.endereco||'Jamile Beauty'),
     'BEGIN:VALARM','TRIGGER:-PT120M','ACTION:DISPLAY','DESCRIPTION:Seu horário na Jamile Beauty','END:VALARM',
     'END:VEVENT','END:VCALENDAR'].join('\r\n');
@@ -772,16 +887,60 @@ function baixarICS(r){
 }
 
 /* ============================================================
+   CANCELAMENTO PELA CLIENTE
+   ============================================================ */
+function abrirCancelar(){
+  $('legCancelar').textContent = 'Informe o código que você recebeu e o WhatsApp usado no agendamento.';
+  $('dicaCancelar').textContent = 'O cancelamento pelo site é possível até ' + cfg.horasCancelamento
+    + ' horas antes do horário marcado. Depois disso, fale com a Jamile pelo WhatsApp.';
+  $('cCodigo').value = ''; $('cTel').value = ''; $('erroCancelar').textContent = '';
+  irParaExtra('telaCancelar');
+}
+
+async function cancelarPelaCliente(){
+  const cod = $('cCodigo').value.trim();
+  const tel = $('cTel').value.replace(/\D/g,'');
+  const err = $('erroCancelar');
+  if(!cod){ err.textContent = 'Informe o código do agendamento.'; return; }
+  if(tel.length < 10){ err.textContent = 'Informe o WhatsApp com DDD.'; return; }
+  err.textContent = 'Verificando…';
+  $('btnCancelarAg').disabled = true;
+
+  const { data, error } = await db.rpc('cancelar_agendamento', { p_codigo: cod, p_telefone: tel });
+  $('btnCancelarAg').disabled = false;
+
+  if(error){ err.textContent = 'Não foi possível concluir: ' + error.message; return; }
+  if(!data || !data.ok){
+    err.textContent = (data && data.mensagem) ? data.mensagem : 'Não foi possível cancelar.';
+    if(data && data.tarde){
+      $('dicaCancelar').innerHTML = 'Fale com a Jamile pelo WhatsApp: <a href="https://wa.me/'
+        + cfg.negocio.whatsapp + '" target="_blank" rel="noopener">' + cfg.negocio.whatsapp.replace(/^55(\d{2})(\d{5})(\d{4})$/,'($1) $2-$3') + '</a>';
+    }
+    return;
+  }
+
+  err.textContent = '';
+  canceladoAgora = { codigo: cod.toUpperCase(), proc: data.procedimento, data: data.data, hora: hhmm(data.hora), nome: data.nome };
+  $('resumoCancelado').innerHTML =
+    linha('Código', '<span class="codigo">'+canceladoAgora.codigo+'</span>') +
+    linha('Procedimento', canceladoAgora.proc) +
+    linha('Dia', extenso(canceladoAgora.data)) +
+    linha('Horário', canceladoAgora.hora);
+  await carregarOcupacao();
+  irParaExtra('telaCancelado');
+}
+
+function textoZapCancel(c){
+  return `Olá, Jamile! Precisei cancelar meu horário pelo site.%0A%0A✨ ${encodeURIComponent(c.proc)}%0A📅 ${encodeURIComponent(extenso(c.data))} às ${c.hora}%0A👤 ${encodeURIComponent(c.nome)}%0A🔖 Código ${c.codigo}%0A%0ADesculpe pelo transtorno!`;
+}
+
+/* ============================================================
    LOGIN E GESTÃO
    ============================================================ */
 function abrirLogin(){
-  $('app').style.display='none';
-  $('telaGestao').classList.remove('ativa');
-  $('telaLogin').classList.add('ativa');
   $('fSenha').value=''; $('erroLogin').textContent='';
-  window.scrollTo({top:0});
+  irParaExtra('telaLogin');
 }
-
 async function entrar(){
   const email = $('fEmail').value.trim();
   const senha = $('fSenha').value;
@@ -792,30 +951,43 @@ async function entrar(){
   const { error } = await db.auth.signInWithPassword({ email, password: senha });
   $('loginEntrar').disabled = false;
   if(error){
-    err.textContent = error.message.includes('Invalid')
-      ? 'E-mail ou senha incorretos.'
-      : 'Não foi possível entrar: ' + error.message;
+    err.textContent = error.message.includes('Invalid') ? 'E-mail ou senha incorretos.' : 'Não foi possível entrar: ' + error.message;
     return;
   }
   err.textContent = '';
   await abrirGestao();
 }
-
 async function abrirGestao(){
-  $('app').style.display='none';
-  $('telaLogin').classList.remove('ativa');
-  $('telaGestao').classList.add('ativa');
+  irParaExtra('telaGestao');
   const { data:{ user } } = await db.auth.getUser();
   $('quemLogado').textContent = user ? 'Conectada como ' + user.email : '';
   await carregarAgendamentos();
-  preencherRegras(); desenharExpediente(); desenharFeriados(); desenharBloqueios(); desenharAgenda(); desenharProcEdit();
-  window.scrollTo({top:0});
+  preencherRegras(); desenharExpediente(); desenharFeriados(); desenharBloqueios();
+  desenharAgenda(); desenharProcEdit(); preencherPacotes(); desenharPacEdit();
+  atualizarAlertaCancel();
 }
-
 async function sair(){
   await db.auth.signOut();
   agendamentos = [];
+  atualizarSino();
   irPara(1);
+}
+
+function novosCancelamentos(){
+  return agendamentos.filter(a => a.status==='cancelado' && a.visto_pela_gestora === false);
+}
+function atualizarAlertaCancel(){
+  const n = novosCancelamentos().length;
+  $('alertaCancel').classList.toggle('on', n>0);
+  if(n) $('txtAlertaCancel').textContent = n === 1
+    ? '1 cliente cancelou desde a sua última visita.'
+    : n + ' clientes cancelaram desde a sua última visita.';
+  atualizarSino();
+}
+function atualizarSino(){
+  const n = novosCancelamentos().length;
+  $('sino').classList.toggle('on', n>0);
+  $('sino').textContent = n > 9 ? '9+' : n;
 }
 
 function preencherRegras(){
@@ -845,15 +1017,14 @@ function desenharExpediente(){
         ${(e.pausas||[]).map((p,i)=>`
           <div class="pausa">
             <span class="ate">intervalo</span>
-            <input type="time" class="pa-i" value="${p.i}" aria-label="Começa">
-            <input type="time" class="pa-f" value="${p.f}" aria-label="Termina">
+            <input type="time" class="pa-i" value="${p.i}">
+            <input type="time" class="pa-f" value="${p.f}">
             <button class="lixo" data-rempausa="${d}:${i}" style="height:36px;width:36px">✕</button>
           </div>`).join('')}
       </div>
       <button class="btn vazado mini" data-addpausa="${d}" style="margin-top:6px">+ intervalo</button>
     </div>`;
   }).join('');
-
   $('expediente').querySelectorAll('[data-h24]').forEach(b=>{
     b.onclick = () => {
       lerExpediente();
@@ -878,7 +1049,6 @@ function desenharExpediente(){
     c.onchange = () => { lerExpediente(); desenharExpediente(); };
   });
 }
-
 function lerExpediente(){
   [...$('expediente').querySelectorAll('.exp-dia')].forEach(l=>{
     const d = l.dataset.dia;
@@ -887,13 +1057,11 @@ function lerExpediente(){
       inicio: l.querySelector('.exp-i').value || '00:00',
       fim: l.querySelector('.exp-f').value || '00:00',
       pausas: [...l.querySelectorAll('.pausa')].map(p=>({
-        i: p.querySelector('.pa-i').value,
-        f: p.querySelector('.pa-f').value
+        i: p.querySelector('.pa-i').value, f: p.querySelector('.pa-f').value
       })).filter(p=>p.i&&p.f)
     };
   });
 }
-
 function desenharFeriados(){
   const dentro = f => f.data >= ymd(hoje()) && f.data <= ymd(somaDias(hoje(), Math.max(365, Number(cfg.janela.maxDias)||90)));
   const l = Object.values(mapaFeriados()).filter(dentro).sort((a,b)=>a.data.localeCompare(b.data));
@@ -901,10 +1069,8 @@ function desenharFeriados(){
   $('listaFeriados').innerHTML = l.map(f=>{
     const aberto = cfg.feriadosAbertos.includes(f.data);
     return `<div class="fer-linha ${aberto?'':'travado'}">
-      <div>
-        <div class="fer-nome">${f.nome}</div>
-        <div class="fer-data">${extenso(f.data)}${f.tipo==='facultativo'?' · ponto facultativo':f.tipo==='df'?' · feriado do DF':''}</div>
-      </div>
+      <div><div class="fer-nome">${f.nome}</div>
+      <div class="fer-data">${extenso(f.data)}${f.tipo==='facultativo'?' · ponto facultativo':f.tipo==='df'?' · feriado do DF':''}</div></div>
       <button class="btn ${aberto?'':'vazado'} mini" data-fer="${f.data}">${aberto?'Atende':'Travado'}</button>
     </div>`;
   }).join('');
@@ -912,8 +1078,7 @@ function desenharFeriados(){
     b.onclick = () => {
       const d = b.dataset.fer;
       cfg.feriadosAbertos = cfg.feriadosAbertos.includes(d)
-        ? cfg.feriadosAbertos.filter(x=>x!==d)
-        : [...cfg.feriadosAbertos, d];
+        ? cfg.feriadosAbertos.filter(x=>x!==d) : [...cfg.feriadosAbertos, d];
       desenharFeriados();
     };
   });
@@ -934,33 +1099,86 @@ function desenharAgenda(){
     .sort((a,b) => (a.data+a.hora).localeCompare(b.data+b.hora));
   $('btnPassados').textContent = mostrarPassados ? 'Ver só os próximos' : 'Ver anteriores';
   if(!l.length){ $('listaAgenda').innerHTML = '<div class="vazio-msg">Nenhum agendamento por aqui ainda. Compartilhe o link e ele começa a encher.</div>'; return; }
-  $('listaAgenda').innerHTML = l.map(a=>`
-    <div class="agenda-item">
+  $('listaAgenda').innerHTML = l.map(a=>{
+    const novoCancel = a.status==='cancelado' && a.visto_pela_gestora===false;
+    return `<div class="agenda-item ${novoCancel?'novo-cancel':''}">
       <div class="top">
         <span class="quando">${extenso(a.data)} · ${hhmm(a.hora)}</span>
-        <span class="tag">${a.status==='cancelado'?'cancelado':a.codigo}</span>
+        <span class="tag ${novoCancel?'alerta':''}">${a.status==='cancelado'?(a.cancelado_por==='cliente'?'cancelou':'cancelado'):a.codigo}</span>
       </div>
       <div class="quem">${a.procedimento} · ${a.duracao} min</div>
       <div class="quem">${a.nome} — ${a.telefone}</div>
       ${a.observacao?`<div class="quem">📝 ${a.observacao}</div>`:''}
       <div class="mini-acoes">
-        <a class="btn vazado mini" href="https://wa.me/55${a.telefone.replace(/^55/,'')}?text=${encodeURIComponent('Oi, '+a.nome.split(' ')[0]+'! Confirmando seu horário na Jamile Beauty: '+a.procedimento+' em '+extenso(a.data)+' às '+hhmm(a.hora)+'. Até lá!')}" target="_blank" rel="noopener" style="text-decoration:none;text-align:center">Chamar</a>
+        <a class="btn vazado mini" href="https://wa.me/55${a.telefone.replace(/^55/,'')}?text=${encodeURIComponent('Oi, '+a.nome.split(' ')[0]+'! '+(a.status==='cancelado'?'Vi que você cancelou o horário de '+extenso(a.data)+'. Quer remarcar?':'Confirmando seu horário na Jamile Beauty: '+a.procedimento+' em '+extenso(a.data)+' às '+hhmm(a.hora)+'. Até lá!'))}" target="_blank" rel="noopener" style="text-decoration:none;text-align:center">Chamar</a>
         ${a.status!=='cancelado'?`<button class="btn vazado mini" data-cancelar="${a.id}">Cancelar</button>`:''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   $('listaAgenda').querySelectorAll('[data-cancelar]').forEach(b=>{
     b.onclick = async () => {
       if(!confirm('Cancelar este agendamento? O horário volta a ficar livre.')) return;
       const { error } = await db.from('agendamentos')
-        .update({ status:'cancelado', cancelado_em:new Date().toISOString(), cancelado_por:'gestora' })
+        .update({ status:'cancelado', cancelado_em:new Date().toISOString(), cancelado_por:'gestora', visto_pela_gestora:true })
         .eq('id', b.dataset.cancelar);
       if(error){ alert('Não foi possível cancelar: ' + error.message); return; }
-      await carregarAgendamentos();
-      await carregarOcupacao();
-      desenharAgenda();
+      await carregarAgendamentos(); await carregarOcupacao();
+      desenharAgenda(); atualizarAlertaCancel();
     };
   });
 }
+async function marcarVistos(){
+  const ids = novosCancelamentos().map(a=>a.id);
+  if(!ids.length) return;
+  const { error } = await db.from('agendamentos').update({ visto_pela_gestora:true }).in('id', ids);
+  if(error){ alert('Não foi possível marcar: ' + error.message); return; }
+  await carregarAgendamentos();
+  desenharAgenda(); atualizarAlertaCancel();
+}
+
+/* ---- novo agendamento pela gestora ---- */
+function abrirNovo(){
+  $('nProc').innerHTML = cfg.procedimentos.map(p=>`<option value="${p.id}">${p.nome} (${p.duracao} min)</option>`).join('');
+  $('nData').value = ymd(hoje());
+  $('nHora').value = '';
+  $('nNome').value = ''; $('nTel').value = ''; $('nObs').value = '';
+  $('erroNovo').textContent = '';
+  $('blocoNovo').style.display = 'block';
+  $('btnAbrirNovo').style.display = 'none';
+}
+function fecharNovo(){
+  $('blocoNovo').style.display = 'none';
+  $('btnAbrirNovo').style.display = '';
+}
+async function salvarNovo(){
+  const p = cfg.procedimentos.find(x=>x.id === $('nProc').value);
+  const err = $('erroNovo');
+  const nome = $('nNome').value.trim();
+  const tel = $('nTel').value.replace(/\D/g,'');
+  if(!p){ err.textContent = 'Escolha um procedimento.'; return; }
+  if(!$('nData').value){ err.textContent = 'Informe a data.'; return; }
+  if(!$('nHora').value){ err.textContent = 'Informe a hora.'; return; }
+  if(nome.length < 3){ err.textContent = 'Informe o nome da cliente.'; return; }
+  if(tel.length < 10){ err.textContent = 'Informe o WhatsApp com DDD.'; return; }
+  err.textContent = '';
+  $('novoSalvar').disabled = true;
+  const { error } = await db.from('agendamentos').insert({
+    codigo: codigo(), procedimento: p.nome, duracao: p.duracao, preco: p.preco || null,
+    data: $('nData').value, hora: $('nHora').value, nome, telefone: tel,
+    observacao: $('nObs').value.trim() || null, status: 'confirmado'
+  });
+  $('novoSalvar').disabled = false;
+  if(error){
+    err.textContent = error.code === '23P01'
+      ? 'Já existe um atendimento nesse intervalo. Escolha outro horário.'
+      : 'Não foi possível marcar: ' + error.message;
+    return;
+  }
+  await carregarAgendamentos(); await carregarOcupacao();
+  desenharAgenda(); fecharNovo();
+}
+
+/* ---- procedimentos ---- */
 function desenharProcEdit(){
   $('listaProcEdit').innerHTML = cfg.procedimentos.map((p,i)=>`
     <div class="proc-edit" data-i="${i}">
@@ -983,6 +1201,61 @@ function lerProcEdit(){
     icone: cfg.procedimentos[i] ? cfg.procedimentos[i].icone : 'estrela'
   }));
 }
+
+/* ---- pacotes ---- */
+function preencherPacotes(){
+  $('vAtiva').checked = !!cfg.vitrine.ativa;
+  $('vTitulo').value = cfg.vitrine.titulo || '';
+  $('vChamada').value = cfg.vitrine.chamada || '';
+}
+function desenharPacEdit(){
+  if(!cfg.pacotes.length){
+    $('listaPacEdit').innerHTML = '<p class="dica">Nenhum pacote cadastrado. A vitrine fica escondida até você criar um.</p>';
+    return;
+  }
+  $('listaPacEdit').innerHTML = cfg.pacotes.map((p,i)=>`
+    <div class="pac-edit" data-i="${i}">
+      <label>Nome do pacote</label>
+      <input class="px-nome" value="${String(p.nome||'').replace(/"/g,'&quot;')}" placeholder="Ex.: Limpeza de pele — 5 sessões">
+      <label>Descrição curta (opcional)</label>
+      <input class="px-desc" value="${String(p.descricao||'').replace(/"/g,'&quot;')}" placeholder="Ex.: uma por semana">
+      <div class="dupla">
+        <div><label>Sessões</label><input class="px-ses" type="number" min="1" value="${p.sessoes||1}"></div>
+        <div><label>Validade</label><input class="px-val" type="date" value="${p.validade||''}"></div>
+      </div>
+      <div class="dupla">
+        <div><label>Preço avulso total</label><input class="px-avulso" type="number" step="0.01" min="0" value="${p.precoAvulso||''}" placeholder="900"></div>
+        <div><label>Preço no pacote</label><input class="px-pacote" type="number" step="0.01" min="0" value="${p.precoPacote||''}" placeholder="720"></div>
+      </div>
+      <label class="chk" style="margin-top:12px"><input type="checkbox" class="px-dest" ${p.destaque?'checked':''}><span>Destacar como oferta</span></label>
+      <div class="acoes" style="margin-top:12px"><button class="btn vazado mini" data-rempac="${i}" style="flex:1">Remover pacote</button></div>
+    </div>`).join('');
+  $('listaPacEdit').querySelectorAll('[data-rempac]').forEach(b=>{
+    b.onclick = () => { lerPacEdit(); cfg.pacotes.splice(Number(b.dataset.rempac),1); desenharPacEdit(); };
+  });
+}
+function lerPacEdit(){
+  const linhas = [...$('listaPacEdit').querySelectorAll('.pac-edit')];
+  if(!linhas.length) return;
+  cfg.pacotes = linhas.map((l,i)=>({
+    id: cfg.pacotes[i] ? cfg.pacotes[i].id : 'pac'+Date.now()+i,
+    nome: l.querySelector('.px-nome').value.trim(),
+    descricao: l.querySelector('.px-desc').value.trim(),
+    sessoes: Number(l.querySelector('.px-ses').value) || 1,
+    validade: l.querySelector('.px-val').value || '',
+    precoAvulso: l.querySelector('.px-avulso').value ? Number(l.querySelector('.px-avulso').value) : '',
+    precoPacote: l.querySelector('.px-pacote').value ? Number(l.querySelector('.px-pacote').value) : '',
+    destaque: l.querySelector('.px-dest').checked
+  }));
+}
+function lerVitrine(){
+  cfg.vitrine = {
+    ativa: $('vAtiva').checked,
+    titulo: $('vTitulo').value.trim() || 'Pacotes e promoções',
+    chamada: $('vChamada').value.trim()
+  };
+}
+
 function lerRegras(){
   cfg.janela.maxDias = Math.max(1, Number($('gMax').value)||90);
   cfg.janela.minDias = Math.max(0, Number($('gMin').value)||0);
@@ -993,20 +1266,27 @@ function lerRegras(){
   lerExpediente();
 }
 function baixarCSV(){
-  const cab = ['Codigo','Data','Hora','Procedimento','Duracao','Preco','Nome','WhatsApp','Observacao','Status'];
-  const linhas = agendamentos.map(a=>[a.codigo,a.data,hhmm(a.hora),a.procedimento,a.duracao,a.preco||'',a.nome,a.telefone,(a.observacao||'').replace(/;/g,','),a.status]);
+  const cab = ['Codigo','Data','Hora','Procedimento','Duracao','Preco','Nome','WhatsApp','Observacao','Status','CanceladoPor'];
+  const linhas = agendamentos.map(a=>[a.codigo,a.data,hhmm(a.hora),a.procedimento,a.duracao,a.preco||'',a.nome,a.telefone,(a.observacao||'').replace(/;/g,','),a.status,a.cancelado_por||'']);
   const csv = '\uFEFF' + [cab,...linhas].map(l=>l.join(';')).join('\n');
   const url = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   const a = document.createElement('a'); a.href=url; a.download='agenda-jamile-beauty.csv'; a.click();
   URL.revokeObjectURL(url);
 }
-
-/* ============ rodapé ============ */
 function desenharRodape(){
   $('linkZap').href = 'https://wa.me/'+cfg.negocio.whatsapp;
   $('txtZap').textContent = cfg.negocio.whatsapp.replace(/^55(\d{2})(\d{5})(\d{4})$/,'($1) $2-$3');
   $('linkInsta').href = 'https://instagram.com/'+cfg.negocio.instagram;
   $('txtInsta').textContent = '@'+cfg.negocio.instagram;
+}
+
+/* ============ máscara de telefone ============ */
+function mascaraTel(el){
+  el.addEventListener('input', e => {
+    const v = e.target.value.replace(/\D/g,'').slice(0,11);
+    e.target.value = v.length>6 ? `(${v.slice(0,2)}) ${v.slice(2,v.length>10?7:6)}-${v.slice(v.length>10?7:6)}`
+                   : v.length>2 ? `(${v.slice(0,2)}) ${v.slice(2)}` : v;
+  });
 }
 
 /* ============ eventos ============ */
@@ -1018,6 +1298,17 @@ $('loginVoltar').onclick = () => irPara(1);
 $('loginEntrar').onclick = entrar;
 $('fSenha').addEventListener('keydown', e => { if(e.key==='Enter') entrar(); });
 $('btnSair').onclick = sair;
+$('btnVistos').onclick = marcarVistos;
+$('btnAbrirNovo').onclick = abrirNovo;
+$('novoCancelar').onclick = fecharNovo;
+$('novoSalvar').onclick = salvarNovo;
+
+$('btnAbrirCancelar').onclick = abrirCancelar;
+$('cancelVoltar').onclick = () => irPara(1);
+$('btnCancelarAg').onclick = cancelarPelaCliente;
+$('btnVoltarInicio').onclick = () => { desenharProcedimentos(); irPara(1); };
+$('btnZapCancel').onclick = () => { if(canceladoAgora) window.open('https://wa.me/'+cfg.negocio.whatsapp+'?text='+textoZapCancel(canceladoAgora),'_blank'); };
+
 document.querySelectorAll('[data-voltar]').forEach(b => b.onclick = () => irPara(Number(b.dataset.voltar)));
 $('mesAnt').onclick = () => { mesVisivel = new Date(mesVisivel.getFullYear(), mesVisivel.getMonth()-1, 1); desenharCalendario(); };
 $('mesProx').onclick = () => { mesVisivel = new Date(mesVisivel.getFullYear(), mesVisivel.getMonth()+1, 1); desenharCalendario(); };
@@ -1032,40 +1323,47 @@ $('btnBloq').onclick = () => {
   if(v && !cfg.bloqueios.includes(v)){ cfg.bloqueios.push(v); desenharBloqueios(); $('gBloq').value=''; }
 };
 $('btnAddProc').onclick = () => { lerProcEdit(); cfg.procedimentos.push({id:'p'+Date.now(),nome:'',duracao:60,preco:'',icone:'estrela'}); desenharProcEdit(); };
+$('btnAddPac').onclick = () => {
+  lerPacEdit();
+  cfg.pacotes.push({id:'pac'+Date.now(),nome:'',descricao:'',sessoes:5,validade:'',precoAvulso:'',precoPacote:'',destaque:false});
+  desenharPacEdit();
+};
 $('btnSalvarRegras').onclick = async e => {
-  lerRegras();
-  e.target.disabled = true;
-  const erro = await salvarConfig();
-  e.target.disabled = false;
+  lerRegras(); e.target.disabled = true;
+  const erro = await salvarConfig(); e.target.disabled = false;
   $('erroRegras').textContent = erro ? 'Não salvou: ' + erro : '';
   e.target.textContent = erro ? 'Não salvou' : 'Salvo ✓';
   if(!erro){ await carregarOcupacao(); desenharRodape(); desenharProcedimentos(); }
   setTimeout(()=>{ e.target.textContent='Salvar alterações'; }, 1800);
 };
 $('btnSalvarProc').onclick = async e => {
-  lerProcEdit();
-  e.target.disabled = true;
-  const erro = await salvarConfig();
-  e.target.disabled = false;
+  lerProcEdit(); e.target.disabled = true;
+  const erro = await salvarConfig(); e.target.disabled = false;
   $('erroProc').textContent = erro ? 'Não salvou: ' + erro : '';
   e.target.textContent = erro ? 'Não salvou' : 'Salvo ✓';
   if(!erro) desenharProcedimentos();
   setTimeout(()=>{ e.target.textContent='Salvar alterações'; }, 1800);
 };
+$('btnSalvarPac').onclick = async e => {
+  lerPacEdit(); lerVitrine(); e.target.disabled = true;
+  const erro = await salvarConfig(); e.target.disabled = false;
+  $('erroPac').textContent = erro ? 'Não salvou: ' + erro : '';
+  e.target.textContent = erro ? 'Não salvou' : 'Salvo ✓';
+  if(!erro) desenharVitrine();
+  setTimeout(()=>{ e.target.textContent='Salvar alterações'; }, 1800);
+};
 $('regrasVoltar').onclick = () => irPara(1);
 $('procVoltar').onclick = () => irPara(1);
+$('pacVoltar').onclick = () => irPara(1);
 document.querySelectorAll('.aba').forEach(a => a.onclick = () => {
   document.querySelectorAll('.aba').forEach(x=>x.classList.remove('on'));
   a.classList.add('on');
-  $('abaAgendamentos').style.display = a.dataset.aba==='agendamentos' ? '' : 'none';
-  $('abaRegras').style.display       = a.dataset.aba==='regras' ? '' : 'none';
-  $('abaProcedimentos').style.display= a.dataset.aba==='procedimentos' ? '' : 'none';
+  $('abaAgendamentos').style.display  = a.dataset.aba==='agendamentos' ? '' : 'none';
+  $('abaRegras').style.display        = a.dataset.aba==='regras' ? '' : 'none';
+  $('abaProcedimentos').style.display = a.dataset.aba==='procedimentos' ? '' : 'none';
+  $('abaPacotes').style.display       = a.dataset.aba==='pacotes' ? '' : 'none';
 });
-$('fTel').addEventListener('input', e => {
-  const v = e.target.value.replace(/\D/g,'').slice(0,11);
-  e.target.value = v.length>6 ? `(${v.slice(0,2)}) ${v.slice(2,v.length>10?7:6)}-${v.slice(v.length>10?7:6)}`
-                 : v.length>2 ? `(${v.slice(0,2)}) ${v.slice(2)}` : v;
-});
+mascaraTel($('fTel')); mascaraTel($('cTel')); mascaraTel($('nTel'));
 
 /* ============ início ============ */
 (async function(){
@@ -1082,6 +1380,10 @@ $('fTel').addEventListener('input', e => {
   $('carregando').style.display = 'none';
   $('app').style.display = '';
   desenharProcedimentos(); desenharRodape(); irPara(1);
+
+  // se a Jamile já estiver logada, mostra o sino com cancelamentos novos
+  const { data:{ session } } = await db.auth.getSession();
+  if(session){ await carregarAgendamentos(); atualizarSino(); }
 })();
 </script>
 </body>
