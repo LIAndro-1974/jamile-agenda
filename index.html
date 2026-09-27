@@ -1002,13 +1002,13 @@ function desenharHome(){
     </button>`;
   }
   html += mods.map(m=>{
-    const min = aPartirDe(m), temPac = pacotesDoServico(m.id).length>0;
+    const min = aPartirDe(m), temPac = !m.embreve && pacotesDoServico(m.id).length>0;
     return `<button class="item" data-serv="${m.id}">
       <span class="medalha">${ICONES[m.icone]||ICONES.estrela}</span>
       <span class="item-nome">${escH(m.nome)}</span>
       ${m.descricao?`<span class="item-desc">${escH(m.descricao)}</span>`:''}
       <span class="item-meta">${m.duracao} min${temPac?' · tem pacote':''}</span>
-      <span class="item-preco">${min!==null ? 'a partir de R$ '+dinheiro(min) : 'Ver detalhes ›'}</span>
+      <span class="item-preco">${m.embreve ? 'Em breve' : min!==null ? 'a partir de R$ '+dinheiro(min) : 'Ver detalhes ›'}</span>
     </button>`;
   }).join('');
   $('listaProc').innerHTML = html || '<div class="vazio-msg" style="grid-column:1/-1">Nenhum serviço cadastrado ainda.</div>';
@@ -1055,9 +1055,11 @@ function desenharDetalhe(){
   }
 
   // botões
-  $('btnAgendarSessao').textContent = ehAv ? 'Agende sua avaliação' : 'Agende sua sessão';
-  const pacs = ehAv ? [] : pacotesDoServico(m.id);
-  $('btnPacote').style.display = ehAv ? 'none' : '';
+  const emBreve = !ehAv && !!m.embreve;
+  $('btnAgendarSessao').textContent = ehAv ? 'Agende sua avaliação' : emBreve ? 'Em breve' : 'Agende sua sessão';
+  $('btnAgendarSessao').disabled = emBreve;
+  const pacs = (ehAv || emBreve) ? [] : pacotesDoServico(m.id);
+  $('btnPacote').style.display = (ehAv || emBreve) ? 'none' : '';
   $('btnPacote').disabled = !pacs.length;
   if(!pacs.length){
     $('btnPacote').innerHTML = 'Promoção de pacote<small>Nenhum pacote disponível no momento</small>';
@@ -1080,6 +1082,7 @@ function desenharDetalhe(){
   };
   $('detNota').textContent = ehAv
     ? 'A avaliação é gratuita e sem compromisso.'
+    : emBreve ? 'Este serviço chega em breve. Fale com a Jamile pelo WhatsApp para entrar na lista de espera.'
     : (pacs.length ? 'Em qualquer opção você agenda agora só a 1ª sessão. As próximas são combinadas com a Jamile.' : 'Aqui você agenda uma sessão. As próximas são combinadas com a Jamile.');
 }
 
@@ -1095,6 +1098,7 @@ function regiaoOkDet(){
 }
 function agendarSessao(){
   const ehAv = servicoAberto==='avaliacao';
+  if(!ehAv){ const mm = cfg.modelos.find(x=>x.id===servicoAberto); if(mm && mm.embreve) return; }
   if(ehAv && avProc===null){
     $('erroDet').textContent = 'Escolha o que você quer avaliar.';
     $('detAvOps').scrollIntoView({behavior:'smooth',block:'center'});
@@ -1566,7 +1570,7 @@ async function marcarVistos(){
   await carregarAgendamentos(); desenharAgenda(); atualizarAlertaCancel();
 }
 function opcoesNovo(){
-  const l = cfg.modelos.filter(m=>m.nome).map(m=>({v:'m:'+m.id, rot:m.nome+' ('+m.duracao+' min)'}));
+  const l = cfg.modelos.filter(m=>m.nome && !m.embreve).map(m=>({v:'m:'+m.id, rot:m.nome+' ('+m.duracao+' min)'}));
   cfg.avaliacao.procedimentos.forEach((p,i)=>l.push({v:'a:'+i, rot:'Avaliação gratuita — '+p+' ('+cfg.avaliacao.duracao+' min)'}));
   return l;
 }
@@ -1646,6 +1650,7 @@ function desenharServicosEdit(){
       <textarea class="me-infos" style="min-height:70px" placeholder="Sessões indicadas: 4 a 6&#10;Intervalo: 15 dias&#10;Indicado para: todos os tipos de pele">${escH(m.infos)}</textarea>
       <label>Duração (minutos)</label>
       <input class="me-dur" type="number" min="10" step="5" value="${m.duracao}">
+      <label class="chk" style="margin-top:12px"><input type="checkbox" class="me-breve" ${m.embreve?'checked':''}><span>Em breve (aparece na lista, sem agendamento)</span></label>
       <label>Foto da página (opcional)</label>
       <input type="file" class="me-file" accept="image/*" data-i="${i}">
       <div class="envio" data-menvio="${i}"></div>
@@ -1700,6 +1705,7 @@ function lerServicosEdit(){
     m.infos = l.querySelector('.me-infos').value.trim();
     m.imagem = l.querySelector('.me-img').value || '';
     m.duracao = Math.max(10, Number(l.querySelector('.me-dur').value)||60);
+    m.embreve = l.querySelector('.me-breve').checked;
     m.precos = Object.assign({}, m.precos);
     l.querySelectorAll('.me-preco').forEach(inp=>{ m.precos[inp.dataset.reg] = inp.value.trim(); });
     return m;
