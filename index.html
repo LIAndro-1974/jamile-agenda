@@ -393,13 +393,19 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
   <!-- ================= ESQUECI A SENHA ================= -->
   <section class="tela" id="telaEsqueci">
     <h2>Recuperar senha</h2>
-    <p class="legenda">Informe o e-mail da sua conta. Você vai receber um link para criar uma senha nova.</p>
+    <p class="legenda">Informe o e-mail da sua conta. Você vai receber um código para criar uma senha nova.</p>
     <label for="rEmail">E-mail</label>
     <input id="rEmail" type="email" autocomplete="username" placeholder="seu@email.com">
     <div class="erro" id="erroEsqueci"></div>
     <div class="acoes">
       <button class="btn vazado" id="esqueciVoltar">Voltar</button>
-      <button class="btn" id="btnEnviarLink">Enviar link</button>
+      <button class="btn" id="btnEnviarLink">Enviar código</button>
+    </div>
+    <div id="blocoCodigo" style="display:none">
+      <label for="rCodigo">Código recebido no e-mail</label>
+      <input id="rCodigo" inputmode="numeric" autocomplete="one-time-code" placeholder="000000" maxlength="10" style="letter-spacing:.3em;text-align:center;font-size:20px">
+      <div class="erro" id="erroCodigo"></div>
+      <div class="acoes"><button class="btn" id="btnConfirmarCodigo">Confirmar código</button></div>
     </div>
     <div class="aviso">Não chegou? Olhe a caixa de spam e espere alguns minutos antes de pedir de novo.</div>
   </section>
@@ -1122,6 +1128,7 @@ const URL_RETORNO = location.origin + location.pathname;
 function abrirEsqueci(){
   $('rEmail').value = $('fEmail').value.trim();
   $('erroEsqueci').className = 'erro'; $('erroEsqueci').textContent = '';
+  $('blocoCodigo').style.display = 'none';
   irParaExtra('telaEsqueci');
 }
 async function enviarLinkSenha(){
@@ -1138,7 +1145,23 @@ async function enviarLinkSenha(){
     return;
   }
   msg.className = 'ok-msg';
-  msg.textContent = 'Pronto! Se este e-mail tiver conta, o link chega em instantes. Abra-o neste mesmo aparelho.';
+  msg.textContent = 'Enviado! Veja seu e-mail (e o spam) e digite abaixo o código que chegou. Use sempre o e-mail mais recente.';
+  $('blocoCodigo').style.display = ''; $('rCodigo').value = ''; $('erroCodigo').textContent = '';
+  $('rCodigo').focus();
+}
+async function confirmarCodigo(){
+  const email = $('rEmail').value.trim(), token = $('rCodigo').value.replace(/\D/g,''), err = $('erroCodigo');
+  if(token.length < 6){ err.textContent = 'Digite o código completo que chegou no e-mail.'; return; }
+  err.textContent = 'Verificando…'; $('btnConfirmarCodigo').disabled = true;
+  const { error } = await db.auth.verifyOtp({ email, token, type:'recovery' });
+  $('btnConfirmarCodigo').disabled = false;
+  if(error){
+    err.textContent = /expired|invalid/i.test(error.message)
+      ? 'Código inválido ou vencido. Confira se é o do e-mail mais recente ou peça outro.'
+      : 'Não foi possível verificar: ' + error.message;
+    return;
+  }
+  err.textContent = ''; emRecuperacao = true; abrirNovaSenha();
 }
 function abrirNovaSenha(){
   if(!$('telaNovaSenha')) return;
@@ -1531,6 +1554,8 @@ $('btnEsqueci').onclick = abrirEsqueci;
 $('esqueciVoltar').onclick = abrirLogin;
 $('btnEnviarLink').onclick = enviarLinkSenha;
 $('btnSalvarSenha').onclick = salvarNovaSenha;
+$('btnConfirmarCodigo').onclick = confirmarCodigo;
+$('rCodigo').addEventListener('keydown', e => { if(e.key==='Enter') confirmarCodigo(); });
 $('nsConf').addEventListener('keydown', e => { if(e.key==='Enter') salvarNovaSenha(); });
 $('fSenha').addEventListener('keydown', e => { if(e.key==='Enter') entrar(); });
 $('btnSair').onclick = sair;
