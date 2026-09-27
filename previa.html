@@ -443,6 +443,16 @@ body.car-fixo main{padding-bottom:90px}
   .car-wrap .sl-info{font-size:12.5px}
   body.car-fixo main{padding-bottom:96px}
 }
+
+/* ================= TICKER (faixa rolante contínua) ================= */
+.car-wrap .carrossel.tk{overflow:hidden;scroll-snap-type:none;display:block;padding:0!important;max-width:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.ticker{display:flex;width:max-content;animation:ticker var(--dur,30s) linear infinite!important;will-change:transform}
+.ticker .copia{display:flex;gap:10px;padding-right:10px}
+.carrossel.tk:hover .ticker,.carrossel.tk.pausa .ticker{animation-play-state:paused!important}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.car-wrap .carrossel.tk .slide{flex:0 0 auto;width:270px}
+@media (min-width:900px){ .car-wrap .carrossel.tk .slide{width:400px} .car-wrap .carrossel.tk .sl-txt{flex-direction:column;align-items:flex-start;gap:0} }
 </style>
 </head>
 <body>
@@ -1298,7 +1308,7 @@ function desenharBanner(){
   $('carTit').textContent = ativos.length>1 ? 'Promoções' : 'Promoção';
   const car = $('carrossel');
   car.classList.toggle('um', ativos.length===1);
-  car.innerHTML = ativos.map(p=>{
+  const slidesHtml = ativos.map(p=>{
     const serv = cfg.modelos.find(m=>m.id===p.servico && m.nome);
     return `<button class="slide" data-slide="${p.id}">
       ${p.imagem ? `<img src="${esc(p.imagem)}" alt="">` : `<span class="sl-ico">${serv?(ICONES[serv.icone]||ICONES.estrela):ICONES.estrela}</span>`}
@@ -1310,7 +1320,19 @@ function desenharBanner(){
       <span class="sl-seta">›</span>
     </button>`;
   }).join('');
-  $('carPontos').innerHTML = ativos.length>1 ? ativos.map((_,i)=>`<i class="${i===0?'on':''}"></i>`).join('') : '';
+  // ===== ticker: faixa rolante contínua =====
+  car.classList.add('tk');
+  car.innerHTML = `<div class="ticker"><div class="copia">${slidesHtml}</div></div>`;
+  $('carPontos').innerHTML = '';
+  const ticker = car.firstElementChild, copia = ticker.firstElementChild;
+  // repete os cartões até uma cópia ocupar a largura toda da tela
+  // largura estimada pelo CSS (não depende da tela estar visível no momento)
+  const larguraCartao = (window.innerWidth >= 900 ? 400 : 270) + 10;
+  const repeticoes = Math.max(1, Math.ceil((window.innerWidth + 80) / (larguraCartao * ativos.length)));
+  for(let r=1; r<repeticoes; r++) copia.insertAdjacentHTML('beforeend', slidesHtml);
+  ticker.insertAdjacentHTML('beforeend', `<div class="copia" aria-hidden="true">${copia.innerHTML}</div>`);
+  const largura = larguraCartao * ativos.length * repeticoes;
+  ticker.style.setProperty('--dur', Math.max(10, largura / 45) + 's');   // ~45 px por segundo
   car.querySelectorAll('[data-slide]').forEach(b=>{
     b.onclick = () => {
       const p = ativos.find(x=>x.id===b.dataset.slide);
@@ -1318,26 +1340,11 @@ function desenharBanner(){
       else { desenharVitrine(); irParaExtra('telaVitrine'); }
     };
   });
-  const indice = () => {
-    const w = car.firstElementChild ? car.firstElementChild.offsetWidth + 10 : 1;
-    if(car.scrollLeft >= car.scrollWidth - car.clientWidth - 4 && car.scrollLeft > 0) return ativos.length - 1;
-    return Math.min(ativos.length - 1, Math.round(car.scrollLeft / w));
-  };
-  car.onscroll = () => { const i = indice(); $('carPontos').querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on', k===i)); };
-  const pausar = () => { carPausa = Date.now() + 9000; };
-  car.onpointerdown = pausar; car.ontouchstart = pausar; car.onwheel = pausar;
-  car.scrollLeft = 0;
-  if(ativos.length>1){
-    carTimer = setInterval(()=>{
-      if(Date.now() < carPausa || document.hidden || !$('carWrap').classList.contains('on')) return;
-      const w = car.firstElementChild.offsetWidth + 10;
-      const fim = car.scrollWidth - car.clientWidth;
-      const noFim = car.scrollLeft >= fim - 4;
-      let prox = indice() + 1;
-      if(noFim || prox >= ativos.length) prox = 0;
-      car.scrollTo({ left: Math.min(prox*w, fim), behavior: semAnimacao ? 'auto' : 'smooth' });
-    }, 4000);
-  }
+  let tPausa = null;
+  const pausa = () => { clearTimeout(tPausa); car.classList.add('pausa'); };
+  const solta = () => { clearTimeout(tPausa); tPausa = setTimeout(()=>car.classList.remove('pausa'), 2500); };
+  car.onpointerdown = pausa; car.onpointerup = solta; car.onpointercancel = solta; car.onpointerleave = solta;
+  car.ontouchstart = null; car.onwheel = null; car.onscroll = null;
 }
 
 function desenharVitrine(){
