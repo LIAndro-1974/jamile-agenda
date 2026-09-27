@@ -370,72 +370,48 @@ h1,h2{color:#3E2A20}
 .hora:hover{border-color:var(--rose)}
 .lista .medalha{width:42px;height:42px}
 
-/* ================= MARROM NO JOGO ================= */
-:root{
-  --choco:#4A2F26; --choco-2:#6B4433; --caramelo:#B9825B;
-  --grad:linear-gradient(135deg,#5A3A2E 0%,#9C5A62 50%,#C27A93 100%);
-  --grad-lilas:linear-gradient(135deg,#6B4433 0%,#9A7AC0 100%);
+/* ================= AJUSTES FINOS: topo compacto + carrossel fixo no rodapé ================= */
+header{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:16px 52px 10px 0;min-height:0}
+.marca{font-size:34px;line-height:1.15;padding:0 .18em 0 .12em;margin-left:-.12em;display:inline-block}
+.marca-sub{font-size:9.5px;letter-spacing:.34em;margin-top:0;padding-left:.2em}
+header .ornamento{display:none}
+.engrenagem{top:50%;transform:translateY(-50%)}
+.passos,#passos{display:none!important}
+#vHome h1{font-size:28px;margin-top:6px}
+#vHome .legenda{margin-bottom:16px}
+
+/* barra fixa do carrossel */
+.car-wrap.on{position:fixed;left:0;right:0;bottom:0;z-index:40;margin:0;
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));
+  background:rgba(255,250,252,.82);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  border-top:1px solid rgba(210,126,148,.35);box-shadow:0 -10px 30px rgba(166,139,203,.18)}
+.car-wrap .car-topo,.car-wrap .carrossel,.car-wrap .car-pontos{max-width:1180px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
+.car-wrap .car-topo{margin-bottom:6px}
+.car-wrap .carrossel{scroll-padding:0 16px}
+.lista .item{min-height:0}
+.car-wrap .car-tit{font-size:9.5px}
+.car-wrap .car-pontos{display:none}
+.car-wrap .slide{min-height:0;padding:7px 10px 7px 7px;gap:10px;border-radius:14px}
+.car-wrap .slide img,.car-wrap .sl-ico{width:44px;height:44px;flex-basis:44px;border-radius:10px}
+.car-wrap .sl-tag{display:none}
+.car-wrap .sl-nome{font-size:16px;margin-top:0}
+.car-wrap .sl-info{font-size:12px;margin-top:0}
+.car-wrap .sl-seta{flex-basis:26px;height:26px}
+body.car-fixo main{padding-bottom:118px}
+@media (min-width:900px){
+  header{padding:22px 60px 14px 0}
+  .marca{font-size:42px}
+  .marca-sub{font-size:10.5px}
+  #vHome h1{font-size:36px}
+  .car-wrap .car-topo,.car-wrap .carrossel{padding-left:40px;padding-right:40px}
+  .car-wrap .carrossel{padding-left:calc(40px + 19%);padding-right:calc(40px + 19%);scroll-padding:0 calc(40px + 19%)}
+  .car-wrap .carrossel.um{padding-left:40px;padding-right:40px}
+  .car-wrap .slide{min-height:0}
+  .lista .item{min-height:150px}
+  .car-wrap .slide img,.car-wrap .sl-ico{width:52px;height:52px;flex-basis:52px}
+  .car-wrap .sl-nome{font-size:18px}
+  body.car-fixo main{padding-bottom:130px}
 }
-/* faixa chocolate no topo, de ponta a ponta */
-header{background:var(--choco);box-shadow:0 0 0 100vmax var(--choco);clip-path:inset(0 -100vmax);padding:30px 0 26px}
-header::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;
-  background:radial-gradient(520px 200px at 22% 0%,rgba(210,126,148,.38),rgba(210,126,148,0) 70%),radial-gradient(520px 220px at 80% 20%,rgba(166,139,203,.36),rgba(166,139,203,0) 70%)}
-header > *{position:relative;z-index:1}
-header > .engrenagem{position:absolute;z-index:2}
-.marca{background:linear-gradient(100deg,#FFFFFF 15%,#F6C9D6 60%,#DCCBF3 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.marca-sub{color:#E8C4A6}
-.ornamento i{background:linear-gradient(90deg,rgba(232,196,166,0),rgba(232,196,166,.8))}
-.ornamento i:last-child{background:linear-gradient(90deg,rgba(232,196,166,.8),rgba(232,196,166,0))}
-.ornamento b{background:#F2B8C8}
-.engrenagem{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);color:#F6E6DA}
-.engrenagem:hover{background:rgba(255,255,255,.18)}
-.passos{margin-top:26px}
-.passo{color:var(--choco-2)}
-.passo.on{color:var(--choco)}
-
-/* títulos em chocolate com sublinhado colorido */
-#vHome h1{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--choco)}
-#vHome h1::after,#detNome::after{content:'';display:block;width:64px;height:3px;border-radius:3px;margin-top:10px;background:linear-gradient(90deg,var(--rose),var(--lilas))}
-#detNome{color:var(--choco)}
-h2{color:var(--choco)}
-
-/* botões */
-.btn{background:var(--grad)}
-.btn.pac{background:var(--lilas-2);border-color:var(--lilas);color:var(--choco-2)}
-.btn.vazado{border-color:var(--choco-2);color:var(--choco-2)}
-
-/* carrossel: miniatura chocolate */
-.slide{background:linear-gradient(120deg,#FFF6F2 0%,#F7E3EA 55%,#EDE3F8 100%);border-color:rgba(107,68,51,.35)}
-.slide .sl-ico{background:var(--choco);color:#F6C9D6}
-.sl-nome{color:var(--choco)}
-.sl-seta{background:var(--choco);color:#fff}
-.car-tit{color:var(--choco-2)}
-.car-pontos i.on{background:var(--choco-2)}
-
-/* cartões de serviço: ícones em 4 tons, incluindo chocolate */
-.item-nome{color:var(--choco)}
-.item::before{background:linear-gradient(90deg,#6B4433,#C27A93,#A68BCB)}
-.lista .item:nth-child(4n+1) .medalha{background:var(--choco);color:#F6C9D6;border-color:transparent}
-.lista .item:nth-child(4n+2) .medalha{background:var(--rose-2);color:var(--rose-esc);border-color:transparent}
-.lista .item:nth-child(4n+3) .medalha{background:var(--lilas-2);color:var(--lilas-esc);border-color:transparent}
-.lista .item:nth-child(4n) .medalha{background:#F1D9C4;color:var(--choco-2);border-color:transparent}
-.item-preco{color:var(--choco-2);font-weight:500}
-.item.item-av{background:linear-gradient(150deg,#FDF1F5 0%,#EFE6FA 100%);border-color:var(--lilas)}
-.item.item-av .item-nome{color:var(--lilas-esc)}
-
-/* detalhe e agenda */
-.det-info{border-color:rgba(107,68,51,.2)}
-.det-info small{color:var(--rose-esc)}
-.det-preco b{color:var(--choco)}
-.reg.sel{background:var(--grad)}
-.dia.sel{background:var(--grad)}
-@media (min-width:900px){ .det-col-b::before{background:linear-gradient(90deg,#6B4433,#C27A93,#A68BCB)} }
-
-/* rodapé chocolate */
-footer{background:var(--choco);color:rgba(255,240,232,.8);border-radius:22px;padding:24px 18px 20px}
-footer .frase{color:#FBE9EF}
-footer a{color:#F2C3D1}
-footer .link-cancelar{color:rgba(255,240,232,.75)}
 </style>
 </head>
 <body>
@@ -1058,17 +1034,23 @@ const temVaga = (d,dur) => horariosLivres(d,dur).length>0;
 /* ============ navegação ============ */
 const $ = id => document.getElementById(id);
 const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado','telaVitrine','telaEsqueci','telaNovaSenha'];
+function ajustarCarFixo(){
+  const vis = $('carWrap') && $('carWrap').classList.contains('on') && passo===1 && $('app').style.display!=='none' && !servicoAberto;
+  document.body.classList.toggle('car-fixo', !!vis);
+}
 function irPara(n){
   passo = n;
   EXTRAS.forEach(t=>$(t).classList.remove('ativa'));
   $('app').style.display = '';
   for(let i=1;i<=5;i++) $('tela'+i).classList.toggle('ativa', i===n);
   desenharPassos();
+  if(typeof ajustarCarFixo==='function') ajustarCarFixo();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function irParaExtra(id){
   $('app').style.display='none';
   EXTRAS.forEach(t=>$(t).classList.toggle('ativa', t===id));
+  document.body.classList.remove('car-fixo');
   window.scrollTo({top:0});
 }
 function desenharPassos(){
@@ -1279,6 +1261,7 @@ function desenharBanner(){
   const ativos = pacotesAtivos().slice().sort((a,b)=>(b.destaque?1:0)-(a.destaque?1:0));
   const mostra = cfg.vitrine.ativa && ativos.length > 0 && !servicoAberto;
   $('carWrap').classList.toggle('on', mostra);
+  ajustarCarFixo();
   clearInterval(carTimer);
   if(!mostra) return;
   $('carTit').textContent = ativos.length>1 ? 'Promoções' : 'Promoção';
