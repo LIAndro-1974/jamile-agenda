@@ -291,6 +291,168 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
   .det-col-b .aval-ops{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ================= TEMA COLORIDO (rosé + lilás) ================= */
+:root{
+  --rose:#D27E94; --rose-esc:#B45F77; --rose-2:#F6D3DE;
+  --lilas:#A68BCB; --lilas-esc:#7C5FA6; --lilas-2:#E6DBF6;
+  --grad:linear-gradient(135deg,#B9825B 0%,#D27E94 55%,#A68BCB 100%);
+  --grad-suave:linear-gradient(120deg,#FBE3EA 0%,#ECE2F9 100%);
+  --linha:rgba(180,120,140,.28);
+}
+body{background:
+  radial-gradient(900px 560px at -8% -6%, #F3C9D6 0, rgba(243,201,214,0) 62%),
+  radial-gradient(860px 560px at 108% 4%, #DFD0F4 0, rgba(223,208,244,0) 60%),
+  radial-gradient(1000px 640px at 50% 112%, #F2D3E2 0, rgba(242,211,226,0) 62%),
+  var(--creme)}
+.marca{background:linear-gradient(100deg,#4A2E28 10%,#B45F77 60%,#7C5FA6 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.marca-sub{color:var(--rose-esc)}
+.ornamento i{background:linear-gradient(90deg,rgba(210,126,148,0),rgba(210,126,148,.6))}
+.ornamento i:last-child{background:linear-gradient(90deg,rgba(166,139,203,.6),rgba(166,139,203,0))}
+.ornamento b{background:var(--rose)}
+.engrenagem{background:rgba(255,255,255,.6)}
+.passo{color:var(--rose-esc)}
+.passo.on .bolha{background:var(--grad);border-color:transparent}
+h1,h2{color:#3E2A20}
+#vHome h1{background:linear-gradient(100deg,#3E2A20 0%,#B45F77 70%,#7C5FA6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.legenda{color:rgba(62,42,32,.7)}
+
+/* botões */
+.btn{background:var(--grad);border-color:transparent;box-shadow:0 8px 20px rgba(210,126,148,.28)}
+.btn:hover{filter:brightness(1.05) saturate(1.05)}
+.btn.vazado{background:rgba(255,255,255,.7);border-color:var(--rose);color:var(--rose-esc);box-shadow:none}
+.btn.zap{background:#1FA855;border-color:#1FA855;box-shadow:0 8px 20px rgba(31,168,85,.22)}
+.btn.pac{background:var(--lilas-2);border:1px solid var(--lilas);color:var(--lilas-esc);box-shadow:none}
+.btn.pac:disabled{background:#fff;border-color:var(--linha);color:rgba(62,42,32,.45)}
+.btn:disabled{box-shadow:none}
+
+/* carrossel */
+.car-tit{color:var(--rose-esc);font-weight:500}
+.car-ver{color:var(--lilas-esc)}
+.slide{background:var(--grad-suave);border:1px solid rgba(210,126,148,.55);box-shadow:0 10px 26px rgba(166,139,203,.16)}
+.slide .sl-ico{background:#fff;color:var(--rose-esc)}
+.sl-tag,.promo-tag,.item .gratis-tag{background:var(--grad)}
+.sl-info b{color:var(--rose-esc)}
+.sl-seta{background:#fff;color:var(--lilas-esc)}
+.car-pontos i.on{background:var(--rose)}
+
+/* serviços */
+.item{background:rgba(255,255,255,.9);border-color:rgba(210,126,148,.3);box-shadow:0 6px 18px rgba(180,95,119,.07);position:relative;overflow:hidden}
+.item::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--grad);opacity:.85}
+.lista .item{border-top-color:transparent}
+.item:hover{border-color:var(--rose)}
+.item-preco{color:var(--rose-esc)}
+.lista .item:nth-child(3n+1) .medalha{background:var(--rose-2);border-color:transparent;color:var(--rose-esc)}
+.lista .item:nth-child(3n+2) .medalha{background:var(--lilas-2);border-color:transparent;color:var(--lilas-esc)}
+.lista .item:nth-child(3n) .medalha{background:#F3DCC9;border-color:transparent;color:var(--bronze-esc)}
+.item.item-av{background:linear-gradient(150deg,#FDF1F5 0%,#F1EAFA 100%);border-color:var(--lilas)}
+
+/* detalhe */
+.det-voltar{color:var(--lilas-esc)}
+.det-info{background:rgba(255,255,255,.85);border-color:rgba(166,139,203,.3)}
+.det-info small{color:var(--lilas-esc)}
+.det-preco b{color:var(--rose-esc)}
+.reg{background:rgba(255,255,255,.85)}
+.reg:hover{border-color:var(--rose)}
+.reg.sel{background:var(--grad);border-color:transparent}
+.aval-op{background:#fff}
+.aval-op.sel{background:var(--lilas);border-color:var(--lilas)}
+.aval{border-color:var(--lilas);background:linear-gradient(150deg,#FFFFFF 0%,#F4EEFB 100%)}
+.pac-op{background:var(--lilas-2);border-color:var(--lilas)}
+@media (min-width:900px){
+  .det-col-b{border-color:rgba(210,126,148,.3);box-shadow:0 18px 40px rgba(166,139,203,.18);position:sticky}
+  .det-col-b::before{content:'';display:block;height:4px;margin:-24px -24px 20px;border-radius:22px 22px 0 0;background:var(--grad)}
+}
+
+/* agenda */
+.dia.sel{background:var(--grad);border-color:transparent}
+.dia.livre:hover{border-color:var(--rose)}
+.hora:hover{border-color:var(--rose)}
+.lista .medalha{width:42px;height:42px}
+
+/* ================= AJUSTES FINOS: topo compacto + carrossel fixo no rodapé ================= */
+header{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:16px 52px 10px 0;min-height:0}
+.marca{font-size:34px;line-height:1.15;padding:0 .18em 0 .12em;margin-left:-.12em;display:inline-block}
+.marca-sub{font-size:9.5px;letter-spacing:.34em;margin-top:0;padding-left:.2em}
+header .ornamento{display:none}
+.engrenagem{top:50%;transform:translateY(-50%)}
+.passos,#passos{display:none!important}
+#vHome h1{font-size:28px;margin-top:6px}
+#vHome .legenda{margin-bottom:16px}
+
+/* barra fixa do carrossel */
+.car-wrap.on{position:fixed;left:0;right:0;bottom:0;z-index:40;margin:0;
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));
+  background:rgba(255,250,252,.82);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  border-top:1px solid rgba(210,126,148,.35);box-shadow:0 -10px 30px rgba(166,139,203,.18)}
+.car-wrap .car-topo,.car-wrap .carrossel,.car-wrap .car-pontos{max-width:1180px;margin-left:auto;margin-right:auto;padding-left:16px;padding-right:16px}
+.car-wrap .car-topo{margin-bottom:6px}
+.car-wrap .carrossel{scroll-padding:0 16px}
+.lista .item{min-height:0}
+.car-wrap .car-tit{font-size:9.5px}
+.car-wrap .car-pontos{display:none}
+.car-wrap .slide{min-height:0;padding:7px 10px 7px 7px;gap:10px;border-radius:14px}
+.car-wrap .slide img,.car-wrap .sl-ico{width:44px;height:44px;flex-basis:44px;border-radius:10px}
+.car-wrap .sl-tag{display:none}
+.car-wrap .sl-nome{font-size:16px;margin-top:0}
+.car-wrap .sl-info{font-size:12px;margin-top:0}
+.car-wrap .sl-seta{flex-basis:26px;height:26px}
+body.car-fixo main{padding-bottom:118px}
+@media (min-width:900px){
+  header{padding:22px 60px 14px 0}
+  .marca{font-size:42px}
+  .marca-sub{font-size:10.5px}
+  #vHome h1{font-size:36px}
+  .car-wrap .car-topo,.car-wrap .carrossel{padding-left:40px;padding-right:40px}
+  .car-wrap .carrossel{padding-left:calc(40px + 19%);padding-right:calc(40px + 19%);scroll-padding:0 calc(40px + 19%)}
+  .car-wrap .carrossel.um{padding-left:40px;padding-right:40px}
+  .car-wrap .slide{min-height:0}
+  .lista .item{min-height:150px}
+  .car-wrap .slide img,.car-wrap .sl-ico{width:52px;height:52px;flex-basis:52px}
+  .car-wrap .sl-nome{font-size:18px}
+  body.car-fixo main{padding-bottom:130px}
+}
+
+/* ================= AJUSTES FINOS 2 ================= */
+header{padding:12px 52px 4px 0}
+#vHome h1{text-align:right;font-size:21px;margin:0 0 12px}
+#vHome h1 + .legenda{display:none}
+/* faixa do carrossel em chocolate, mais estreita */
+.car-wrap.on{padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px));background:rgba(74,47,38,.97);
+  -webkit-backdrop-filter:none;backdrop-filter:none;border-top:0;box-shadow:0 -8px 24px rgba(74,47,38,.25)}
+.car-wrap .car-topo{position:absolute;right:16px;top:-24px;margin:0;padding:4px 12px 3px;gap:12px;max-width:none;
+  background:rgba(74,47,38,.97);border-radius:10px 10px 0 0}
+.car-wrap .car-tit{color:#F2C3D1;font-size:9px}
+.car-wrap .car-ver{color:#fff;font-size:11.5px}
+.car-wrap .slide{padding:5px 8px 5px 5px;border-radius:12px;box-shadow:none}
+.car-wrap .slide img,.car-wrap .sl-ico{width:36px;height:36px;flex-basis:36px;border-radius:9px}
+.car-wrap .sl-txt{display:flex;flex-direction:column}
+.car-wrap .sl-nome{font-size:15px}
+.car-wrap .sl-info{font-size:11.5px}
+.car-wrap .sl-seta{flex-basis:24px;height:24px}
+.car-wrap .carrossel{-webkit-mask-image:none;mask-image:none}
+body.car-fixo main{padding-bottom:90px}
+@media (min-width:900px){
+  header{padding:18px 60px 0 0}
+  #vHome h1{font-size:30px;margin:-40px 0 18px auto;max-width:55%}
+  .car-wrap .car-topo{right:max(40px, calc((100vw - 1180px)/2 + 40px))}
+  .car-wrap .carrossel{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+  .car-wrap .slide img,.car-wrap .sl-ico{width:40px;height:40px;flex-basis:40px}
+  .car-wrap .sl-txt{flex-direction:row;align-items:baseline;gap:14px}
+  .car-wrap .sl-nome{font-size:17px}
+  .car-wrap .sl-info{font-size:12.5px}
+  body.car-fixo main{padding-bottom:96px}
+}
+
+/* ================= TICKER (faixa rolante contínua) ================= */
+.car-wrap .carrossel.tk{overflow:hidden;scroll-snap-type:none;display:block;padding:0!important;max-width:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.ticker{display:flex;width:max-content;animation:ticker var(--dur,30s) linear infinite!important;will-change:transform}
+.ticker .copia{display:flex;gap:10px;padding-right:10px}
+.carrossel.tk:hover .ticker,.carrossel.tk.pausa .ticker{animation-play-state:paused!important}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.car-wrap .carrossel.tk .slide{flex:0 0 auto;width:270px}
+@media (min-width:900px){ .car-wrap .carrossel.tk .slide{width:400px} .car-wrap .carrossel.tk .sl-txt{flex-direction:column;align-items:flex-start;gap:0} }
 </style>
 </head>
 <body>
@@ -913,17 +1075,23 @@ const temVaga = (d,dur) => horariosLivres(d,dur).length>0;
 /* ============ navegação ============ */
 const $ = id => document.getElementById(id);
 const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado','telaVitrine','telaEsqueci','telaNovaSenha'];
+function ajustarCarFixo(){
+  const vis = $('carWrap') && $('carWrap').classList.contains('on') && passo===1 && $('app').style.display!=='none' && !servicoAberto;
+  document.body.classList.toggle('car-fixo', !!vis);
+}
 function irPara(n){
   passo = n;
   EXTRAS.forEach(t=>$(t).classList.remove('ativa'));
   $('app').style.display = '';
   for(let i=1;i<=5;i++) $('tela'+i).classList.toggle('ativa', i===n);
   desenharPassos();
+  if(typeof ajustarCarFixo==='function') ajustarCarFixo();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function irParaExtra(id){
   $('app').style.display='none';
   EXTRAS.forEach(t=>$(t).classList.toggle('ativa', t===id));
+  document.body.classList.remove('car-fixo');
   window.scrollTo({top:0});
 }
 function desenharPassos(){
@@ -1134,12 +1302,13 @@ function desenharBanner(){
   const ativos = pacotesAtivos().slice().sort((a,b)=>(b.destaque?1:0)-(a.destaque?1:0));
   const mostra = cfg.vitrine.ativa && ativos.length > 0 && !servicoAberto;
   $('carWrap').classList.toggle('on', mostra);
+  ajustarCarFixo();
   clearInterval(carTimer);
   if(!mostra) return;
   $('carTit').textContent = ativos.length>1 ? 'Promoções' : 'Promoção';
   const car = $('carrossel');
   car.classList.toggle('um', ativos.length===1);
-  car.innerHTML = ativos.map(p=>{
+  const slidesHtml = ativos.map(p=>{
     const serv = cfg.modelos.find(m=>m.id===p.servico && m.nome);
     return `<button class="slide" data-slide="${p.id}">
       ${p.imagem ? `<img src="${esc(p.imagem)}" alt="">` : `<span class="sl-ico">${serv?(ICONES[serv.icone]||ICONES.estrela):ICONES.estrela}</span>`}
@@ -1151,7 +1320,19 @@ function desenharBanner(){
       <span class="sl-seta">›</span>
     </button>`;
   }).join('');
-  $('carPontos').innerHTML = ativos.length>1 ? ativos.map((_,i)=>`<i class="${i===0?'on':''}"></i>`).join('') : '';
+  // ===== ticker: faixa rolante contínua =====
+  car.classList.add('tk');
+  car.innerHTML = `<div class="ticker"><div class="copia">${slidesHtml}</div></div>`;
+  $('carPontos').innerHTML = '';
+  const ticker = car.firstElementChild, copia = ticker.firstElementChild;
+  // repete os cartões até uma cópia ocupar a largura toda da tela
+  // largura estimada pelo CSS (não depende da tela estar visível no momento)
+  const larguraCartao = (window.innerWidth >= 900 ? 400 : 270) + 10;
+  const repeticoes = Math.max(1, Math.ceil((window.innerWidth + 80) / (larguraCartao * ativos.length)));
+  for(let r=1; r<repeticoes; r++) copia.insertAdjacentHTML('beforeend', slidesHtml);
+  ticker.insertAdjacentHTML('beforeend', `<div class="copia" aria-hidden="true">${copia.innerHTML}</div>`);
+  const largura = larguraCartao * ativos.length * repeticoes;
+  ticker.style.setProperty('--dur', Math.max(10, largura / 45) + 's');   // ~45 px por segundo
   car.querySelectorAll('[data-slide]').forEach(b=>{
     b.onclick = () => {
       const p = ativos.find(x=>x.id===b.dataset.slide);
@@ -1159,26 +1340,11 @@ function desenharBanner(){
       else { desenharVitrine(); irParaExtra('telaVitrine'); }
     };
   });
-  const indice = () => {
-    const w = car.firstElementChild ? car.firstElementChild.offsetWidth + 10 : 1;
-    if(car.scrollLeft >= car.scrollWidth - car.clientWidth - 4 && car.scrollLeft > 0) return ativos.length - 1;
-    return Math.min(ativos.length - 1, Math.round(car.scrollLeft / w));
-  };
-  car.onscroll = () => { const i = indice(); $('carPontos').querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on', k===i)); };
-  const pausar = () => { carPausa = Date.now() + 9000; };
-  car.onpointerdown = pausar; car.ontouchstart = pausar; car.onwheel = pausar;
-  car.scrollLeft = 0;
-  if(ativos.length>1){
-    carTimer = setInterval(()=>{
-      if(Date.now() < carPausa || document.hidden || !$('carWrap').classList.contains('on')) return;
-      const w = car.firstElementChild.offsetWidth + 10;
-      const fim = car.scrollWidth - car.clientWidth;
-      const noFim = car.scrollLeft >= fim - 4;
-      let prox = indice() + 1;
-      if(noFim || prox >= ativos.length) prox = 0;
-      car.scrollTo({ left: Math.min(prox*w, fim), behavior: semAnimacao ? 'auto' : 'smooth' });
-    }, 4000);
-  }
+  let tPausa = null;
+  const pausa = () => { clearTimeout(tPausa); car.classList.add('pausa'); };
+  const solta = () => { clearTimeout(tPausa); tPausa = setTimeout(()=>car.classList.remove('pausa'), 2500); };
+  car.onpointerdown = pausa; car.onpointerup = solta; car.onpointercancel = solta; car.onpointerleave = solta;
+  car.ontouchstart = null; car.onwheel = null; car.onscroll = null;
 }
 
 function desenharVitrine(){
