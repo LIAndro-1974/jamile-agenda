@@ -213,6 +213,49 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .reg-edit input[type=text]{padding:10px;font-size:14px}
 .preco-reg{display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin-bottom:6px;font-size:14px}
 .preco-reg input{padding:9px 10px;font-size:14px}
+/* ---------- carrossel de promoções ---------- */
+.car-wrap{margin:0 0 22px;display:none}
+.car-wrap.on{display:block}
+.car-topo{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.car-tit{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze-esc)}
+.car-ver{background:none;border:0;font:inherit;font-size:12.5px;color:var(--bronze-esc);text-decoration:underline;cursor:pointer;padding:0}
+.carrossel{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.carrossel::-webkit-scrollbar{display:none}
+.slide{flex:0 0 86%;scroll-snap-align:start;display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--bronze);border-radius:16px;padding:10px 12px 10px 10px;cursor:pointer;font:inherit;color:inherit;text-align:left;min-height:84px}
+.carrossel.um .slide{flex-basis:100%}
+.slide img,.sl-ico{width:62px;height:62px;border-radius:12px;object-fit:cover;flex:0 0 62px;background:var(--creme-2)}
+.sl-ico{display:grid;place-items:center;color:var(--bronze-esc)}
+.sl-txt{flex:1;min-width:0}
+.sl-tag{display:inline-block;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--bronze);border-radius:999px;padding:1px 8px}
+.sl-nome{display:block;font-family:var(--display);font-size:17px;line-height:1.15;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sl-info{display:block;font-size:12.5px;color:rgba(62,42,32,.65);margin-top:2px}
+.sl-info b{color:var(--bronze-esc);font-weight:500}
+.sl-seta{flex:0 0 28px;height:28px;border-radius:50%;background:var(--creme-2);color:var(--bronze-esc);display:grid;place-items:center}
+.car-pontos{display:flex;justify-content:center;gap:6px;margin-top:9px}
+.car-pontos i{width:6px;height:6px;border-radius:50%;background:var(--linha);transition:background .3s}
+.car-pontos i.on{background:var(--bronze)}
+/* ---------- detalhe do serviço ---------- */
+.det-voltar{background:none;border:0;color:var(--bronze-esc);font:inherit;font-size:14px;cursor:pointer;padding:0;margin:0 0 14px}
+.det-foto{width:100%;height:190px;object-fit:cover;border-radius:18px;display:block;margin-bottom:16px;background:var(--creme-2)}
+.det-texto{white-space:pre-line;font-size:15px;line-height:1.6;color:rgba(62,42,32,.85);margin:8px 0 16px}
+.det-infos{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 22px}
+.det-info{background:#fff;border:1px solid var(--linha);border-radius:12px;padding:10px 12px}
+.det-info small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(62,42,32,.55)}
+.det-info b{font-weight:500;font-size:14.5px;display:block;margin-top:2px}
+.det-preco{font-size:14.5px;color:var(--bronze-esc);margin:12px 0 0}
+.det-botoes{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.det-botoes .btn{width:100%}
+.btn.pac{background:#fff;color:var(--bronze-esc)}
+.btn.pac small{display:block;font-size:12px;letter-spacing:0;opacity:.8;margin-top:2px}
+.pac-opcoes{display:flex;flex-direction:column;gap:8px}
+.pac-op{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:14px;border:1px solid var(--bronze);background:var(--creme);font:inherit;color:var(--cacau);cursor:pointer}
+.pac-op.foco{background:#fff;box-shadow:0 6px 18px rgba(139,94,60,.14)}
+.pac-op b{font-weight:500;display:block}
+.pac-op span{font-size:12.5px;color:rgba(62,42,32,.65)}
+.det-nota{font-size:12.5px;color:rgba(62,42,32,.6);text-align:center;margin-top:12px;line-height:1.45}
+.aval-op.sel{background:var(--bronze);border-color:var(--bronze);color:#fff}
+.item .gratis-tag{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--bronze);color:#fff;border-radius:999px;padding:1px 8px;margin-bottom:4px}
+.item.item-av{border-color:var(--bronze)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -236,31 +279,51 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     <div class="passos" id="passos"></div>
 
     <section class="tela" id="tela1">
-      <button class="promo" id="promoBanner">
-        <img class="promo-foto" id="promoFoto" alt="" style="display:none">
-        <span class="promo-corpo">
-          <span class="promo-txt">
-            <span class="promo-tag" id="promoTag">Promoção</span>
-            <span class="promo-tit" id="promoTit"></span>
-            <span class="promo-sub" id="promoSub"></span>
-          </span>
-          <span class="promo-seta">›</span>
-        </span>
-      </button>
-
-      <h1>Onde você quer ser atendida?</h1>
-      <p class="legenda">Escolha a sua região. O valor do atendimento varia conforme o local.</p>
-      <div class="regioes" id="listaRegioes"></div>
-      <div id="outrosBox" style="display:none">
-        <label for="fOutraRegiao">Qual é a sua região?</label>
-        <input id="fOutraRegiao" placeholder="Ex.: Taguatinga, Guará, Lago Sul…">
-        <div class="erro" id="erroOutra"></div>
-      </div>
-      <div id="blocoServicos" style="display:none">
-        <div id="blocoAvaliacao"></div>
-        <h2 style="margin-top:24px">Escolha o atendimento</h2>
-        <p class="legenda" id="legServicos"></p>
+      <!-- início -->
+      <div id="vHome">
+        <div class="car-wrap" id="carWrap">
+          <div class="car-topo">
+            <span class="car-tit" id="carTit">Promoções</span>
+            <button class="car-ver" id="carVer">Ver todas</button>
+          </div>
+          <div class="carrossel" id="carrossel"></div>
+          <div class="car-pontos" id="carPontos"></div>
+        </div>
+        <h1>Conheça nossos serviços</h1>
+        <p class="legenda">Toque em um serviço para ver os detalhes e agendar.</p>
         <div class="lista" id="listaProc"></div>
+      </div>
+
+      <!-- detalhe do serviço -->
+      <div id="vDetalhe" style="display:none">
+        <button class="det-voltar" id="detVoltar">‹ Todos os serviços</button>
+        <img class="det-foto" id="detFoto" alt="" style="display:none">
+        <h1 id="detNome"></h1>
+        <div class="det-texto" id="detTexto"></div>
+        <div class="det-infos" id="detInfos"></div>
+
+        <div id="detAvBox" style="display:none">
+          <h2>O que você quer avaliar?</h2>
+          <div class="aval-ops" id="detAvOps" style="margin:10px 0 22px"></div>
+        </div>
+
+        <h2>Onde você quer ser atendida?</h2>
+        <p class="legenda" id="detLegReg">O valor pode variar conforme a região.</p>
+        <div class="regioes" id="listaRegioes"></div>
+        <div id="outrosBox" style="display:none">
+          <label for="fOutraRegiao">Qual é a sua região?</label>
+          <input id="fOutraRegiao" placeholder="Ex.: Taguatinga, Guará, Lago Sul…">
+          <div class="erro" id="erroOutra"></div>
+        </div>
+        <div class="det-preco" id="detPreco"></div>
+
+        <div class="det-botoes">
+          <button class="btn grande" id="btnAgendarSessao">Agende sua sessão</button>
+          <button class="btn pac" id="btnPacote"></button>
+          <div class="pac-opcoes" id="pacOpcoes" style="display:none"></div>
+        </div>
+        <div class="erro" id="erroDet" style="text-align:center"></div>
+        <p class="det-nota" id="detNota"></p>
       </div>
     </section>
 
@@ -535,14 +598,17 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
         <label class="chk" style="margin-top:14px"><input type="checkbox" id="sOutros"><span>Mostrar a opção "Outros" (cliente digita a região)</span></label>
       </div>
       <div class="bloco">
-        <h3>Modelos de atendimento</h3>
-        <p class="dica">Preço por região. Deixe vazio para mostrar "sob consulta".</p>
+        <h3>Serviços</h3>
+        <p class="dica">Aparecem em "Conheça nossos serviços". O texto e as informações formam a página de detalhes. Preço vazio mostra "sob consulta".</p>
         <div id="listaModEdit"></div>
+        <button class="btn vazado mini" id="btnAddServ" style="margin-top:4px">Adicionar serviço</button>
       </div>
       <div class="bloco">
         <h3>Avaliação gratuita</h3>
         <p class="dica">Entra na mesma agenda e ocupa o horário como qualquer atendimento.</p>
         <label class="chk" style="margin:6px 0 4px"><input type="checkbox" id="sAvAtiva"><span>Oferecer avaliação gratuita</span></label>
+        <label for="sAvTexto">Texto da página de detalhes</label>
+        <textarea id="sAvTexto" style="min-height:90px" placeholder="Explique como funciona a avaliação."></textarea>
         <label for="sAvDur">Duração (minutos)</label>
         <input id="sAvDur" type="number" min="10" step="5">
         <label for="sAvProcs">Procedimentos avaliados (um por linha)</label>
@@ -557,24 +623,25 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 
     <div id="abaPacotes" style="display:none">
       <div class="bloco">
-        <h3>Chamada do topo</h3>
-        <p class="dica">É o primeiro bloco que a cliente vê. Ao tocar nele, ela vai para a lista de pacotes.</p>
-        <label class="chk" style="margin:6px 0 12px"><input type="checkbox" id="vAtiva"><span>Mostrar a promoção no topo</span></label>
+        <h3>Carrossel de promoções</h3>
+        <p class="dica">Faixa compacta no topo da página, passando sozinha pelos pacotes ativos. Ao tocar, a cliente vai para o serviço do pacote e agenda a 1ª sessão.</p>
+        <label class="chk" style="margin:6px 0 12px"><input type="checkbox" id="vAtiva"><span>Mostrar o carrossel</span></label>
         <label for="vEtiqueta">Etiqueta</label>
         <input id="vEtiqueta" placeholder="Promoção">
-        <label for="vTitulo">Título</label>
+        <label for="vTitulo">Título da página "Ver todas"</label>
         <input id="vTitulo" placeholder="Pacotes e promoções">
-        <label for="vChamada">Chamada</label>
+        <label for="vChamada">Chamada da página "Ver todas"</label>
         <input id="vChamada" placeholder="Resultados melhores vêm com constância.">
-        <label for="vFoto">Foto do topo</label>
-        <input type="file" id="vFoto" accept="image/*">
-        <div class="envio" id="vEnvio"></div>
-        <img class="miniatura" id="vMini" alt="Prévia da foto do topo">
-        <button class="btn vazado mini" id="vRemFoto" style="margin-top:8px;display:none">Remover foto</button>
+        <div style="display:none">
+          <input type="file" id="vFoto" accept="image/*">
+          <div class="envio" id="vEnvio"></div>
+          <img class="miniatura" id="vMini" alt="">
+          <button class="btn vazado mini" id="vRemFoto">Remover foto</button>
+        </div>
       </div>
       <div class="bloco">
         <h3>Pacotes oferecidos</h3>
-        <p class="dica">A cliente toca no pacote e fala com você pelo WhatsApp. O fechamento é feito por lá.</p>
+        <p class="dica">Escolha o <b>serviço</b> de cada pacote: é isso que ativa o botão "Promoção de pacote" na página do serviço. Pacote sem serviço continua indo para o WhatsApp.</p>
         <div id="listaPacEdit"></div>
         <button class="btn vazado mini" id="btnAddPac" style="margin-top:8px">Adicionar pacote</button>
       </div>
@@ -636,11 +703,11 @@ const PADRAO = {
   ],
   outrosAtivo:true,
   modelos:[
-    {id:'pequenas', nome:'Pequenas Áreas', descricao:'', duracao:30, icone:'gota',    precos:{}},
-    {id:'medias',   nome:'Médias Áreas',   descricao:'', duracao:45, icone:'folha',   precos:{}},
-    {id:'grandes',  nome:'Grandes Áreas',  descricao:'', duracao:60, icone:'estrela', precos:{}}
+    {id:'pequenas', nome:'Pequenas Áreas', descricao:'', texto:'', infos:'', imagem:'', duracao:30, icone:'gota',    precos:{}},
+    {id:'medias',   nome:'Médias Áreas',   descricao:'', texto:'', infos:'', imagem:'', duracao:45, icone:'folha',   precos:{}},
+    {id:'grandes',  nome:'Grandes Áreas',  descricao:'', texto:'', infos:'', imagem:'', duracao:60, icone:'estrela', precos:{}}
   ],
-  avaliacao:{ ativa:true, duracao:30, procedimentos:['Limpeza de pele','Peeling','Tratamento de melasma','Micro-vasos'] },
+  avaliacao:{ ativa:true, duracao:30, texto:'', procedimentos:['Limpeza de pele','Peeling','Tratamento de melasma','Micro-vasos'] },
   vitrine:{ ativa:true, etiqueta:'Promoção', titulo:'Pacotes e promoções', chamada:'Resultados melhores vêm com constância.', imagem:'' }
 };
 
@@ -664,6 +731,7 @@ const hhmm = s => String(s).slice(0,5);
 const extenso = s => { const d=doYmd(s); return DIAS_CURTO[d.getDay()]+', '+d.getDate()+' de '+MESES[d.getMonth()]; };
 const dinheiro = n => Number(n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const esc = s => String(s||'').replace(/"/g,'&quot;');
+const escH = s => String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 function pascoa(ano){
   const a=ano%19, b=Math.floor(ano/100), c=ano%100, d=Math.floor(b/4), e=b%4,
@@ -850,87 +918,215 @@ function seguirComServico(proc){
   mesVisivel = somaDias(hoje(), Number(cfg.janela.minDias));
   desenharCalendario(); irPara(2);
 }
-function desenharProcedimentos(){
-  const regs = regioesVisiveis();
-  if(sel.regiao && !regs.some(r=>r.id===sel.regiao.id)) sel.regiao = null;
-  $('listaRegioes').innerHTML = regs.map(r=>`
-    <button class="reg ${sel.regiao&&sel.regiao.id===r.id?'sel':''}" data-reg="${r.id}">${r.nome}${avaliacaoLiberada(r)?'<span class="gratis">avaliação grátis</span>':''}</button>`).join('');
-  $('listaRegioes').querySelectorAll('[data-reg]').forEach(b=>{
-    b.onclick = () => {
-      sel.regiao = regs.find(r=>r.id===b.dataset.reg);
-      desenharProcedimentos();
-      setTimeout(()=>{ (sel.regiao.id==='outros'?$('outrosBox'):$('blocoServicos')).scrollIntoView({behavior:'smooth',block:'start'}); }, 30);
-    };
+let servicoAberto = null;   // id do serviço, 'avaliacao' ou null
+let pacoteFoco = null, avProc = null, mostrarPacotes = false;
+const servicosVisiveis = () => cfg.modelos.filter(m=>m.nome);
+const avaliacaoNaVitrine = () => cfg.avaliacao.ativa && cfg.avaliacao.procedimentos.length && regioesComAvaliacao().length;
+const pacotesDoServico = id => pacotesAtivos().filter(p=>p.servico===id);
+const numPreco = t => { const n = Number(String(t).replace(/[^\d,.]/g,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.')); return isFinite(n)&&n>0 ? n : null; };
+function aPartirDe(m){
+  const ns = regioesVisiveis().map(r=>numPreco(precoDe(m,r.id))).filter(n=>n!==null);
+  return ns.length ? Math.min(...ns) : null;
+}
+function lerInfos(txt){
+  return String(txt||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
+    const i = l.indexOf(':');
+    return i>0 ? { r:l.slice(0,i).trim(), v:l.slice(i+1).trim() } : { r:'', v:l };
   });
-  $('outrosBox').style.display = sel.regiao && sel.regiao.id==='outros' ? '' : 'none';
-  $('blocoServicos').style.display = sel.regiao ? '' : 'none';
+}
+function abrirServico(id, pacId){
+  servicoAberto = id; pacoteFoco = pacId||null; mostrarPacotes = !!pacId; avProc = null;
+  $('erroDet').textContent = '';
+  desenharProcedimentos(); irPara(1);
+}
+function fecharServico(){ servicoAberto = null; desenharProcedimentos(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function desenharProcedimentos(){
+  const noDetalhe = !!servicoAberto && (servicoAberto==='avaliacao' ? avaliacaoNaVitrine() : cfg.modelos.some(m=>m.id===servicoAberto));
+  if(!noDetalhe) servicoAberto = null;
+  $('vHome').style.display = noDetalhe ? 'none' : '';
+  $('vDetalhe').style.display = noDetalhe ? '' : 'none';
   desenharBanner();
-  if(!sel.regiao) return;
+  if(noDetalhe) desenharDetalhe(); else desenharHome();
+}
 
-  // avaliação gratuita
-  const av = cfg.avaliacao;
-  if(avaliacaoLiberada(sel.regiao)){
-    $('blocoAvaliacao').innerHTML = `<div class="aval">
-      <span class="promo-tag">Grátis</span>
-      <div class="aval-tit">Avaliação gratuita</div>
-      <div class="aval-sub">Escolha o que você quer avaliar · ${av.duracao} min</div>
-      <div class="aval-ops">${av.procedimentos.map((p,i)=>`<button class="aval-op" data-av="${i}">${p}</button>`).join('')}</div>
-    </div>`;
-    $('blocoAvaliacao').querySelectorAll('[data-av]').forEach(b=>{
-      b.onclick = () => seguirComServico({
-        tipo:'avaliacao', gratis:true, preco:'', duracao:Number(av.duracao)||30,
-        nome:'Avaliação gratuita — '+av.procedimentos[Number(b.dataset.av)]+' · '+nomeRegiaoSel()
-      });
-    });
-  } else {
-    const com = regioesComAvaliacao().map(r=>r.nome);
-    $('blocoAvaliacao').innerHTML = (av.ativa && com.length)
-      ? `<p class="aval-nota">Avaliação gratuita disponível, por enquanto, em ${com.join(', ').replace(/, ([^,]*)$/,' e $1')}.</p>` : '';
+function desenharHome(){
+  const mods = servicosVisiveis();
+  let html = '';
+  if(avaliacaoNaVitrine()){
+    html += `<button class="item item-av" data-serv="avaliacao">
+      <span class="gratis-tag">Grátis</span>
+      <span class="item-nome">Avaliação gratuita</span>
+      <span class="item-meta">${cfg.avaliacao.duracao} min</span>
+      <span class="item-preco">Ver detalhes ›</span>
+    </button>`;
   }
-
-  // modelos de atendimento
-  $('legServicos').textContent = 'Valores para '+sel.regiao.nome+'. O pagamento é feito no dia do atendimento.';
-  const mods = cfg.modelos.filter(m=>m.nome);
-  if(!mods.length){
-    $('listaProc').innerHTML = '<div class="vazio-msg" style="grid-column:1/-1">Nenhum atendimento cadastrado ainda.</div>';
-    return;
-  }
-  $('listaProc').innerHTML = mods.map(m=>{
-    const p = precoDe(m, sel.regiao.id);
-    return `<button class="item" data-mod="${m.id}">
+  html += mods.map(m=>{
+    const min = aPartirDe(m), temPac = pacotesDoServico(m.id).length>0;
+    return `<button class="item" data-serv="${m.id}">
       <span class="medalha">${ICONES[m.icone]||ICONES.estrela}</span>
-      <span class="item-nome">${m.nome}</span>
-      ${m.descricao?`<span class="item-desc">${m.descricao}</span>`:''}
-      <span class="item-meta">${m.duracao} min</span>
-      <span class="item-preco">${p ? 'R$ '+p : 'sob consulta'}</span>
+      <span class="item-nome">${escH(m.nome)}</span>
+      ${m.descricao?`<span class="item-desc">${escH(m.descricao)}</span>`:''}
+      <span class="item-meta">${m.duracao} min${temPac?' · tem pacote':''}</span>
+      <span class="item-preco">${min!==null ? 'a partir de R$ '+dinheiro(min) : 'Ver detalhes ›'}</span>
     </button>`;
   }).join('');
-  $('listaProc').querySelectorAll('[data-mod]').forEach(b=>{
-    b.onclick = () => {
-      const m = mods.find(x=>x.id===b.dataset.mod);
-      seguirComServico({ tipo:'modelo', preco:precoDe(m, sel.regiao.id), duracao:Number(m.duracao)||60,
-        nome:m.nome+' · '+nomeRegiaoSel() });
-    };
+  $('listaProc').innerHTML = html || '<div class="vazio-msg" style="grid-column:1/-1">Nenhum serviço cadastrado ainda.</div>';
+  $('listaProc').querySelectorAll('[data-serv]').forEach(b=>{ b.onclick = () => abrirServico(b.dataset.serv); });
+}
+
+function desenharDetalhe(){
+  const ehAv = servicoAberto==='avaliacao';
+  const m = ehAv ? null : cfg.modelos.find(x=>x.id===servicoAberto);
+  const av = cfg.avaliacao;
+  const nome = ehAv ? 'Avaliação gratuita' : m.nome;
+  const texto = ehAv ? (av.texto || 'Uma conversa sem compromisso para entender a sua pele e indicar o tratamento certo para você.') : (m.texto || m.descricao || '');
+  const img = ehAv ? '' : (m.imagem||'');
+  $('detNome').textContent = nome;
+  $('detTexto').textContent = texto;
+  $('detTexto').style.display = texto ? '' : 'none';
+  $('detFoto').style.display = img ? 'block' : 'none';
+  if(img) $('detFoto').src = img;
+
+  const infos = [{r:'Duração', v:(ehAv?av.duracao:m.duracao)+' min'}]
+    .concat(ehAv ? [{r:'Valor', v:'Gratuita'}] : lerInfos(m.infos));
+  $('detInfos').innerHTML = infos.map(i=>`<div class="det-info">${i.r?`<small>${escH(i.r)}</small>`:''}<b>${escH(i.v)}</b></div>`).join('');
+
+  // procedimentos da avaliação
+  $('detAvBox').style.display = ehAv ? '' : 'none';
+  if(ehAv){
+    $('detAvOps').innerHTML = av.procedimentos.map((p,i)=>`<button class="aval-op ${avProc===i?'sel':''}" data-av="${i}">${escH(p)}</button>`).join('');
+    $('detAvOps').querySelectorAll('[data-av]').forEach(b=>{ b.onclick = () => { avProc = Number(b.dataset.av); $('erroDet').textContent=''; desenharDetalhe(); }; });
+  }
+
+  // regiões
+  const regs = ehAv ? regioesComAvaliacao() : regioesVisiveis();
+  const regSel = sel.regiao && regs.some(r=>r.id===sel.regiao.id) ? sel.regiao : null;
+  $('detLegReg').textContent = ehAv ? 'Por enquanto, a avaliação gratuita é feita nestas regiões.' : 'O valor pode variar conforme a região.';
+  $('listaRegioes').innerHTML = regs.map(r=>`<button class="reg ${regSel&&regSel.id===r.id?'sel':''}" data-reg="${r.id}">${escH(r.nome)}</button>`).join('');
+  $('listaRegioes').querySelectorAll('[data-reg]').forEach(b=>{
+    b.onclick = () => { sel.regiao = regs.find(r=>r.id===b.dataset.reg); $('erroDet').textContent=''; desenharDetalhe(); };
   });
+  $('outrosBox').style.display = regSel && regSel.id==='outros' ? '' : 'none';
+  if(ehAv || !regSel){ $('detPreco').textContent = ''; }
+  else {
+    const p = precoDe(m, regSel.id);
+    $('detPreco').innerHTML = 'Sessão avulsa em '+escH(regSel.nome)+': <b>'+(p ? 'R$ '+escH(p) : 'sob consulta')+'</b>';
+  }
+
+  // botões
+  $('btnAgendarSessao').textContent = ehAv ? 'Agende sua avaliação' : 'Agende sua sessão';
+  const pacs = ehAv ? [] : pacotesDoServico(m.id);
+  $('btnPacote').style.display = ehAv ? 'none' : '';
+  $('btnPacote').disabled = !pacs.length;
+  if(!pacs.length){
+    $('btnPacote').innerHTML = 'Promoção de pacote<small>Nenhum pacote disponível no momento</small>';
+  } else if(pacs.length===1){
+    const p = pacs[0];
+    $('btnPacote').innerHTML = 'Promoção de pacote<small>'+p.sessoes+' sessões'+(p.precoPacote?' por R$ '+dinheiro(p.precoPacote):'')+' · agende a 1ª sessão</small>';
+  } else {
+    $('btnPacote').innerHTML = 'Promoção de pacote<small>'+pacs.length+' opções · toque para escolher</small>';
+  }
+  $('pacOpcoes').style.display = pacs.length>1 && mostrarPacotes ? '' : 'none';
+  $('pacOpcoes').innerHTML = pacs.map(p=>`
+    <button class="pac-op ${pacoteFoco===p.id?'foco':''}" data-pacop="${p.id}">
+      <b>${escH(p.nome)}</b>
+      <span>${p.sessoes} sessões${p.precoPacote?' por R$ '+dinheiro(p.precoPacote):''}${p.descricao?' · '+escH(p.descricao):''}${p.validade?' · até '+extenso(p.validade):''}</span>
+    </button>`).join('');
+  $('pacOpcoes').querySelectorAll('[data-pacop]').forEach(b=>{ b.onclick = () => agendarPacote(pacs.find(p=>p.id===b.dataset.pacop)); });
+  $('btnPacote').onclick = () => {
+    if(pacs.length===1) return agendarPacote(pacs[0]);
+    mostrarPacotes = !mostrarPacotes; desenharDetalhe();
+  };
+  $('detNota').textContent = ehAv
+    ? 'A avaliação é gratuita e sem compromisso.'
+    : (pacs.length ? 'Em qualquer opção você agenda agora só a 1ª sessão. As próximas são combinadas com a Jamile.' : 'Aqui você agenda uma sessão. As próximas são combinadas com a Jamile.');
+}
+
+function regiaoOkDet(){
+  const ehAv = servicoAberto==='avaliacao';
+  const regs = ehAv ? regioesComAvaliacao() : regioesVisiveis();
+  if(!sel.regiao || !regs.some(r=>r.id===sel.regiao.id)){
+    $('erroDet').textContent = 'Escolha onde você quer ser atendida.';
+    $('listaRegioes').scrollIntoView({behavior:'smooth',block:'center'});
+    return false;
+  }
+  return outraRegiaoOk();
+}
+function agendarSessao(){
+  const ehAv = servicoAberto==='avaliacao';
+  if(ehAv && avProc===null){
+    $('erroDet').textContent = 'Escolha o que você quer avaliar.';
+    $('detAvOps').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  if(!regiaoOkDet()) return;
+  if(ehAv){
+    const av = cfg.avaliacao;
+    return seguirComServico({ tipo:'avaliacao', gratis:true, preco:'', duracao:Number(av.duracao)||30,
+      nome:'Avaliação gratuita — '+av.procedimentos[avProc]+' · '+nomeRegiaoSel() });
+  }
+  const m = cfg.modelos.find(x=>x.id===servicoAberto);
+  seguirComServico({ tipo:'modelo', preco:precoDe(m, sel.regiao.id), duracao:Number(m.duracao)||60,
+    nome:m.nome+' · '+nomeRegiaoSel() });
+}
+function agendarPacote(p){
+  if(!p) return;
+  pacoteFoco = p.id;
+  if(!regiaoOkDet()) return;
+  const m = cfg.modelos.find(x=>x.id===servicoAberto);
+  seguirComServico({ tipo:'pacote', preco: p.precoPacote ? String(p.precoPacote) : '',
+    duracao:Number(m.duracao)||60,
+    valorTexto: p.precoPacote ? 'R$ '+dinheiro(p.precoPacote)+' (pacote com '+p.sessoes+' sessões)' : 'Pacote — valor sob consulta',
+    nome:'Pacote '+p.nome+' — 1ª sessão · '+nomeRegiaoSel() });
 }
 
 const pacoteValido = p => !p.validade || p.validade >= ymd(hoje());
 const pacotesAtivos = () => (cfg.pacotes||[]).filter(p=>p.nome && pacoteValido(p));
 
+let carTimer = null, carPausa = 0;
+const semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function desenharBanner(){
-  const ativos = pacotesAtivos();
-  const mostra = cfg.vitrine.ativa && ativos.length > 0;
-  $('promoBanner').classList.toggle('on', mostra);
+  const ativos = pacotesAtivos().slice().sort((a,b)=>(b.destaque?1:0)-(a.destaque?1:0));
+  const mostra = cfg.vitrine.ativa && ativos.length > 0 && !servicoAberto;
+  $('carWrap').classList.toggle('on', mostra);
+  clearInterval(carTimer);
   if(!mostra) return;
-  $('promoTag').textContent = cfg.vitrine.etiqueta || 'Promoção';
-  $('promoTag').style.display = (cfg.vitrine.etiqueta===''?'none':'inline-block');
-  $('promoTit').textContent = cfg.vitrine.titulo || 'Pacotes e promoções';
-  $('promoSub').textContent = cfg.vitrine.chamada || (ativos.length + (ativos.length===1?' oferta disponível':' ofertas disponíveis'));
-  if(cfg.vitrine.imagem){
-    $('promoFoto').src = cfg.vitrine.imagem;
-    $('promoFoto').style.display = 'block';
-  } else {
-    $('promoFoto').style.display = 'none';
+  $('carTit').textContent = ativos.length>1 ? 'Promoções' : 'Promoção';
+  const car = $('carrossel');
+  car.classList.toggle('um', ativos.length===1);
+  car.innerHTML = ativos.map(p=>{
+    const serv = cfg.modelos.find(m=>m.id===p.servico && m.nome);
+    return `<button class="slide" data-slide="${p.id}">
+      ${p.imagem ? `<img src="${esc(p.imagem)}" alt="">` : `<span class="sl-ico">${serv?(ICONES[serv.icone]||ICONES.estrela):ICONES.estrela}</span>`}
+      <span class="sl-txt">
+        <span class="sl-tag">${escH(cfg.vitrine.etiqueta||'Promoção')}</span>
+        <span class="sl-nome">${escH(p.nome)}</span>
+        <span class="sl-info">${p.sessoes} ${Number(p.sessoes)===1?'sessão':'sessões'}${p.precoPacote?' por <b>R$ '+dinheiro(p.precoPacote)+'</b>':''}</span>
+      </span>
+      <span class="sl-seta">›</span>
+    </button>`;
+  }).join('');
+  $('carPontos').innerHTML = ativos.length>1 ? ativos.map((_,i)=>`<i class="${i===0?'on':''}"></i>`).join('') : '';
+  car.querySelectorAll('[data-slide]').forEach(b=>{
+    b.onclick = () => {
+      const p = ativos.find(x=>x.id===b.dataset.slide);
+      if(p && cfg.modelos.some(m=>m.id===p.servico && m.nome)) abrirServico(p.servico, p.id);
+      else { desenharVitrine(); irParaExtra('telaVitrine'); }
+    };
+  });
+  const indice = () => { const w = car.firstElementChild ? car.firstElementChild.offsetWidth + 10 : 1; return Math.round(car.scrollLeft / w); };
+  car.onscroll = () => { const i = indice(); $('carPontos').querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on', k===i)); };
+  const pausar = () => { carPausa = Date.now() + 9000; };
+  car.onpointerdown = pausar; car.ontouchstart = pausar; car.onwheel = pausar;
+  car.scrollLeft = 0;
+  if(ativos.length>1 && !semAnimacao){
+    carTimer = setInterval(()=>{
+      if(Date.now() < carPausa || document.hidden || !$('carWrap').classList.contains('on') || passo!==1) return;
+      const w = car.firstElementChild.offsetWidth + 10;
+      const prox = (indice()+1) % ativos.length;
+      car.scrollTo({ left: prox*w, behavior:'smooth' });
+    }, 4200);
   }
 }
 
@@ -957,10 +1153,15 @@ function desenharVitrine(){
           ${economia ? `<span class="economia">economize R$ ${dinheiro(economia)}</span>`:''}
         </div>
         ${p.validade?`<div class="pacote-val">Oferta válida até ${extenso(p.validade)}</div>`:''}
-        <button class="btn zap" data-pac="${p.id}">Quero este pacote</button>
+        ${cfg.modelos.some(m=>m.id===p.servico && m.nome)
+          ? `<button class="btn" data-agpac="${p.id}">Agendar a 1ª sessão</button>`
+          : `<button class="btn zap" data-pac="${p.id}">Quero este pacote</button>`}
       </div>
     </div>`;
   }).join('');
+  $('listaPacotes').querySelectorAll('[data-agpac]').forEach(b=>{
+    b.onclick = () => { const p = ativos.find(x=>x.id===b.dataset.agpac); abrirServico(p.servico, p.id); };
+  });
   $('listaPacotes').querySelectorAll('[data-pac]').forEach(b=>{
     b.onclick = () => {
       const p = ativos.find(x=>x.id===b.dataset.pac);
@@ -1012,7 +1213,7 @@ function desenharResumoPre(){
   $('resumoPre').innerHTML =
     linha('Procedimento', sel.proc.nome) + linha('Dia', extenso(sel.data)) +
     linha('Horário', sel.hora+' — '+min2hm(hm2min(sel.hora)+sel.proc.duracao)) +
-    (sel.proc.gratis?linha('Valor','Gratuita'):sel.proc.preco?linha('Valor','R$ '+sel.proc.preco):'');
+    (sel.proc.valorTexto?linha('Valor',sel.proc.valorTexto):sel.proc.gratis?linha('Valor','Gratuita'):sel.proc.preco?linha('Valor','R$ '+sel.proc.preco):'');
 }
 const codigo = () => 'JB'+String(Date.now()).slice(-5)+Math.floor(Math.random()*9);
 
@@ -1388,19 +1589,48 @@ function desenharServicosEdit(){
   const colunas = cfg.regioes.filter(r=>r.nome).concat(cfg.outrosAtivo ? [OUTROS] : []);
   $('listaModEdit').innerHTML = cfg.modelos.map((m,i)=>`
     <div class="pac-edit" data-i="${i}">
-      <label>Nome</label>
-      <input class="me-nome" value="${esc(m.nome)}">
-      <label>Descrição curta (opcional)</label>
-      <input class="me-desc" value="${esc(m.descricao)}" placeholder="Ex.: quais áreas entram neste modelo">
+      <label>Nome do serviço</label>
+      <input class="me-nome" value="${esc(m.nome)}" placeholder="Ex.: Limpeza de pele">
+      <label>Frase curta para a lista (opcional)</label>
+      <input class="me-desc" value="${esc(m.descricao)}" placeholder="Ex.: pele renovada e sem cravos">
+      <label>Texto da página de detalhes</label>
+      <textarea class="me-texto" style="min-height:110px" placeholder="Como funciona, para quem é indicado, resultados esperados, cuidados…">${escH(m.texto)}</textarea>
+      <label>Informações extras (uma por linha, no formato Rótulo: valor)</label>
+      <textarea class="me-infos" style="min-height:70px" placeholder="Sessões indicadas: 4 a 6&#10;Intervalo: 15 dias&#10;Indicado para: todos os tipos de pele">${escH(m.infos)}</textarea>
       <label>Duração (minutos)</label>
       <input class="me-dur" type="number" min="10" step="5" value="${m.duracao}">
+      <label>Foto da página (opcional)</label>
+      <input type="file" class="me-file" accept="image/*" data-i="${i}">
+      <div class="envio" data-menvio="${i}"></div>
+      <img class="miniatura ${m.imagem?'on':''}" data-mmini="${i}" src="${esc(m.imagem)}" alt="">
+      <input type="hidden" class="me-img" value="${esc(m.imagem)}">
       <label>Preço por região (R$)</label>
       ${colunas.map(r=>`<div class="preco-reg"><span>${r.nome}</span>
         <input class="me-preco" data-reg="${r.id}" inputmode="decimal" value="${esc(precoDe(m, r.id))}" placeholder="sob consulta"></div>`).join('')}
-    </div>`).join('');
+      <div class="acoes" style="margin-top:12px"><button class="btn vazado mini" data-remserv="${i}" style="flex:1">Remover serviço</button></div>
+    </div>`).join('') || '<p class="dica">Nenhum serviço cadastrado.</p>';
+  $('listaModEdit').querySelectorAll('[data-remserv]').forEach(b=>{
+    b.onclick = () => {
+      lerServicosEdit();
+      const m = cfg.modelos[Number(b.dataset.remserv)];
+      if(!confirm('Remover o serviço '+(m.nome||'')+'?')) return;
+      cfg.modelos.splice(Number(b.dataset.remserv),1); desenharServicosEdit();
+    };
+  });
+  $('listaModEdit').querySelectorAll('.me-file').forEach(inp=>{
+    inp.onchange = async () => {
+      const i = inp.dataset.i;
+      const url = await enviarImagem(inp.files[0], 'servico-'+i, $('listaModEdit').querySelector('[data-menvio="'+i+'"]'));
+      if(!url) return;
+      const caixa = inp.closest('.pac-edit');
+      caixa.querySelector('.me-img').value = url;
+      const mini = caixa.querySelector('[data-mmini]'); mini.src = url; mini.classList.add('on');
+    };
+  });
 
   $('sAvAtiva').checked = !!cfg.avaliacao.ativa;
   $('sAvDur').value = cfg.avaliacao.duracao;
+  $('sAvTexto').value = cfg.avaliacao.texto || '';
   $('sAvProcs').value = cfg.avaliacao.procedimentos.join('\n');
 }
 function lerServicosEdit(){
@@ -1414,15 +1644,22 @@ function lerServicosEdit(){
     return { id, nome, avaliacao:l.querySelector('.re-av').checked };
   });
   cfg.outrosAtivo = $('sOutros').checked;
-  [...$('listaModEdit').querySelectorAll('.pac-edit')].forEach((l,i)=>{
-    const m = cfg.modelos[i]; if(!m) return;
-    m.nome = l.querySelector('.me-nome').value.trim() || m.nome;
+  const linhasServ = [...$('listaModEdit').querySelectorAll('.pac-edit')];
+  cfg.modelos = linhasServ.map((l,i)=>{
+    const m = Object.assign({ id:'s'+Date.now()+i, icone:'estrela', precos:{} }, cfg.modelos[i]||{});
+    m.nome = l.querySelector('.me-nome').value.trim();
     m.descricao = l.querySelector('.me-desc').value.trim();
+    m.texto = l.querySelector('.me-texto').value.trim();
+    m.infos = l.querySelector('.me-infos').value.trim();
+    m.imagem = l.querySelector('.me-img').value || '';
     m.duracao = Math.max(10, Number(l.querySelector('.me-dur').value)||60);
+    m.precos = Object.assign({}, m.precos);
     l.querySelectorAll('.me-preco').forEach(inp=>{ m.precos[inp.dataset.reg] = inp.value.trim(); });
+    return m;
   });
   cfg.avaliacao = {
     ativa: $('sAvAtiva').checked,
+    texto: $('sAvTexto').value.trim(),
     duracao: Math.max(10, Number($('sAvDur').value)||30),
     procedimentos: $('sAvProcs').value.split('\n').map(t=>t.trim()).filter(Boolean)
   };
@@ -1450,6 +1687,11 @@ function desenharPacEdit(){
     <div class="pac-edit" data-i="${i}">
       <label>Nome do pacote</label>
       <input class="px-nome" value="${esc(p.nome)}" placeholder="Ex.: Limpeza de pele — 5 sessões">
+      <label>Serviço deste pacote</label>
+      <select class="px-serv">
+        <option value="">— nenhum (cliente fala pelo WhatsApp) —</option>
+        ${cfg.modelos.filter(m=>m.nome).map(m=>`<option value="${m.id}" ${p.servico===m.id?'selected':''}>${escH(m.nome)}</option>`).join('')}
+      </select>
       <label>Descrição curta (opcional)</label>
       <input class="px-desc" value="${esc(p.descricao)}" placeholder="Ex.: uma por semana">
       <div class="dupla">
@@ -1497,7 +1739,8 @@ function lerPacEdit(){
     precoAvulso: l.querySelector('.px-avulso').value ? Number(l.querySelector('.px-avulso').value) : '',
     precoPacote: l.querySelector('.px-pacote').value ? Number(l.querySelector('.px-pacote').value) : '',
     imagem: l.querySelector('.px-img').value||'',
-    destaque: l.querySelector('.px-dest').checked
+    destaque: l.querySelector('.px-dest').checked,
+    servico: l.querySelector('.px-serv').value || ''
   }));
 }
 function lerVitrineEdit(){
@@ -1541,7 +1784,18 @@ function mascaraTel(el){
 }
 
 /* ============ eventos ============ */
-$('promoBanner').onclick = () => { desenharVitrine(); irParaExtra('telaVitrine'); };
+$('carVer').onclick = () => { desenharVitrine(); irParaExtra('telaVitrine'); };
+$('detVoltar').onclick = fecharServico;
+$('btnAgendarSessao').onclick = agendarSessao;
+$('btnAddServ').onclick = () => {
+  lerServicosEdit();
+  const icones = ['rosto','gota','folha','estrela','maos','olho'];
+  cfg.modelos.push({ id:'s'+Date.now(), nome:'', descricao:'', texto:'', infos:'', imagem:'', duracao:60,
+    icone: icones[cfg.modelos.length % icones.length], precos:{} });
+  desenharServicosEdit();
+  const caixas = $('listaModEdit').querySelectorAll('.pac-edit');
+  caixas[caixas.length-1].scrollIntoView({behavior:'smooth',block:'center'});
+};
 $('vitVoltar').onclick = () => irPara(1);
 
 $('btnGestao').onclick = async () => {
@@ -1576,7 +1830,7 @@ $('mesProx').onclick = () => { mesVisivel = new Date(mesVisivel.getFullYear(), m
 $('btnConfirmar').onclick = confirmar;
 $('btnZap').onclick = () => { if(ultimo) window.open('https://wa.me/'+cfg.negocio.whatsapp+'?text='+textoZap(ultimo),'_blank'); };
 $('btnAgenda').onclick = () => { if(ultimo) baixarICS(ultimo); };
-$('btnNovo').onclick = () => { sel={proc:null,data:null,hora:null,regiao:sel.regiao}; desenharProcedimentos(); $('fNome').value=''; $('fTel').value=''; $('fObs').value=''; irPara(1); };
+$('btnNovo').onclick = () => { sel={proc:null,data:null,hora:null,regiao:sel.regiao}; servicoAberto=null; desenharProcedimentos(); $('fNome').value=''; $('fTel').value=''; $('fObs').value=''; irPara(1); };
 $('btnCSV').onclick = baixarCSV;
 $('btnPassados').onclick = () => { mostrarPassados = !mostrarPassados; desenharAgenda(); };
 $('btnBloq').onclick = () => {
@@ -1593,7 +1847,7 @@ $('btnAddReg').onclick = () => {
 $('fOutraRegiao').addEventListener('input', () => { $('erroOutra').textContent=''; });
 $('btnAddPac').onclick = () => {
   lerPacEdit();
-  cfg.pacotes.push({id:'pac'+Date.now(),nome:'',descricao:'',sessoes:5,validade:'',precoAvulso:'',precoPacote:'',imagem:'',destaque:false});
+  cfg.pacotes.push({id:'pac'+Date.now(),nome:'',descricao:'',sessoes:5,validade:'',precoAvulso:'',precoPacote:'',imagem:'',destaque:false,servico:''});
   desenharPacEdit();
 };
 $('vFoto').onchange = async () => {
@@ -1620,7 +1874,7 @@ $('btnSalvarProc').onclick = async e => {
   const erro = await salvarConfig(); e.target.disabled=false;
   $('erroProc').textContent = erro?'Não salvou: '+erro:'';
   e.target.textContent = erro?'Não salvou':'Salvo ✓';
-  if(!erro) desenharProcedimentos();
+  if(!erro){ desenharProcedimentos(); }
   setTimeout(()=>{ e.target.textContent='Salvar alterações'; },1800);
 };
 $('btnSalvarPac').onclick = async e => {
@@ -1628,7 +1882,7 @@ $('btnSalvarPac').onclick = async e => {
   const erro = await salvarConfig(); e.target.disabled=false;
   $('erroPac').textContent = erro?'Não salvou: '+erro:'';
   e.target.textContent = erro?'Não salvou':'Salvo ✓';
-  if(!erro){ $('vEnvio').textContent=''; desenharBanner(); }
+  if(!erro){ $('vEnvio').textContent=''; desenharProcedimentos(); }
   setTimeout(()=>{ e.target.textContent='Salvar alterações'; },1800);
 };
 $('regrasVoltar').onclick = () => irPara(1);
@@ -1641,6 +1895,7 @@ document.querySelectorAll('.aba').forEach(a => a.onclick = () => {
   $('abaRegras').style.display        = a.dataset.aba==='regras'?'':'none';
   $('abaProcedimentos').style.display = a.dataset.aba==='procedimentos'?'':'none';
   $('abaPacotes').style.display       = a.dataset.aba==='pacotes'?'':'none';
+  if(a.dataset.aba==='pacotes'){ lerPacEdit(); desenharPacEdit(); }
 });
 mascaraTel($('fTel')); mascaraTel($('cTel')); mascaraTel($('nTel'));
 
