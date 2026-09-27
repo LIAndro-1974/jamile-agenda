@@ -412,6 +412,39 @@ body.car-fixo main{padding-bottom:118px}
   .car-wrap .sl-nome{font-size:18px}
   body.car-fixo main{padding-bottom:130px}
 }
+
+/* ================= AJUSTES FINOS 2 ================= */
+header{padding:12px 52px 4px 0}
+#vHome h1{text-align:right;font-size:21px;margin:0 0 12px}
+#vHome h1 + .legenda{display:none}
+/* faixa do carrossel em chocolate, mais estreita */
+.car-wrap.on{padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px));background:rgba(74,47,38,.97);
+  -webkit-backdrop-filter:none;backdrop-filter:none;border-top:0;box-shadow:0 -8px 24px rgba(74,47,38,.25)}
+.car-wrap .car-topo{position:absolute;right:16px;top:-24px;margin:0;padding:4px 12px 3px;gap:12px;max-width:none;
+  background:rgba(74,47,38,.97);border-radius:10px 10px 0 0}
+.car-wrap .car-tit{color:#F2C3D1;font-size:9px}
+.car-wrap .car-ver{color:#fff;font-size:11.5px}
+.car-wrap .slide{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);box-shadow:none;padding:5px 8px 5px 5px;border-radius:12px}
+.car-wrap .slide img,.car-wrap .sl-ico{width:36px;height:36px;flex-basis:36px;border-radius:9px}
+.car-wrap .sl-ico{background:rgba(255,255,255,.12);color:#F6C9D6}
+.car-wrap .sl-txt{display:flex;flex-direction:column}
+.car-wrap .sl-nome{color:#FFF6F2;font-size:15px}
+.car-wrap .sl-info{color:rgba(255,236,242,.8);font-size:11.5px}
+.car-wrap .sl-info b{color:#F6B9CB}
+.car-wrap .sl-seta{background:#D27E94;color:#fff;flex-basis:24px;height:24px}
+.car-wrap .carrossel{-webkit-mask-image:none;mask-image:none}
+body.car-fixo main{padding-bottom:90px}
+@media (min-width:900px){
+  header{padding:18px 60px 0 0}
+  #vHome h1{font-size:30px;margin:-40px 0 18px auto;max-width:55%}
+  .car-wrap .car-topo{right:max(40px, calc((100vw - 1180px)/2 + 40px))}
+  .car-wrap .carrossel{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+  .car-wrap .slide img,.car-wrap .sl-ico{width:40px;height:40px;flex-basis:40px}
+  .car-wrap .sl-txt{flex-direction:row;align-items:baseline;gap:14px}
+  .car-wrap .sl-nome{font-size:17px}
+  .car-wrap .sl-info{font-size:12.5px}
+  body.car-fixo main{padding-bottom:96px}
+}
 </style>
 </head>
 <body>
