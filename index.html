@@ -133,6 +133,8 @@ textarea{min-height:80px;resize:vertical}
 footer{margin-top:38px;text-align:center;font-size:13px;color:rgba(62,42,32,.6)}
 footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-items:center;gap:7px;margin:0 9px}
 .frase{font-family:var(--display);font-size:17px;color:var(--cacau);margin-bottom:14px}
+.link-senha{display:block;margin:18px auto 0;font-size:13px;color:var(--bronze-esc);background:none;border:0;cursor:pointer;font-family:inherit;text-decoration:underline}
+.ok-msg{color:var(--ok);font-size:13.5px;margin-top:10px}
 .link-cancelar{display:block;margin-top:18px;font-size:12.5px;color:rgba(62,42,32,.55);background:none;border:0;cursor:pointer;font-family:inherit;width:100%;text-decoration:underline}
 
 .tela{display:none}
@@ -385,6 +387,35 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       <button class="btn vazado" id="loginVoltar">Voltar</button>
       <button class="btn" id="loginEntrar">Entrar</button>
     </div>
+    <button class="link-senha" id="btnEsqueci">Esqueci minha senha</button>
+  </section>
+
+  <!-- ================= ESQUECI A SENHA ================= -->
+  <section class="tela" id="telaEsqueci">
+    <h2>Recuperar senha</h2>
+    <p class="legenda">Informe o e-mail da sua conta. Você vai receber um link para criar uma senha nova.</p>
+    <label for="rEmail">E-mail</label>
+    <input id="rEmail" type="email" autocomplete="username" placeholder="seu@email.com">
+    <div class="erro" id="erroEsqueci"></div>
+    <div class="acoes">
+      <button class="btn vazado" id="esqueciVoltar">Voltar</button>
+      <button class="btn" id="btnEnviarLink">Enviar link</button>
+    </div>
+    <div class="aviso">Não chegou? Olhe a caixa de spam e espere alguns minutos antes de pedir de novo.</div>
+  </section>
+
+  <!-- ================= NOVA SENHA ================= -->
+  <section class="tela" id="telaNovaSenha">
+    <h2>Criar senha nova</h2>
+    <p class="legenda">Escolha uma senha com pelo menos 8 caracteres.</p>
+    <label for="nsSenha">Nova senha</label>
+    <input id="nsSenha" type="password" autocomplete="new-password" placeholder="••••••••">
+    <label for="nsConf">Repita a nova senha</label>
+    <input id="nsConf" type="password" autocomplete="new-password" placeholder="••••••••">
+    <div class="erro" id="erroNovaSenha"></div>
+    <div class="acoes">
+      <button class="btn" id="btnSalvarSenha">Salvar senha</button>
+    </div>
   </section>
 
   <!-- ================= GESTÃO ================= -->
@@ -556,7 +587,14 @@ const SUPABASE_URL  = 'https://ifemczgjdxwcfrxzlrlh.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZW1jemdqZHh3Y2ZyeHpscmxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwOTI5NjYsImV4cCI6MjEwMzY2ODk2Nn0.dWBxSGIHodCzLp5m_luECGAV8lHmOieQML8rcbaxyn8';
 const BUCKET = 'pacotes';
 
+const HASH_INICIAL = location.hash || '';
+const VEIO_DA_RECUPERACAO = /type=recovery/.test(HASH_INICIAL);
+const LINK_EXPIRADO = /error_code=otp_expired|error=access_denied/.test(HASH_INICIAL);
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+let emRecuperacao = VEIO_DA_RECUPERACAO;
+db.auth.onAuthStateChange(ev => {
+  if(ev === 'PASSWORD_RECOVERY'){ emRecuperacao = true; abrirNovaSenha(); }
+});
 
 const ICONES = {
   rosto:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3c4 0 6.5 2.6 6.5 6.4 0 4.6-3 11.6-6.5 11.6S5.5 14 5.5 9.4C5.5 5.6 8 3 12 3z"/><circle cx="9.6" cy="10" r=".7" fill="currentColor"/><circle cx="14.4" cy="10" r=".7" fill="currentColor"/></svg>',
@@ -760,7 +798,7 @@ const temVaga = (d,dur) => horariosLivres(d,dur).length>0;
 
 /* ============ navegação ============ */
 const $ = id => document.getElementById(id);
-const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado','telaVitrine'];
+const EXTRAS = ['telaLogin','telaGestao','telaCancelar','telaCancelado','telaVitrine','telaEsqueci','telaNovaSenha'];
 function irPara(n){
   passo = n;
   EXTRAS.forEach(t=>$(t).classList.remove('ativa'));
@@ -1079,6 +1117,55 @@ async function abrirGestao(){
   desenharAgenda(); desenharServicosEdit(); preencherVitrineEdit(); desenharPacEdit();
   atualizarAlertaCancel();
 }
+/* ---- recuperação de senha ---- */
+const URL_RETORNO = location.origin + location.pathname;
+function abrirEsqueci(){
+  $('rEmail').value = $('fEmail').value.trim();
+  $('erroEsqueci').className = 'erro'; $('erroEsqueci').textContent = '';
+  irParaExtra('telaEsqueci');
+}
+async function enviarLinkSenha(){
+  const email = $('rEmail').value.trim(), msg = $('erroEsqueci');
+  msg.className = 'erro';
+  if(!/^\S+@\S+\.\S+$/.test(email)){ msg.textContent = 'Informe um e-mail válido.'; return; }
+  msg.textContent = 'Enviando…'; $('btnEnviarLink').disabled = true;
+  const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo: URL_RETORNO });
+  $('btnEnviarLink').disabled = false;
+  if(error){
+    msg.textContent = /rate|seconds|limit/i.test(error.message)
+      ? 'Muitos pedidos seguidos. Espere alguns minutos e tente de novo.'
+      : 'Não foi possível enviar: ' + error.message;
+    return;
+  }
+  msg.className = 'ok-msg';
+  msg.textContent = 'Pronto! Se este e-mail tiver conta, o link chega em instantes. Abra-o neste mesmo aparelho.';
+}
+function abrirNovaSenha(){
+  if(!$('telaNovaSenha')) return;
+  $('carregando').style.display = 'none';
+  $('nsSenha').value = ''; $('nsConf').value = ''; $('erroNovaSenha').textContent = '';
+  irParaExtra('telaNovaSenha');
+}
+async function salvarNovaSenha(){
+  const a = $('nsSenha').value, b = $('nsConf').value, err = $('erroNovaSenha');
+  if(a.length < 8){ err.textContent = 'A senha precisa ter pelo menos 8 caracteres.'; return; }
+  if(a !== b){ err.textContent = 'As duas senhas não são iguais.'; return; }
+  err.textContent = 'Salvando…'; $('btnSalvarSenha').disabled = true;
+  const { error } = await db.auth.updateUser({ password: a });
+  $('btnSalvarSenha').disabled = false;
+  if(error){
+    err.textContent = /session|expired|missing/i.test(error.message)
+      ? 'O link expirou. Volte e peça um novo em "Esqueci minha senha".'
+      : 'Não foi possível salvar: ' + error.message;
+    return;
+  }
+  emRecuperacao = false;
+  history.replaceState(null, '', URL_RETORNO);
+  err.textContent = '';
+  alert('Senha alterada com sucesso!');
+  await abrirGestao();
+}
+
 async function sair(){ await db.auth.signOut(); agendamentos=[]; atualizarSino(); irPara(1); }
 
 const novosCancelamentos = () => agendamentos.filter(a=>a.status==='cancelado' && a.visto_pela_gestora===false);
@@ -1440,6 +1527,11 @@ $('btnGestao').onclick = async () => {
 };
 $('loginVoltar').onclick = () => irPara(1);
 $('loginEntrar').onclick = entrar;
+$('btnEsqueci').onclick = abrirEsqueci;
+$('esqueciVoltar').onclick = abrirLogin;
+$('btnEnviarLink').onclick = enviarLinkSenha;
+$('btnSalvarSenha').onclick = salvarNovaSenha;
+$('nsConf').addEventListener('keydown', e => { if(e.key==='Enter') salvarNovaSenha(); });
 $('fSenha').addEventListener('keydown', e => { if(e.key==='Enter') entrar(); });
 $('btnSair').onclick = sair;
 $('btnVistos').onclick = marcarVistos;
@@ -1540,6 +1632,13 @@ mascaraTel($('fTel')); mascaraTel($('cTel')); mascaraTel($('nTel'));
   $('carregando').style.display='none';
   $('app').style.display='';
   desenharProcedimentos(); desenharRodape(); irPara(1);
+  if(emRecuperacao){ abrirNovaSenha(); return; }
+  if(LINK_EXPIRADO){
+    history.replaceState(null, '', location.origin + location.pathname);
+    abrirLogin();
+    $('erroLogin').textContent = 'Esse link de recuperação expirou ou já foi usado. Toque em "Esqueci minha senha" para receber outro.';
+    return;
+  }
   const { data:{ session } } = await db.auth.getSession();
   if(session){ await carregarAgendamentos(); atualizarSino(); }
 })();
