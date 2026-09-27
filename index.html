@@ -256,6 +256,40 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .aval-op.sel{background:var(--bronze);border-color:var(--bronze);color:#fff}
 .item .gratis-tag{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--bronze);color:#fff;border-radius:999px;padding:1px 8px;margin-bottom:4px}
 .item.item-av{border-color:var(--bronze)}
+/* ---------- telas largas (computador e tablet deitado) ---------- */
+@media (min-width:900px){
+  .wrap{max-width:1180px;padding:0 40px 56px}
+  header{padding-top:34px}
+  .marca{font-size:58px}
+  .engrenagem{top:36px}
+  /* etapas de agendamento e telas auxiliares continuam em coluna confortável */
+  #tela2,#tela3,#tela4,#tela5,#telaLogin,#telaCancelar,#telaCancelado,#telaEsqueci,#telaNovaSenha,#telaVitrine{max-width:640px;margin-left:auto;margin-right:auto}
+  #telaGestao{max-width:980px;margin-left:auto;margin-right:auto}
+  footer{max-width:640px;margin-left:auto;margin-right:auto}
+  /* início */
+  #vHome h1{font-size:40px}
+  #vHome .legenda{font-size:15.5px;margin-bottom:26px}
+  .lista{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .item{padding:20px 20px 18px;min-height:180px;transition:transform .2s,box-shadow .2s}
+  .item:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(139,94,60,.12)}
+  .item-nome{font-size:21px}
+  .car-wrap{margin-bottom:34px}
+  .carrossel{padding:0 19%;scroll-padding:0 19%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%)}
+  .carrossel.um{padding:0;-webkit-mask-image:none;mask-image:none}
+  .slide{flex:0 0 100%;scroll-snap-align:center;min-height:104px;padding:12px 16px 12px 12px}
+  .carrossel.um .slide{flex-basis:100%}
+  .slide img,.sl-ico{width:80px;height:80px;flex-basis:80px}
+  .sl-nome{font-size:20px}
+  .sl-info{font-size:13.5px}
+  /* detalhe do serviço */
+  .det-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:44px;align-items:start}
+  .det-col-a h1{font-size:44px}
+  .det-foto{height:340px}
+  .det-texto{font-size:16px}
+  .det-infos{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .det-col-b{position:sticky;top:24px;background:#fff;border:1px solid var(--linha);border-radius:22px;padding:24px 24px 18px;box-shadow:0 14px 34px rgba(139,94,60,.08)}
+  .det-col-b .aval-ops{grid-template-columns:1fr 1fr}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -297,10 +331,14 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       <!-- detalhe do serviço -->
       <div id="vDetalhe" style="display:none">
         <button class="det-voltar" id="detVoltar">‹ Todos os serviços</button>
+        <div class="det-grid">
+        <div class="det-col-a">
         <img class="det-foto" id="detFoto" alt="" style="display:none">
         <h1 id="detNome"></h1>
         <div class="det-texto" id="detTexto"></div>
         <div class="det-infos" id="detInfos"></div>
+        </div>
+        <div class="det-col-b">
 
         <div id="detAvBox" style="display:none">
           <h2>O que você quer avaliar?</h2>
@@ -324,6 +362,8 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
         </div>
         <div class="erro" id="erroDet" style="text-align:center"></div>
         <p class="det-nota" id="detNota"></p>
+        </div>
+        </div>
       </div>
     </section>
 
@@ -1115,18 +1155,25 @@ function desenharBanner(){
       else { desenharVitrine(); irParaExtra('telaVitrine'); }
     };
   });
-  const indice = () => { const w = car.firstElementChild ? car.firstElementChild.offsetWidth + 10 : 1; return Math.round(car.scrollLeft / w); };
+  const indice = () => {
+    const w = car.firstElementChild ? car.firstElementChild.offsetWidth + 10 : 1;
+    if(car.scrollLeft >= car.scrollWidth - car.clientWidth - 4 && car.scrollLeft > 0) return ativos.length - 1;
+    return Math.min(ativos.length - 1, Math.round(car.scrollLeft / w));
+  };
   car.onscroll = () => { const i = indice(); $('carPontos').querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on', k===i)); };
   const pausar = () => { carPausa = Date.now() + 9000; };
   car.onpointerdown = pausar; car.ontouchstart = pausar; car.onwheel = pausar;
   car.scrollLeft = 0;
-  if(ativos.length>1 && !semAnimacao){
+  if(ativos.length>1){
     carTimer = setInterval(()=>{
-      if(Date.now() < carPausa || document.hidden || !$('carWrap').classList.contains('on') || passo!==1) return;
+      if(Date.now() < carPausa || document.hidden || !$('carWrap').classList.contains('on')) return;
       const w = car.firstElementChild.offsetWidth + 10;
-      const prox = (indice()+1) % ativos.length;
-      car.scrollTo({ left: prox*w, behavior:'smooth' });
-    }, 4200);
+      const fim = car.scrollWidth - car.clientWidth;
+      const noFim = car.scrollLeft >= fim - 4;
+      let prox = indice() + 1;
+      if(noFim || prox >= ativos.length) prox = 0;
+      car.scrollTo({ left: Math.min(prox*w, fim), behavior: semAnimacao ? 'auto' : 'smooth' });
+    }, 4000);
   }
 }
 
