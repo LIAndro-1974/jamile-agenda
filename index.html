@@ -192,6 +192,25 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 .dia.sel::after{background:#fff}
 .leg-fer{display:none;align-items:center;gap:7px;margin-top:12px;font-size:12.5px;color:rgba(62,42,32,.6)}
 .leg-fer .ponto{width:6px;height:6px;border-radius:50%;background:var(--rosa);display:block}
+/* ---------- regiões e avaliação ---------- */
+.regioes{display:flex;flex-wrap:wrap;gap:8px}
+.reg{padding:10px 16px;border-radius:999px;border:1px solid var(--linha);background:#fff;font:inherit;font-size:14.5px;color:var(--cacau);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.reg:hover{border-color:var(--bronze)}
+.reg.sel{background:var(--bronze);border-color:var(--bronze);color:#fff}
+.reg .gratis{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--creme-2);color:var(--bronze-esc);border-radius:999px;padding:1px 7px}
+.reg.sel .gratis{background:rgba(255,255,255,.25);color:#fff}
+.aval{background:#fff;border:1px solid var(--bronze);border-radius:18px;padding:16px 16px 14px;margin-top:22px;box-shadow:0 8px 24px rgba(139,94,60,.10)}
+.aval-tit{font-family:var(--display);font-size:21px;line-height:1.15;margin:6px 0 2px}
+.aval-sub{font-size:13px;color:rgba(62,42,32,.65);margin-bottom:12px}
+.aval-ops{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.aval-op{padding:11px 10px;border-radius:12px;border:1px solid var(--linha);background:var(--creme);font:inherit;font-size:14px;color:var(--cacau);cursor:pointer;text-align:center}
+.aval-op:hover{border-color:var(--bronze);background:#fff}
+.aval-nota{font-size:12.5px;color:rgba(62,42,32,.6);margin-top:18px;text-align:center}
+.item-desc{font-size:12px;color:rgba(62,42,32,.6);line-height:1.35;margin-top:2px}
+.reg-edit{display:grid;grid-template-columns:1fr auto 36px;gap:8px;align-items:center;margin-bottom:8px}
+.reg-edit input[type=text]{padding:10px;font-size:14px}
+.preco-reg{display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin-bottom:6px;font-size:14px}
+.preco-reg input{padding:9px 10px;font-size:14px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -227,9 +246,20 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
         </span>
       </button>
 
-      <h1>Escolha o procedimento</h1>
-      <p class="legenda">Cuidados que transformam por fora e por dentro.</p>
-      <div class="lista" id="listaProc"></div>
+      <h1>Onde você quer ser atendida?</h1>
+      <p class="legenda">Escolha a sua região. O valor do atendimento varia conforme o local.</p>
+      <div class="regioes" id="listaRegioes"></div>
+      <div id="outrosBox" style="display:none">
+        <label for="fOutraRegiao">Qual é a sua região?</label>
+        <input id="fOutraRegiao" placeholder="Ex.: Taguatinga, Guará, Lago Sul…">
+        <div class="erro" id="erroOutra"></div>
+      </div>
+      <div id="blocoServicos" style="display:none">
+        <div id="blocoAvaliacao"></div>
+        <h2 style="margin-top:24px">Escolha o atendimento</h2>
+        <p class="legenda" id="legServicos"></p>
+        <div class="lista" id="listaProc"></div>
+      </div>
     </section>
 
     <section class="tela" id="tela2">
@@ -307,7 +337,7 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
     <h1 id="vitTitulo"></h1>
     <p class="legenda" id="vitChamada"></p>
     <div id="listaPacotes"></div>
-    <div class="acoes"><button class="btn vazado" id="vitVoltar">Voltar aos procedimentos</button></div>
+    <div class="acoes"><button class="btn vazado" id="vitVoltar">Voltar</button></div>
   </section>
 
   <!-- ================= CANCELAMENTO ================= -->
@@ -379,8 +409,10 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
       <div class="bloco" id="blocoNovo" style="display:none">
         <h3>Novo agendamento</h3>
         <p class="dica">Para marcar por telefone ou encaixar uma sessão de pacote.</p>
-        <label for="nProc">Procedimento</label>
+        <label for="nProc">Atendimento</label>
         <select id="nProc"></select>
+        <label for="nReg">Região</label>
+        <select id="nReg"></select>
         <div class="dupla">
           <div><label for="nData">Data</label><input id="nData" type="date"></div>
           <div><label for="nHora">Hora</label><input id="nHora" type="time"></div>
@@ -459,10 +491,25 @@ footer a{color:var(--bronze-esc);text-decoration:none;display:inline-flex;align-
 
     <div id="abaProcedimentos" style="display:none">
       <div class="bloco">
-        <h3>Seus procedimentos</h3>
-        <p class="dica">Nome, duração em minutos e preço. Deixe o preço vazio para mostrar "sob consulta".</p>
-        <div id="listaProcEdit"></div>
-        <button class="btn vazado mini" id="btnAddProc" style="margin-top:8px">Adicionar procedimento</button>
+        <h3>Regiões de atendimento</h3>
+        <p class="dica">Marque <b>Avaliação</b> nas regiões onde a avaliação gratuita já está liberada.</p>
+        <div id="listaRegEdit"></div>
+        <button class="btn vazado mini" id="btnAddReg" style="margin-top:4px">Adicionar região</button>
+        <label class="chk" style="margin-top:14px"><input type="checkbox" id="sOutros"><span>Mostrar a opção "Outros" (cliente digita a região)</span></label>
+      </div>
+      <div class="bloco">
+        <h3>Modelos de atendimento</h3>
+        <p class="dica">Preço por região. Deixe vazio para mostrar "sob consulta".</p>
+        <div id="listaModEdit"></div>
+      </div>
+      <div class="bloco">
+        <h3>Avaliação gratuita</h3>
+        <p class="dica">Entra na mesma agenda e ocupa o horário como qualquer atendimento.</p>
+        <label class="chk" style="margin:6px 0 4px"><input type="checkbox" id="sAvAtiva"><span>Oferecer avaliação gratuita</span></label>
+        <label for="sAvDur">Duração (minutos)</label>
+        <input id="sAvDur" type="number" min="10" step="5">
+        <label for="sAvProcs">Procedimentos avaliados (um por linha)</label>
+        <textarea id="sAvProcs" style="min-height:110px"></textarea>
       </div>
       <div class="erro" id="erroProc"></div>
       <div class="acoes">
@@ -537,6 +584,19 @@ const PADRAO = {
     6:{aberto:true, inicio:'07:30',fim:'20:00',pausas:[]}
   },
   feriadosAbertos:[], bloqueios:[], procedimentos:[], pacotes:[],
+  regioes:[
+    {id:'samambaia',    nome:'Samambaia',    avaliacao:true},
+    {id:'sudoeste',     nome:'Sudoeste',     avaliacao:false},
+    {id:'asa-norte',    nome:'Asa Norte',    avaliacao:false},
+    {id:'aguas-claras', nome:'Águas Claras', avaliacao:false}
+  ],
+  outrosAtivo:true,
+  modelos:[
+    {id:'pequenas', nome:'Pequenas Áreas', descricao:'', duracao:30, icone:'gota',    precos:{}},
+    {id:'medias',   nome:'Médias Áreas',   descricao:'', duracao:45, icone:'folha',   precos:{}},
+    {id:'grandes',  nome:'Grandes Áreas',  descricao:'', duracao:60, icone:'estrela', precos:{}}
+  ],
+  avaliacao:{ ativa:true, duracao:30, procedimentos:['Limpeza de pele','Peeling','Tratamento de melasma','Micro-vasos'] },
   vitrine:{ ativa:true, etiqueta:'Promoção', titulo:'Pacotes e promoções', chamada:'Resultados melhores vêm com constância.', imagem:'' }
 };
 
@@ -546,7 +606,7 @@ const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','ag
 
 let cfg = JSON.parse(JSON.stringify(PADRAO));
 let ocupacaoLista = [], agendamentos = [];
-let sel = { proc:null, data:null, hora:null };
+let sel = { proc:null, data:null, hora:null, regiao:null };
 let mesVisivel = new Date();
 let passo = 1, mostrarPassados = false, ultimo = null, canceladoAgora = null;
 
@@ -606,6 +666,11 @@ function migrar(){
   ['feriadosAbertos','bloqueios','procedimentos','pacotes'].forEach(k=>{ if(!Array.isArray(cfg[k])) cfg[k]=[]; });
   cfg.vitrine = Object.assign(JSON.parse(JSON.stringify(PADRAO.vitrine)), cfg.vitrine||{});
   if(!cfg.horasCancelamento) cfg.horasCancelamento = 24;
+  ['regioes','modelos'].forEach(k=>{ if(!Array.isArray(cfg[k]) || !cfg[k].length) cfg[k] = JSON.parse(JSON.stringify(PADRAO[k])); });
+  cfg.modelos.forEach(m=>{ if(!m.precos || typeof m.precos!=='object') m.precos = {}; });
+  if(typeof cfg.outrosAtivo !== 'boolean') cfg.outrosAtivo = true;
+  cfg.avaliacao = Object.assign(JSON.parse(JSON.stringify(PADRAO.avaliacao)), cfg.avaliacao||{});
+  if(!Array.isArray(cfg.avaliacao.procedimentos)) cfg.avaliacao.procedimentos = [];
   Object.keys(cfg.expediente).forEach(d=>{
     const e = cfg.expediente[d];
     if(!Array.isArray(e.pausas)) e.pausas = (e.almocoI&&e.almocoF)?[{i:e.almocoI,f:e.almocoF}]:[];
@@ -717,27 +782,92 @@ function desenharPassos(){
 }
 
 /* ============ tela 1 ============ */
+const OUTROS = { id:'outros', nome:'Outros', avaliacao:false };
+const regioesVisiveis = () => cfg.regioes.filter(r=>r.nome).concat(cfg.outrosAtivo ? [OUTROS] : []);
+const regioesComAvaliacao = () => cfg.regioes.filter(r=>r.nome && r.avaliacao);
+const avaliacaoLiberada = r => !!(r && cfg.avaliacao.ativa && r.avaliacao && cfg.avaliacao.procedimentos.length);
+const precoDe = (m, regId) => String((m.precos||{})[regId] ?? '').trim();
+function nomeRegiaoSel(){
+  if(!sel.regiao) return '';
+  if(sel.regiao.id !== 'outros') return sel.regiao.nome;
+  const t = $('fOutraRegiao').value.trim();
+  return t ? 'Outros ('+t+')' : 'Outros';
+}
+function outraRegiaoOk(){
+  if(!sel.regiao || sel.regiao.id!=='outros') return true;
+  if($('fOutraRegiao').value.trim().length >= 2){ $('erroOutra').textContent=''; return true; }
+  $('erroOutra').textContent = 'Escreva a sua região para continuar.';
+  $('fOutraRegiao').focus();
+  return false;
+}
+function seguirComServico(proc){
+  if(!outraRegiaoOk()) return;
+  sel.proc = proc; sel.data=null; sel.hora=null;
+  mesVisivel = somaDias(hoje(), Number(cfg.janela.minDias));
+  desenharCalendario(); irPara(2);
+}
 function desenharProcedimentos(){
-  if(!cfg.procedimentos.length){
-    $('listaProc').innerHTML = '<div class="vazio-msg" style="grid-column:1/-1">Nenhum procedimento cadastrado ainda.</div>';
-  } else {
-    $('listaProc').innerHTML = cfg.procedimentos.map(p=>`
-      <button class="item" data-proc="${p.id}">
-        <span class="medalha">${ICONES[p.icone]||ICONES.estrela}</span>
-        <span class="item-nome">${p.nome}</span>
-        <span class="item-meta">${p.duracao} min</span>
-        <span class="item-preco">${p.preco ? 'R$ '+p.preco : 'sob consulta'}</span>
-      </button>`).join('');
-    $('listaProc').querySelectorAll('[data-proc]').forEach(b=>{
-      b.onclick = () => {
-        sel.proc = cfg.procedimentos.find(p=>p.id===b.dataset.proc);
-        sel.data=null; sel.hora=null;
-        mesVisivel = somaDias(hoje(), Number(cfg.janela.minDias));
-        desenharCalendario(); irPara(2);
-      };
-    });
-  }
+  const regs = regioesVisiveis();
+  if(sel.regiao && !regs.some(r=>r.id===sel.regiao.id)) sel.regiao = null;
+  $('listaRegioes').innerHTML = regs.map(r=>`
+    <button class="reg ${sel.regiao&&sel.regiao.id===r.id?'sel':''}" data-reg="${r.id}">${r.nome}${avaliacaoLiberada(r)?'<span class="gratis">avaliação grátis</span>':''}</button>`).join('');
+  $('listaRegioes').querySelectorAll('[data-reg]').forEach(b=>{
+    b.onclick = () => {
+      sel.regiao = regs.find(r=>r.id===b.dataset.reg);
+      desenharProcedimentos();
+      setTimeout(()=>{ (sel.regiao.id==='outros'?$('outrosBox'):$('blocoServicos')).scrollIntoView({behavior:'smooth',block:'start'}); }, 30);
+    };
+  });
+  $('outrosBox').style.display = sel.regiao && sel.regiao.id==='outros' ? '' : 'none';
+  $('blocoServicos').style.display = sel.regiao ? '' : 'none';
   desenharBanner();
+  if(!sel.regiao) return;
+
+  // avaliação gratuita
+  const av = cfg.avaliacao;
+  if(avaliacaoLiberada(sel.regiao)){
+    $('blocoAvaliacao').innerHTML = `<div class="aval">
+      <span class="promo-tag">Grátis</span>
+      <div class="aval-tit">Avaliação gratuita</div>
+      <div class="aval-sub">Escolha o que você quer avaliar · ${av.duracao} min</div>
+      <div class="aval-ops">${av.procedimentos.map((p,i)=>`<button class="aval-op" data-av="${i}">${p}</button>`).join('')}</div>
+    </div>`;
+    $('blocoAvaliacao').querySelectorAll('[data-av]').forEach(b=>{
+      b.onclick = () => seguirComServico({
+        tipo:'avaliacao', gratis:true, preco:'', duracao:Number(av.duracao)||30,
+        nome:'Avaliação gratuita — '+av.procedimentos[Number(b.dataset.av)]+' · '+nomeRegiaoSel()
+      });
+    });
+  } else {
+    const com = regioesComAvaliacao().map(r=>r.nome);
+    $('blocoAvaliacao').innerHTML = (av.ativa && com.length)
+      ? `<p class="aval-nota">Avaliação gratuita disponível, por enquanto, em ${com.join(', ').replace(/, ([^,]*)$/,' e $1')}.</p>` : '';
+  }
+
+  // modelos de atendimento
+  $('legServicos').textContent = 'Valores para '+sel.regiao.nome+'. O pagamento é feito no dia do atendimento.';
+  const mods = cfg.modelos.filter(m=>m.nome);
+  if(!mods.length){
+    $('listaProc').innerHTML = '<div class="vazio-msg" style="grid-column:1/-1">Nenhum atendimento cadastrado ainda.</div>';
+    return;
+  }
+  $('listaProc').innerHTML = mods.map(m=>{
+    const p = precoDe(m, sel.regiao.id);
+    return `<button class="item" data-mod="${m.id}">
+      <span class="medalha">${ICONES[m.icone]||ICONES.estrela}</span>
+      <span class="item-nome">${m.nome}</span>
+      ${m.descricao?`<span class="item-desc">${m.descricao}</span>`:''}
+      <span class="item-meta">${m.duracao} min</span>
+      <span class="item-preco">${p ? 'R$ '+p : 'sob consulta'}</span>
+    </button>`;
+  }).join('');
+  $('listaProc').querySelectorAll('[data-mod]').forEach(b=>{
+    b.onclick = () => {
+      const m = mods.find(x=>x.id===b.dataset.mod);
+      seguirComServico({ tipo:'modelo', preco:precoDe(m, sel.regiao.id), duracao:Number(m.duracao)||60,
+        nome:m.nome+' · '+nomeRegiaoSel() });
+    };
+  });
 }
 
 const pacoteValido = p => !p.validade || p.validade >= ymd(hoje());
@@ -838,7 +968,7 @@ function desenharResumoPre(){
   $('resumoPre').innerHTML =
     linha('Procedimento', sel.proc.nome) + linha('Dia', extenso(sel.data)) +
     linha('Horário', sel.hora+' — '+min2hm(hm2min(sel.hora)+sel.proc.duracao)) +
-    (sel.proc.preco?linha('Valor','R$ '+sel.proc.preco):'');
+    (sel.proc.gratis?linha('Valor','Gratuita'):sel.proc.preco?linha('Valor','R$ '+sel.proc.preco):'');
 }
 const codigo = () => 'JB'+String(Date.now()).slice(-5)+Math.floor(Math.random()*9);
 
@@ -946,7 +1076,7 @@ async function abrirGestao(){
   $('quemLogado').textContent = user ? 'Conectada como '+user.email : '';
   await carregarAgendamentos();
   preencherRegras(); desenharExpediente(); desenharFeriados(); desenharBloqueios();
-  desenharAgenda(); desenharProcEdit(); preencherVitrineEdit(); desenharPacEdit();
+  desenharAgenda(); desenharServicosEdit(); preencherVitrineEdit(); desenharPacEdit();
   atualizarAlertaCancel();
 }
 async function sair(){ await db.auth.signOut(); agendamentos=[]; atualizarSino(); irPara(1); }
@@ -1077,17 +1207,39 @@ async function marcarVistos(){
   if(error){ alert('Não foi possível marcar: '+error.message); return; }
   await carregarAgendamentos(); desenharAgenda(); atualizarAlertaCancel();
 }
+function opcoesNovo(){
+  const l = cfg.modelos.filter(m=>m.nome).map(m=>({v:'m:'+m.id, rot:m.nome+' ('+m.duracao+' min)'}));
+  cfg.avaliacao.procedimentos.forEach((p,i)=>l.push({v:'a:'+i, rot:'Avaliação gratuita — '+p+' ('+cfg.avaliacao.duracao+' min)'}));
+  return l;
+}
 function abrirNovo(){
-  $('nProc').innerHTML = cfg.procedimentos.map(p=>`<option value="${p.id}">${p.nome} (${p.duracao} min)</option>`).join('');
+  $('nProc').innerHTML = opcoesNovo().map(o=>`<option value="${o.v}">${o.rot}</option>`).join('');
+  $('nReg').innerHTML = cfg.regioes.filter(r=>r.nome).map(r=>`<option value="${r.id}">${r.nome}</option>`).join('')
+    + '<option value="outros">Outros</option>';
   $('nData').value = ymd(hoje()); $('nHora').value='';
   $('nNome').value=''; $('nTel').value=''; $('nObs').value=''; $('erroNovo').textContent='';
   $('blocoNovo').style.display='block'; $('btnAbrirNovo').style.display='none';
 }
+function servicoNovo(){
+  const v = $('nProc').value || '', regId = $('nReg').value;
+  const reg = cfg.regioes.find(r=>r.id===regId) || OUTROS;
+  if(v.startsWith('m:')){
+    const m = cfg.modelos.find(x=>x.id===v.slice(2));
+    if(!m) return null;
+    return { nome:m.nome+' · '+reg.nome, duracao:Number(m.duracao)||60, preco:precoDe(m, reg.id) };
+  }
+  if(v.startsWith('a:')){
+    const p = cfg.avaliacao.procedimentos[Number(v.slice(2))];
+    if(!p) return null;
+    return { nome:'Avaliação gratuita — '+p+' · '+reg.nome, duracao:Number(cfg.avaliacao.duracao)||30, preco:'' };
+  }
+  return null;
+}
 function fecharNovo(){ $('blocoNovo').style.display='none'; $('btnAbrirNovo').style.display=''; }
 async function salvarNovo(){
-  const p = cfg.procedimentos.find(x=>x.id===$('nProc').value), err = $('erroNovo');
+  const p = servicoNovo(), err = $('erroNovo');
   const nome = $('nNome').value.trim(), tel = $('nTel').value.replace(/\D/g,'');
-  if(!p){ err.textContent='Escolha um procedimento.'; return; }
+  if(!p){ err.textContent='Escolha o atendimento.'; return; }
   if(!$('nData').value){ err.textContent='Informe a data.'; return; }
   if(!$('nHora').value){ err.textContent='Informe a hora.'; return; }
   if(nome.length<3){ err.textContent='Informe o nome da cliente.'; return; }
@@ -1104,25 +1256,66 @@ async function salvarNovo(){
   }
   await carregarAgendamentos(); await carregarOcupacao(); desenharAgenda(); fecharNovo();
 }
-function desenharProcEdit(){
-  $('listaProcEdit').innerHTML = cfg.procedimentos.map((p,i)=>`
-    <div class="proc-edit" data-i="${i}">
-      <input class="pe-nome" value="${esc(p.nome)}" placeholder="Nome">
-      <input class="pe-dur" type="number" min="10" step="5" value="${p.duracao}" placeholder="min">
-      <input class="pe-preco" value="${esc(p.preco)}" placeholder="R$">
-      <button class="lixo" data-rem="${i}">✕</button></div>`).join('');
-  $('listaProcEdit').querySelectorAll('[data-rem]').forEach(b=>{
-    b.onclick = () => { lerProcEdit(); cfg.procedimentos.splice(Number(b.dataset.rem),1); desenharProcEdit(); };
+const slug = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'regiao';
+function desenharServicosEdit(){
+  $('listaRegEdit').innerHTML = cfg.regioes.map((r,i)=>`
+    <div class="reg-edit" data-i="${i}">
+      <input type="text" class="re-nome" value="${esc(r.nome)}" placeholder="Nome da região">
+      <label class="chk"><input type="checkbox" class="re-av" ${r.avaliacao?'checked':''}><span>Avaliação</span></label>
+      <button class="lixo" data-remreg="${i}">✕</button>
+    </div>`).join('') || '<p class="dica">Nenhuma região cadastrada.</p>';
+  $('listaRegEdit').querySelectorAll('[data-remreg]').forEach(b=>{
+    b.onclick = () => {
+      lerServicosEdit();
+      if(!confirm('Remover a região '+(cfg.regioes[Number(b.dataset.remreg)].nome||'')+'?')) return;
+      cfg.regioes.splice(Number(b.dataset.remreg),1); desenharServicosEdit();
+    };
   });
+  $('listaRegEdit').querySelectorAll('.re-nome').forEach(inp=>{ inp.onchange = () => { lerServicosEdit(); desenharServicosEdit(); }; });
+  $('sOutros').checked = !!cfg.outrosAtivo;
+  $('sOutros').onchange = () => { lerServicosEdit(); desenharServicosEdit(); };
+
+  const colunas = cfg.regioes.filter(r=>r.nome).concat(cfg.outrosAtivo ? [OUTROS] : []);
+  $('listaModEdit').innerHTML = cfg.modelos.map((m,i)=>`
+    <div class="pac-edit" data-i="${i}">
+      <label>Nome</label>
+      <input class="me-nome" value="${esc(m.nome)}">
+      <label>Descrição curta (opcional)</label>
+      <input class="me-desc" value="${esc(m.descricao)}" placeholder="Ex.: quais áreas entram neste modelo">
+      <label>Duração (minutos)</label>
+      <input class="me-dur" type="number" min="10" step="5" value="${m.duracao}">
+      <label>Preço por região (R$)</label>
+      ${colunas.map(r=>`<div class="preco-reg"><span>${r.nome}</span>
+        <input class="me-preco" data-reg="${r.id}" inputmode="decimal" value="${esc(precoDe(m, r.id))}" placeholder="sob consulta"></div>`).join('')}
+    </div>`).join('');
+
+  $('sAvAtiva').checked = !!cfg.avaliacao.ativa;
+  $('sAvDur').value = cfg.avaliacao.duracao;
+  $('sAvProcs').value = cfg.avaliacao.procedimentos.join('\n');
 }
-function lerProcEdit(){
-  cfg.procedimentos = [...$('listaProcEdit').querySelectorAll('.proc-edit')].map((l,i)=>({
-    id: cfg.procedimentos[i]?cfg.procedimentos[i].id:'p'+Date.now()+i,
-    nome: l.querySelector('.pe-nome').value.trim()||'Procedimento',
-    duracao: Number(l.querySelector('.pe-dur').value)||60,
-    preco: l.querySelector('.pe-preco').value.trim(),
-    icone: cfg.procedimentos[i]?cfg.procedimentos[i].icone:'estrela'
-  }));
+function lerServicosEdit(){
+  const usados = new Set();
+  cfg.regioes = [...$('listaRegEdit').querySelectorAll('.reg-edit')].map((l,i)=>{
+    const nome = l.querySelector('.re-nome').value.trim();
+    let id = (cfg.regioes[i] && cfg.regioes[i].id) || slug(nome);
+    if(id==='outros') id = 'outros-2';
+    while(usados.has(id)) id += '-2';
+    usados.add(id);
+    return { id, nome, avaliacao:l.querySelector('.re-av').checked };
+  });
+  cfg.outrosAtivo = $('sOutros').checked;
+  [...$('listaModEdit').querySelectorAll('.pac-edit')].forEach((l,i)=>{
+    const m = cfg.modelos[i]; if(!m) return;
+    m.nome = l.querySelector('.me-nome').value.trim() || m.nome;
+    m.descricao = l.querySelector('.me-desc').value.trim();
+    m.duracao = Math.max(10, Number(l.querySelector('.me-dur').value)||60);
+    l.querySelectorAll('.me-preco').forEach(inp=>{ m.precos[inp.dataset.reg] = inp.value.trim(); });
+  });
+  cfg.avaliacao = {
+    ativa: $('sAvAtiva').checked,
+    duracao: Math.max(10, Number($('sAvDur').value)||30),
+    procedimentos: $('sAvProcs').value.split('\n').map(t=>t.trim()).filter(Boolean)
+  };
 }
 
 /* ---- promoções ---- */
@@ -1266,14 +1459,21 @@ $('mesProx').onclick = () => { mesVisivel = new Date(mesVisivel.getFullYear(), m
 $('btnConfirmar').onclick = confirmar;
 $('btnZap').onclick = () => { if(ultimo) window.open('https://wa.me/'+cfg.negocio.whatsapp+'?text='+textoZap(ultimo),'_blank'); };
 $('btnAgenda').onclick = () => { if(ultimo) baixarICS(ultimo); };
-$('btnNovo').onclick = () => { sel={proc:null,data:null,hora:null}; $('fNome').value=''; $('fTel').value=''; $('fObs').value=''; irPara(1); };
+$('btnNovo').onclick = () => { sel={proc:null,data:null,hora:null,regiao:sel.regiao}; desenharProcedimentos(); $('fNome').value=''; $('fTel').value=''; $('fObs').value=''; irPara(1); };
 $('btnCSV').onclick = baixarCSV;
 $('btnPassados').onclick = () => { mostrarPassados = !mostrarPassados; desenharAgenda(); };
 $('btnBloq').onclick = () => {
   const v = $('gBloq').value;
   if(v && !cfg.bloqueios.includes(v)){ cfg.bloqueios.push(v); desenharBloqueios(); $('gBloq').value=''; }
 };
-$('btnAddProc').onclick = () => { lerProcEdit(); cfg.procedimentos.push({id:'p'+Date.now(),nome:'',duracao:60,preco:'',icone:'estrela'}); desenharProcEdit(); };
+$('btnAddReg').onclick = () => {
+  lerServicosEdit();
+  const nome = (prompt('Nome da nova região:')||'').trim();
+  if(!nome) return;
+  let id = slug(nome); while(id==='outros' || cfg.regioes.some(r=>r.id===id)) id += '-2';
+  cfg.regioes.push({ id, nome, avaliacao:false }); desenharServicosEdit();
+};
+$('fOutraRegiao').addEventListener('input', () => { $('erroOutra').textContent=''; });
 $('btnAddPac').onclick = () => {
   lerPacEdit();
   cfg.pacotes.push({id:'pac'+Date.now(),nome:'',descricao:'',sessoes:5,validade:'',precoAvulso:'',precoPacote:'',imagem:'',destaque:false});
@@ -1299,7 +1499,7 @@ $('btnSalvarRegras').onclick = async e => {
   setTimeout(()=>{ e.target.textContent='Salvar alterações'; },1800);
 };
 $('btnSalvarProc').onclick = async e => {
-  lerProcEdit(); e.target.disabled=true;
+  lerServicosEdit(); e.target.disabled=true;
   const erro = await salvarConfig(); e.target.disabled=false;
   $('erroProc').textContent = erro?'Não salvou: '+erro:'';
   e.target.textContent = erro?'Não salvou':'Salvo ✓';
